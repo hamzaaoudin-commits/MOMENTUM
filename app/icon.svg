@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="MOMENTUM">
+  <!-- Le M qui prend de l'élan : la jambe droite dépasse la hauteur de la
+       gauche, et le trait montant — celui qui produit l'écart — est en cuivre.
+       Cobalt = la structure, cuivre = ce qui dépasse le point de départ. -->
+  <rect width="64" height="64" rx="13" fill="#0B0D10"/>
+  <g fill="none" stroke-linecap="square" stroke-linejoin="miter" stroke-width="6">
+    <path d="M13 49 V31 L32 44 L51 15 V49" stroke="#5B8DF0"/>
+    <path d="M32 44 L51 15" stroke="#C77B52"/>
+  </g>
+</svg>
