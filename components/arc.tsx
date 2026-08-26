@@ -30,6 +30,18 @@ const SANS = [
   { x: 920, y: 66 },
 ]
 
+/* Ce que fait chaque maillon. Le diagramme cesse d'être une illustration :
+   on peut l'interroger, et chaque réponse explique le mécanisme vendu. */
+const MAILLONS = [
+  "Sortie 1 — elle pose la promesse. Personne ne l'attend, et ce n'est pas grave : son rôle est de dire ce que sera la suite.",
+  "Sortie 2 — elle confirme. C'est elle qui prouve que la première n'était pas un accident.",
+  "Sortie 3 — elle élargit. Même monde, autre angle : on garde l'auditeur en lui montrant qu'il n'a pas fait le tour.",
+  "Sortie 4 — le point de bascule. Les auditeurs de la 1 reviennent d'eux-mêmes ; tu ne repars plus de zéro.",
+  "Sortie 5 — elle capitalise. C'est le moment de sortir le titre le plus fort : il hérite de tout ce qui précède.",
+  "Sortie 6 — elle ouvre. Elle annonce la suite avant même que la suite existe.",
+  "Sortie 7 — elle récolte. Le même travail qu'à la sortie 1, sur une audience qui, elle, n'est plus la même.",
+]
+
 const AVEC = [
   { x: 90, y: 318, r: 4 },
   { x: 230, y: 311, r: 5 },
@@ -43,6 +55,7 @@ const AVEC = [
 export function Arc({ className = "" }: { className?: string }) {
   const ref = useRef<SVGSVGElement | null>(null)
   const [joue, setJoue] = useState(false)
+  const [actif, setActif] = useState<number | null>(null)
 
   useEffect(() => {
     const el = ref.current
@@ -64,6 +77,7 @@ export function Arc({ className = "" }: { className?: string }) {
   const LEN = 1200
 
   return (
+    <div>
     <svg
       ref={ref}
       viewBox="0 0 1000 340"
@@ -126,20 +140,54 @@ export function Arc({ className = "" }: { className?: string }) {
       />
       {AVEC.map((p, i) => {
         const dernier = i === AVEC.length - 1
+        const vise = actif === i
         return (
-          <circle
-            key={i}
-            cx={p.x}
-            cy={p.y}
-            r={p.r}
-            fill={dernier ? "#ffffff" : "var(--color-cobalt-vif)"}
-            style={{
-              opacity: joue ? 1 : 0,
-              transition: `opacity 500ms ease ${300 + i * 190}ms`,
-            }}
-          />
+          <g key={i}>
+            {/* Cible de clic généreuse : les billes font 4 à 13 px de rayon,
+                bien trop peu pour un doigt sur mobile. */}
+            <circle
+              cx={p.x}
+              cy={p.y}
+              r={26}
+              fill="transparent"
+              className="cursor-pointer"
+              tabIndex={0}
+              role="button"
+              aria-label={MAILLONS[i]}
+              onMouseEnter={() => setActif(i)}
+              onMouseLeave={() => setActif(null)}
+              onFocus={() => setActif(i)}
+              onBlur={() => setActif(null)}
+              onClick={() => setActif(vise ? null : i)}
+            />
+            {vise && (
+              <circle cx={p.x} cy={p.y} r={p.r + 9} fill="none" stroke="#ffffff" strokeWidth="1" opacity="0.55" />
+            )}
+            <circle
+              cx={p.x}
+              cy={p.y}
+              r={p.r}
+              fill={vise ? "#ffffff" : dernier ? "#ffffff" : "var(--color-cobalt-vif)"}
+              className="pointer-events-none"
+              style={{
+                opacity: joue ? 1 : 0,
+                transition: `opacity 500ms ease ${300 + i * 190}ms, fill 180ms ease`,
+              }}
+            />
+          </g>
         )
       })}
     </svg>
+
+      {/* Hauteur figée : sans elle, la mise en page saute d'une ligne à chaque
+          survol d'une bille. */}
+      <p className="mt-5 min-h-[54px] border-t border-filet pt-4 text-[13.5px] leading-relaxed text-craie-80">
+        {actif === null ? (
+          <span className="etiquette">Survole ou touche une sortie pour voir son rôle dans la chaîne.</span>
+        ) : (
+          MAILLONS[actif]
+        )}
+      </p>
+    </div>
   )
 }

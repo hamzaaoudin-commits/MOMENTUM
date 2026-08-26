@@ -155,28 +155,44 @@
   color: var(--color-craie-38);
 }
 
+/* Tous les titres en capitales.
+   Trois réglages changent avec la casse et ne sont pas négociables :
+   — l'interlignage se resserre, mais pas autant qu'on le croit : le français
+     accentue ses capitales (É, À, Ê) et ces accents montent au-dessus de la
+     hauteur de capitale. En dessous de 0.93, le É de « D'ÉLAN » percute la
+     ligne du dessus. C'est la limite basse, pas un réglage esthétique ;
+   — l'approche se relâche un peu (-0.03em au lieu de -0.045em), parce que les
+     capitales ont des flancs plus réguliers et se collent plus vite ;
+   — le corps baisse légèrement, une ligne de capitales étant nettement plus
+     large que la même ligne en bas-de-casse.
+   Le html est en lang="fr" : les accents sont donc conservés à la conversion
+   (É, À, Ê), comme le veut l'usage français. */
+
 @utility titre-1 {
   font-family: var(--font-sans);
   font-weight: 800;
-  line-height: 0.9;
-  letter-spacing: -0.045em;
-  font-size: clamp(2.65rem, 7.8vw, 6.1rem);
+  text-transform: uppercase;
+  line-height: 0.93;
+  letter-spacing: -0.03em;
+  font-size: clamp(2.3rem, 6.9vw, 5.5rem);
 }
 
 @utility titre-2 {
   font-family: var(--font-sans);
   font-weight: 800;
-  line-height: 0.96;
-  letter-spacing: -0.035em;
-  font-size: clamp(1.95rem, 4.6vw, 3.4rem);
+  text-transform: uppercase;
+  line-height: 0.95;
+  letter-spacing: -0.025em;
+  font-size: clamp(1.7rem, 4vw, 3rem);
 }
 
 @utility titre-3 {
   font-family: var(--font-sans);
   font-weight: 700;
-  line-height: 1.14;
-  letter-spacing: -0.02em;
-  font-size: clamp(1.15rem, 1.9vw, 1.45rem);
+  text-transform: uppercase;
+  line-height: 1.06;
+  letter-spacing: -0.012em;
+  font-size: clamp(1.05rem, 1.7vw, 1.32rem);
 }
 
 @utility chapo {
@@ -199,9 +215,10 @@
 @utility verdict {
   font-family: var(--font-sans);
   font-weight: 800;
-  font-size: clamp(1.25rem, 2.2vw, 1.75rem);
-  line-height: 1.16;
-  letter-spacing: -0.035em;
+  text-transform: uppercase;
+  font-size: clamp(1.1rem, 1.9vw, 1.5rem);
+  line-height: 1.14;
+  letter-spacing: -0.02em;
   color: var(--color-craie);
   border-left: 3px solid var(--color-craie);
   padding-left: clamp(1rem, 2vw, 1.6rem);
@@ -293,6 +310,15 @@
   text-transform: uppercase;
   letter-spacing: 0.2em;
   color: var(--color-craie-50);
+}
+
+@utility jauge {
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  height: 2px;
+  background: var(--color-cobalt-vif);
+  transition: width 120ms linear;
 }
 
 /* ---------------------------------------------------------------------------

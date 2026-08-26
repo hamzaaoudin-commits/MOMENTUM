@@ -2,8 +2,10 @@
 
 import Link from "next/link"
 import { useEffect, useState } from "react"
+import { Progression, EtiquetteSection } from "./progression"
 
 const LIENS = [
+  { href: "#diagnostic", label: "Diagnostic" },
   { href: "#methode", label: "La méthode" },
   { href: "#offres", label: "L'offre" },
   { href: "#qui", label: "Qui te parle" },
@@ -27,6 +29,10 @@ export function Nav() {
         scrolle || ouvert ? "border-b border-filet bg-encre/92 backdrop-blur-xl" : "border-b border-transparent"
       }`}
     >
+      {/* La jauge est posée sur l'en-tête lui-même : elle doit courir sur toute
+          la largeur de l'écran, y compris en mobile où l'étiquette disparaît. */}
+      <Progression />
+
       <div className="px-marge flex h-[68px] items-center justify-between">
         <Link href="/" className="group flex items-baseline gap-2.5" aria-label="MOMENTUM, accueil">
           {/* Le lettrage reprend exactement celui de l'image de partage : c'est la
@@ -34,6 +40,8 @@ export function Nav() {
           <span className="text-[15px] font-extrabold uppercase tracking-[0.26em] text-craie">MOMENTUM</span>
           <span className="hidden h-[4px] w-[4px] bg-cobalt-vif sm:block" />
         </Link>
+
+        <EtiquetteSection />
 
         <nav className="hidden items-center gap-9 md:flex">
           {LIENS.map((l) => (

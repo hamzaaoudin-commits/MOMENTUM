@@ -19,6 +19,7 @@ export function Footer() {
             <p className="etiquette mb-4">La page</p>
             <ul className="space-y-2.5">
               {[
+                ["#diagnostic", "Diagnostic gratuit"],
                 ["#methode", "La méthode"],
                 ["#offres", "L'offre"],
                 ["#qui", "Qui te parle"],

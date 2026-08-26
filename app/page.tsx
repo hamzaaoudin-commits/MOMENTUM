@@ -7,6 +7,7 @@ import { Arc } from "@/components/arc"
 import { OffreUnique, Garantie, Places } from "@/components/offre-unique"
 import { GrilleOffres, Comparatif } from "@/components/offres"
 import { Depliant } from "@/components/depliant"
+import { Diagnostic } from "@/components/diagnostic"
 import { Faq } from "@/components/faq"
 import { Formulaire } from "@/components/formulaire"
 import { PROPOSITION, CONTACT, CAPACITE } from "@/lib/config"
@@ -192,7 +193,7 @@ export default function Accueil() {
   return (
     <>
       {/* ═══════════════ HERO ═══════════════ */}
-      <section className="relative flex min-h-[92vh] items-center overflow-hidden pt-[68px]">
+      <section data-section data-label="MOMENTUM" className="relative flex min-h-[92vh] items-center overflow-hidden pt-[68px]">
         <div className="pointer-events-none absolute inset-0 opacity-[0.42]">
           <Trajectoires variante="fond" className="h-full w-full" />
         </div>
@@ -242,7 +243,7 @@ export default function Accueil() {
       </section>
 
       {/* ═══════════════ 01 · LA SCÈNE ═══════════════ */}
-      <section className="bloc border-t border-filet">
+      <section className="bloc border-t border-filet" data-section data-label="LA SCÈNE">
         <div className="cadre-md">
           <TeteSection index="01" etiquette="TU CONNAIS CE MOMENT" titre="Deux heures du matin." />
           <Reveal>
@@ -265,7 +266,7 @@ export default function Accueil() {
       </section>
 
       {/* ═══════════════ 02 · FAUSSE SOLUTION ═══════════════ */}
-      <section className="bloc border-t border-filet bg-encre-haute">
+      <section className="bloc border-t border-filet bg-encre-haute" data-section data-label="CE QUE TU AS DÉJÀ ESSAYÉ">
         <div className="cadre">
           <TeteSection
             index="02"
@@ -295,7 +296,7 @@ export default function Accueil() {
       </section>
 
       {/* ═══════════════ 03 · LA VRAIE CAUSE ═══════════════ */}
-      <section className="bloc border-t border-filet">
+      <section className="bloc border-t border-filet" data-section data-label="LA VRAIE CAUSE">
         <div className="cadre">
           <TeteSection
             index="03"
@@ -337,11 +338,32 @@ export default function Accueil() {
         </div>
       </section>
 
-      {/* ═══════════════ 04 · LE MÉCANISME ═══════════════ */}
-      <section id="methode" className="ancre bloc border-t border-filet bg-encre-haute">
-        <div className="cadre">
+      
+      {/* ═══════════════ 04 · LE DIAGNOSTIC ═══════════════ */}
+      <section
+        id="diagnostic"
+        data-section
+        data-label="LE DIAGNOSTIC"
+        className="ancre bloc border-t border-filet bg-encre-haute"
+      >
+        <div className="cadre-md">
           <TeteSection
             index="04"
+            etiquette="AVANT D'ALLER PLUS LOIN"
+            titre="Où en es-tu vraiment ?"
+            chapo="Cinq questions, deux minutes, aucune adresse e-mail. Aucune ne porte sur ton nombre de sorties : sortir beaucoup n'est pas un signe de santé, c'est souvent le symptôme."
+          />
+          <Reveal>
+            <Diagnostic />
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ═══════════════ 05 · LE MÉCANISME ═══════════════ */}
+      <section id="methode" className="ancre bloc border-t border-filet" data-section data-label="LE MÉCANISME">
+        <div className="cadre">
+          <TeteSection
+            index="05"
             etiquette="LE MÉCANISME"
             titre={
               <>
@@ -387,11 +409,11 @@ export default function Accueil() {
         </div>
       </section>
 
-      {/* ═══════════════ 05 · LE CYCLE ═══════════════ */}
-      <section className="bloc border-t border-filet">
+      {/* ═══════════════ 06 · LE CYCLE ═══════════════ */}
+      <section className="bloc border-t border-filet bg-encre-haute" data-section data-label="LE CYCLE MENSUEL">
         <div className="cadre-md">
           <TeteSection
-            index="05"
+            index="06"
             etiquette="LE CYCLE MENSUEL"
             titre="Quatre temps, répétés chaque mois."
             chapo="Rien de spectaculaire pris isolément — et c'est exactement le point. C'est la répétition qui crée l'élan, jamais l'intensité d'un seul mois héroïque."
@@ -416,11 +438,11 @@ export default function Accueil() {
         </div>
       </section>
 
-      {/* ═══════════════ 06 · CE QUE TU OBTIENS ═══════════════ */}
-      <section className="bloc border-t border-filet bg-encre-haute">
+      {/* ═══════════════ 07 · CE QUE TU OBTIENS ═══════════════ */}
+      <section className="bloc border-t border-filet" data-section data-label="CE QUE TU OBTIENS">
         <div className="cadre">
           <TeteSection
-            index="06"
+            index="07"
             etiquette="CE QUE TU OBTIENS"
             titre="Quatre choses que tu ne peux pas te donner à toi-même."
             chapo="Aucune ne remplace ton travail. Toutes déterminent ce que ton travail produit."
@@ -440,11 +462,11 @@ export default function Accueil() {
         </div>
       </section>
 
-      {/* ═══════════════ 07 · PREUVE ═══════════════ */}
-      <section id="qui" className="ancre bloc border-t border-filet">
+      {/* ═══════════════ 08 · PREUVE ═══════════════ */}
+      <section id="qui" className="ancre bloc border-t border-filet bg-encre-haute" data-section data-label="QUI TE PARLE">
         <div className="cadre">
           <TeteSection
-            index="07"
+            index="08"
             etiquette="POURQUOI M'ÉCOUTER MOI"
             titre="Un artiste comprend ton art. Un stratège comprend ton marché."
             chapo="Il t'en faut un qui fasse les deux. C'est la seule raison valable de me confier un regard sur ta carrière, et c'est la seule que je revendique."
@@ -502,11 +524,11 @@ export default function Accueil() {
         </div>
       </section>
 
-      {/* ═══════════════ 08 · L'OFFRE ═══════════════ */}
-      <section id="offres" className="ancre bloc border-t border-filet bg-encre-haute">
+      {/* ═══════════════ 09 · L'OFFRE ═══════════════ */}
+      <section id="offres" className="ancre bloc border-t border-filet" data-section data-label="L'OFFRE">
         <div className="cadre">
           <TeteSection
-            index="08"
+            index="09"
             etiquette="L'OFFRE"
             titre="Un manager coûte 2 000 € par mois. Et il ne prend pas les artistes à ton stade."
             chapo="Entre « je fais tout tout seul » et « j'ai une équipe complète », il existe un niveau intermédiaire. C'est celui-là."
@@ -533,11 +555,11 @@ export default function Accueil() {
         </div>
       </section>
 
-      {/* ═══════════════ 09 · OBJECTIONS ═══════════════ */}
-      <section className="bloc border-t border-filet">
+      {/* ═══════════════ 10 · OBJECTIONS ═══════════════ */}
+      <section className="bloc border-t border-filet bg-encre-haute" data-section data-label="LES OBJECTIONS">
         <div className="cadre-md">
           <TeteSection
-            index="09"
+            index="10"
             etiquette="CE QUE TU ES EN TRAIN DE TE DIRE"
             titre="Les cinq objections, dans l'ordre où elles arrivent."
           />
@@ -554,11 +576,11 @@ export default function Accueil() {
         </div>
       </section>
 
-      {/* ═══════════════ 10 · POUR QUI ═══════════════ */}
-      <section className="bloc border-t border-filet bg-encre-haute">
+      {/* ═══════════════ 11 · POUR QUI ═══════════════ */}
+      <section className="bloc border-t border-filet" data-section data-label="POUR QUI">
         <div className="cadre">
           <TeteSection
-            index="10"
+            index="11"
             etiquette="POUR QUI"
             titre="Tu n'as pas besoin d'être connu. Tu as besoin de vouloir construire."
           />
@@ -596,22 +618,22 @@ export default function Accueil() {
         </div>
       </section>
 
-      {/* ═══════════════ 11 · FAQ ═══════════════ */}
-      <section className="bloc border-t border-filet">
+      {/* ═══════════════ 12 · FAQ ═══════════════ */}
+      <section className="bloc border-t border-filet bg-encre-haute" data-section data-label="QUESTIONS FRÉQUENTES">
         <div className="cadre-md">
-          <TeteSection index="11" etiquette="QUESTIONS FRÉQUENTES" titre="Le reste, en clair." />
+          <TeteSection index="12" etiquette="QUESTIONS FRÉQUENTES" titre="Le reste, en clair." />
           <Reveal>
             <Faq items={FAQ} />
           </Reveal>
         </div>
       </section>
 
-      {/* ═══════════════ 12 · L'ACTION ═══════════════ */}
-      <section id="candidature" className="ancre bloc border-t border-filet bg-encre-haute">
+      {/* ═══════════════ 13 · L'ACTION ═══════════════ */}
+      <section id="candidature" data-section data-label="CANDIDATURE" className="ancre bloc border-t border-filet bg-encre-haute">
         <div className="cadre grid gap-14 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
           <div>
             <Reveal>
-              <p className="index">12 — CANDIDATURE</p>
+              <p className="index">13 — CANDIDATURE</p>
               <h2 className="titre-2 mt-6 text-balance">
                 Envoie-moi un morceau. Je te dis ce que j&rsquo;en pense.
               </h2>

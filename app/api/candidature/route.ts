@@ -83,6 +83,7 @@ export async function POST(req: NextRequest) {
     offre: nettoyer(brut.offre, 40),
     projet: nettoyer(brut.projet, 1500),
     blocage: nettoyer(brut.blocage, 1500),
+    diagnostic: nettoyer(brut.diagnostic, 40),
   }
 
   if (!donnees.nom || !emailValide(donnees.email) || !donnees.projet || !donnees.blocage) {

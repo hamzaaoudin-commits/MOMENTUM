@@ -23,6 +23,7 @@ const NIVEAUX = [
 export function Formulaire() {
   const params = useSearchParams()
   const offreParDefaut = params.get("offre") ?? "development"
+  const diag = params.get("diag") ?? ""
 
   const [offre, setOffre] = useState(offreParDefaut)
   const [etat, setEtat] = useState<"repos" | "envoi" | "ok" | "erreur">("repos")
@@ -79,6 +80,10 @@ export function Formulaire() {
 
   return (
     <form onSubmit={envoyer} className="space-y-7" noValidate>
+      {/* Résultat du diagnostic, s'il a été passé. Le candidat n'a pas à le
+          retaper, et l'information arrive avec la candidature. */}
+      {diag ? <input type="hidden" name="diagnostic" value={diag} /> : null}
+
       {/* Piège à robots : invisible pour un humain, rempli par les scripts. */}
       <div className="absolute left-[-9999px]" aria-hidden>
         <label htmlFor="site">Ne pas remplir</label>

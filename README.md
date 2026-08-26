@@ -31,7 +31,21 @@ numérotées qui se lisent dans l'ordre. Les anciennes routes (`/offres`,
 `/methode`, `/a-propos`, `/candidature`) redirigent en 301 vers les ancres
 correspondantes — voir `next.config.mjs`.
 
-Ancres disponibles : `#methode`, `#qui`, `#offres`, `#candidature`.
+Ancres disponibles : `#diagnostic`, `#methode`, `#qui`, `#offres`, `#candidature`.
+
+### Interactions
+
+- **Le diagnostic** (`components/diagnostic.tsx`) — cinq questions, un score sur
+  quinze, trois verdicts possibles. Le résultat part avec la candidature dans le
+  champ caché `diagnostic` : tu sais dans quel état est le candidat avant même de
+  lire sa réponse. Pour changer les questions ou le barème, tout est en haut du
+  fichier.
+- **L'arc explorable** (`components/arc.tsx`) — chaque bille de la chaîne basse
+  révèle le rôle de cette sortie. Textes dans `MAILLONS`.
+- **La position de lecture** (`components/progression.tsx`) — le trait sous
+  l'en-tête et le numéro de piste. Aucune section n'est déclarée en dur : le
+  composant lit les balises `data-section` / `data-label` de la page. Une
+  section ajoutée apparaît toute seule.
 
 Seule ARTIST DEVELOPMENT est visible par défaut. Les deux autres niveaux et le
 comparatif sont sur la page, repliés derrière un clic (`components/depliant.tsx`) :
@@ -46,6 +60,7 @@ présents pour qui les cherche, invisibles pour qui est déjà convaincu.
 | N'importe quel texte du site | `app/page.tsx` |
 | Les champs du formulaire | `components/formulaire.tsx` + `app/api/candidature/route.ts` |
 | Les visuels signature | `components/trajectoires.tsx`, `components/arc.tsx` |
+| Les questions du diagnostic | `components/diagnostic.tsx` |
 
 ## Identité — « ACIER »
 
@@ -61,6 +76,11 @@ deux ans, et ça se reconnaît en une seconde.
 
 Le contraste typographique vient de l'écart de graisse à l'intérieur d'une
 seule famille (800 contre 400), pas d'un couple serif/sans.
+
+**Tous les titres sont en capitales.** Attention si tu touches à
+l'interlignage : le français accentue ses capitales et 0.93 est la limite
+basse avant que le É de « D'ÉLAN » ne percute la ligne du dessus. Ce n'est pas
+un réglage esthétique.
 
 Aucun dégradé de surface, aucun halo radial, aucun angle arrondi. Une surface
 est plate, un filet est un trait.
