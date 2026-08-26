@@ -1,11 +1,11 @@
 import Link from "next/link"
 import { Reveal } from "./reveal"
-import { CAPACITE } from "@/lib/config"
+import { Places } from "./offre-unique"
 
 export function BandeCta({
   titre,
   texte,
-  cta = "Parler de mon projet",
+  cta = "Candidater",
 }: {
   titre: string
   texte: string
@@ -17,16 +17,16 @@ export function BandeCta({
         <Reveal>
           <h2 className="titre-2 text-balance">{titre}</h2>
           <p className="chapo mx-auto mt-7 max-w-xl text-balance">{texte}</p>
-          <div className="mt-10 flex flex-col items-center justify-center gap-3.5 sm:flex-row">
+          <div className="mt-10 flex justify-center">
             <Link href="/candidature" className="bouton bouton-plein">
               {cta} →
             </Link>
-            <Link href="/offres" className="bouton bouton-vide">
-              Voir les trois formules
-            </Link>
           </div>
-          <p className="etiquette mt-8">
-            À partir de 149 € / mois · {CAPACITE} artistes à la fois · Aucun pourcentage sur ta carrière
+          <div className="mt-9 flex justify-center">
+            <Places compact />
+          </div>
+          <p className="etiquette mt-5">
+            Réponse sous 72 h · Sans engagement · Premier cycle remboursé si tu n&rsquo;en tires rien
           </p>
         </Reveal>
       </div>

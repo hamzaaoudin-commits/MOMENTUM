@@ -62,11 +62,11 @@ export function Formulaire() {
     return (
       <div className="carte-active">
         <p className="index">CANDIDATURE REÇUE</p>
-        <h2 className="titre-3 mt-4">Je te réponds sous 72 heures.</h2>
+        <h2 className="titre-3 mt-4">Tu reçois ton retour écrit sous 72 heures.</h2>
         <p className="corps mt-5 max-w-lg">
-          Je lis chaque candidature moi-même et j'écoute ce que tu m'as envoyé avant de répondre. Si ton profil
-          correspond, on cale un premier échange pour définir le niveau d'accompagnement adapté. Si ce n'est pas le bon
-          moment, je te le dis franchement — et je te dis pourquoi.
+          J'écoute ton morceau en entier, plusieurs fois, et je t'écris ce que j'en pense — que la suite se fasse ou
+          non. Si ton profil correspond, on cale ensuite un appel pour poser ton arc. Si ce n'est pas le bon moment, je
+          te le dis franchement, et je te dis pourquoi.
         </p>
       </div>
     )
@@ -97,7 +97,7 @@ export function Formulaire() {
 
       <div>
         <label className="champ-label" htmlFor="lien">
-          Un lien pour écouter (Spotify, SoundCloud, YouTube…)
+          Le morceau sur lequel tu veux mon retour (Spotify, SoundCloud, YouTube, Drive…)
         </label>
         <input id="lien" name="lien" required maxLength={300} className="champ" placeholder="https://" />
       </div>
@@ -171,9 +171,11 @@ export function Formulaire() {
 
       <div className="flex flex-col gap-4 pt-2 sm:flex-row sm:items-center">
         <button type="submit" disabled={etat === "envoi"} className="bouton bouton-plein justify-center disabled:opacity-55">
-          {etat === "envoi" ? "Envoi…" : "Envoyer ma candidature →"}
+          {etat === "envoi" ? "Envoi…" : "Envoyer et recevoir mon retour →"}
         </button>
-        <p className="etiquette leading-relaxed">Réponse sous 72 h · Aucune inscription automatique</p>
+        <p className="etiquette leading-relaxed">
+          Retour écrit sous 72 h · Gratuit · Aucune inscription automatique
+        </p>
       </div>
     </form>
   )

@@ -5,9 +5,9 @@ import { useEffect, useState } from "react"
 import { usePathname } from "next/navigation"
 
 const LIENS = [
-  { href: "/methode", label: "Le cycle" },
+  { href: "/methode", label: "La méthode" },
   { href: "/offres", label: "Les offres" },
-  { href: "/a-propos", label: "Qui je suis" },
+  { href: "/a-propos", label: "Qui te parle" },
 ]
 
 export function Nav() {
@@ -49,7 +49,7 @@ export function Nav() {
             </Link>
           ))}
           <Link href="/candidature" className="bouton bouton-plein px-5! py-2.5! text-[13.5px]!">
-            Parler de mon projet
+            Candidater
           </Link>
         </nav>
 
@@ -78,7 +78,7 @@ export function Nav() {
             </Link>
           ))}
           <Link href="/candidature" className="bouton bouton-plein mt-5 w-full justify-center">
-            Parler de mon projet
+            Candidater
           </Link>
         </nav>
       )}

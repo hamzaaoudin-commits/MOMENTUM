@@ -2,19 +2,20 @@ import type { Metadata } from "next"
 import { Suspense } from "react"
 import { Reveal } from "@/components/reveal"
 import { Formulaire } from "@/components/formulaire"
-import { CAPACITE, CONTACT } from "@/lib/config"
+import { CONTACT } from "@/lib/config"
+import { Places } from "@/components/offre-unique"
 
 export const metadata: Metadata = {
   title: "Candidater",
   description:
-    "Quelques questions sur ton projet, tes objectifs et ton niveau actuel. Réponse sous 72 heures, y compris pour dire non.",
+    "Quelques questions sur ton projet — et un retour écrit sur l'un de tes morceaux, avant que tu paies quoi que ce soit. Réponse sous 72 heures, y compris pour dire non.",
   robots: { index: true, follow: true },
 }
 
 const ETAPES = [
   ["01", "Tu candidates", "Quelques questions honnêtes. Compte huit minutes si tu réponds sérieusement."],
-  ["02", "J'écoute", "J'écoute ce que tu m'as envoyé et je regarde ton univers avant de te répondre."],
-  ["03", "On échange", "Si le profil correspond, un premier appel pour définir le niveau adapté — et le cap du premier mois."],
+  ["02", "Tu reçois un retour écrit", "J'écoute le morceau que tu m'envoies, en entier, et je t'écris ce que j'en pense. Gratuitement, que la suite se fasse ou non."],
+  ["03", "On décide", "Si le profil correspond, un appel pour poser ton arc et le cap du premier mois. Sinon, je te dis pourquoi."],
 ]
 
 export default function Candidature() {
@@ -24,11 +25,20 @@ export default function Candidature() {
         <div>
           <Reveal>
             <p className="index">CANDIDATURE</p>
-            <h1 className="titre-2 mt-6 text-balance">Parle-moi de ton projet.</h1>
+            <h1 className="titre-2 mt-6 text-balance">
+              Envoie-moi un morceau. Je te dis ce que j&rsquo;en pense.
+            </h1>
             <p className="corps mt-7 max-w-md">
-              Je n'accompagne que {CAPACITE} artistes à la fois. Ce formulaire n'est pas une formalité : c'est déjà le
-              début du diagnostic, et la qualité de tes réponses détermine celle de la mienne.
+              Gratuitement, avant toute question d&rsquo;argent. C&rsquo;est la seule façon honnête de juger un
+              conseiller&nbsp;: sur la qualité de son conseil, pas sur celle de sa page de vente.
             </p>
+            <p className="corps mt-5 max-w-md">
+              Ce formulaire n&rsquo;est pas une formalité — c&rsquo;est déjà le début du diagnostic, et la qualité de
+              tes réponses détermine celle de la mienne.
+            </p>
+            <div className="mt-8">
+              <Places />
+            </div>
           </Reveal>
 
           <Reveal delay={120}>

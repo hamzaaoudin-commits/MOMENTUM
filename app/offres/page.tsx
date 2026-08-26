@@ -4,6 +4,7 @@ import { TeteSection } from "@/components/section"
 import { GrilleOffres, Comparatif } from "@/components/offres"
 import { Faq } from "@/components/faq"
 import { BandeCta } from "@/components/bande-cta"
+import { Garantie, Places } from "@/components/offre-unique"
 import { CAPACITE } from "@/lib/config"
 
 export const metadata: Metadata = {
@@ -46,10 +47,13 @@ export default function Offres() {
               Trois niveaux. Un seul engagement&nbsp;: <em className="italic text-cobalt-vif">au mois</em>.
             </h1>
             <p className="chapo mt-8 max-w-[56ch]">
-              Un manager traditionnel demande environ 2 000 € par mois — et n'accepte pas les artistes à ton stade. Une
-              agence coûte davantage et te traite comme un dossier. Voici ce qui existe entre « je fais tout seul » et
-              « j'ai une équipe ».
+              Un manager demande environ 2 000 € par mois — et n'accepte pas les artistes à ton stade. Une agence coûte
+              davantage et te traite comme un dossier. Voici ce qui existe entre « je fais tout seul » et « j'ai une
+              équipe ». Si tu hésites, prends Artist Development : c'est le niveau où l'écart devient visible.
             </p>
+            <div className="mt-9">
+              <Places />
+            </div>
           </Reveal>
         </div>
       </section>
@@ -57,6 +61,9 @@ export default function Offres() {
       <section className="px-marge pb-20 md:pb-28">
         <div className="cadre">
           <GrilleOffres />
+          <div className="mt-5">
+            <Garantie />
+          </div>
         </div>
       </section>
 
@@ -108,7 +115,7 @@ export default function Offres() {
 
       <BandeCta
         titre="Le bon niveau se décide ensemble, pas dans un tableau."
-        texte="Candidate en indiquant la formule qui te semble juste. Si je pense qu'une autre est plus adaptée à ton stade, je te le dirai — y compris si c'est la moins chère."
+        texte="Candidate en indiquant la formule qui te semble juste. Si une autre est plus adaptée à ton stade, je te le dirai — y compris si c'est la moins chère."
         cta="Candidater"
       />
     </>

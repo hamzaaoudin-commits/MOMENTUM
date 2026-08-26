@@ -35,11 +35,11 @@ export const metadata: Metadata = {
     template: "%s · MOMENTUM",
   },
   description:
-    "Tu ne manques pas de travail. Tu manques d'élan. MOMENTUM est un accompagnement stratégique mensuel pour artistes indépendants : regard honnête sur ton art, stratégie de carrière, priorités claires. À partir de 149 €/mois, sans pourcentage.",
+    "Tes sorties ne s'additionnent pas parce qu'elles ne se racontent pas. MOMENTUM t'aide à passer de titres isolés à un arc qui se construit : un conseiller stratégique dans ton coin, chaque mois. 299 €/mois, sans engagement, sans pourcentage.",
   openGraph: {
     title: "MOMENTUM — Conseil stratégique pour artistes indépendants",
     description:
-      "Un conseiller dans ton coin, chaque mois. Pour arrêter de t'agiter et commencer à construire une trajectoire.",
+      "Tu ne manques pas de travail. Tu manques d'élan. Un conseiller stratégique dans ton coin, chaque mois.",
     locale: "fr_FR",
     type: "website",
   },

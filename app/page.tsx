@@ -2,167 +2,127 @@ import Link from "next/link"
 import { Reveal } from "@/components/reveal"
 import { TeteSection } from "@/components/section"
 import { Trajectoires } from "@/components/trajectoires"
-import { GrilleOffres } from "@/components/offres"
+import { Arc } from "@/components/arc"
+import { OffreUnique, Garantie, Places } from "@/components/offre-unique"
 import { Faq } from "@/components/faq"
-import { BandeCta } from "@/components/bande-cta"
-import { CAPACITE } from "@/lib/config"
+import { PROPOSITION } from "@/lib/config"
 
 /* ===========================================================================
-   PAGE D'ACCUEIL
+   PAGE D'ACCUEIL — LA RÈGLE DE L'UN
    ===========================================================================
-   Une page, un lecteur, une offre, une action. La page se lit dans l'ordre et
-   fait une seule démonstration :
+   UN LECTEUR   Un artiste indépendant de 22 à 30 ans. Il sort depuis deux ou
+                trois ans. Quelques milliers d'auditeurs mensuels. Il écrit,
+                enregistre et monte lui-même. Il a déjà payé de la promo qui n'a
+                rien donné. Sa peur : avoir trente-deux ans et se dire qu'il a
+                perdu dix ans. Son désir : qu'un professionnel compétent lui
+                dise « ton truc est bon, voilà comment on le fait exister ».
 
-     le problème n'est pas ton niveau de travail → c'est ton absence de cap
-     → un cap ne se trouve pas seul → voilà ce que ça donne, mois par mois
-     → voilà ce que ça coûte → voilà qui te le dit → candidate.
+   UNE IDÉE     Tes sorties ne s'additionnent pas parce qu'elles ne se racontent
+                pas. Un arc les relie ; sans arc, chaque titre repart de zéro.
+
+   UNE OFFRE    ARTIST DEVELOPMENT, 299 €/mois. Les deux autres niveaux vivent
+                sur /offres — pas ici. Trois cartes côte à côte transforment un
+                prospect convaincu en comparateur, et un comparateur reporte.
+
+   UNE ACTION   Candidater. Aucun autre bouton principal sur la page.
+
+   SÉQUENCE     problème → agitation → fausse solution → impact → vraie cause
+                → mécanisme → bénéfices → preuve → offre → risque → action.
    =========================================================================== */
 
-const QUESTIONS = [
-  "Quel morceau sortir ?",
-  "Est-ce que cette direction artistique est la bonne ?",
-  "Qu'est-ce que je devrais publier cette semaine ?",
-  "Qui contacter, et avec quoi ?",
-  "Est-ce que cette opportunité vaut mon temps ?",
-  "Est-ce que j'avance… ou est-ce que je m'agite ?",
+const FAUSSES_SOLUTIONS = [
+  { essai: "Sortir plus souvent", effet: "Ton catalogue grossit, ton identité se dilue." },
+  { essai: "Payer de la promo ou un pack de playlists", effet: "Des écoutes qui n'écoutent pas, et zéro auditeur récurrent." },
+  { essai: "Poster tous les jours", effet: "Tu produis du contenu au lieu de produire une œuvre." },
+  { essai: "Changer de style pour ce qui marche", effet: "Tu arrives en retard sur une vague, sans rien qui t'appartienne." },
+  { essai: "Envoyer cent messages à des blogs et des labels", effet: "Personne ne répond, parce que rien ne dit qui tu es." },
 ]
 
-const APPORTS = [
+const CE_QUE_TU_OBTIENS = [
   {
     n: "01",
-    titre: "Un regard honnête sur ton art",
+    titre: "Tu sais enfin où tu en es vraiment",
     texte:
-      "Quand tu es seul avec ton projet, l'objectivité est mécaniquement impossible : tu as entendu ton morceau trois cents fois, tu n'entends plus ce qu'un auditeur entend à la première écoute. Morceaux, textes, EP, clips, pochettes, contenus, direction artistique — je te dis ce qui fonctionne, ce qui ne fonctionne pas, et ce qui rendrait le projet meilleur.",
-    note: "Je ne suis pas là pour te dire que tout est génial.",
+      "Tes morceaux écoutés en entier, plusieurs fois, par quelqu'un dont c'est le métier de faire du son et de construire des identités. Pas un « c'est propre » d'ami bienveillant : ce qui fonctionne, ce qui ne fonctionne pas, et ce qui rendrait le morceau meilleur.",
+    gain: "Le doute cesse d'être permanent. Il devient une question à laquelle on répond.",
   },
   {
     n: "02",
-    titre: "Une vraie stratégie de carrière",
+    titre: "Tu sais quoi sortir, et dans quel ordre",
     texte:
-      "Faire de bons morceaux ne suffit pas : il faut savoir où tu vas. On travaille ton positionnement (pourquoi se souvenir de toi plutôt que d'un autre), ton identité (ce qui rend ton univers reconnaissable en trois secondes), tes sorties (quel single, quel concept, quel rythme), ton contenu, et l'étape suivante de ta carrière.",
-    note: "Et surtout : ce que tu dois arrêter de faire.",
+      "Quel titre en single, avec quel concept, à quel moment, suivi de quoi. Chaque sortie est placée pour préparer la suivante au lieu de vivre trois semaines et de mourir.",
+    gain: "Tes sorties arrêtent de s'annuler entre elles et commencent à s'additionner.",
   },
   {
     n: "03",
-    titre: "Des opportunités qui font sens",
+    titre: "Tu sais ce que tu dois arrêter",
     texte:
-      "Tu n'as pas besoin d'une liste de 200 liens. Tu as besoin de trois bonnes opportunités au bon moment. Médias, playlists, festivals, scènes, résidences, appels à projets, collaborations, producteurs, labels, marques, projets audiovisuels — filtrés pour ton profil et ton niveau réel, pas pour l'artiste que tu seras dans trois ans.",
-    note: "Et surtout : comment t'y présenter correctement.",
+      "C'est la partie que personne ne te donnera jamais gratuitement. Trois priorités par mois, et la liste explicite de tout ce qu'on abandonne — y compris de bonnes idées qui ne sont simplement pas prioritaires maintenant.",
+    gain: "Tu récupères les heures que l'agitation te prenait.",
   },
   {
     n: "04",
-    titre: "Un cerveau extérieur",
+    titre: "Tu n'es plus seul au moment de décider",
     texte:
-      "Une idée importante avant de la lancer, une proposition reçue avant de répondre, un changement d'image avant de l'annoncer. Tu restes le créateur, tu gardes le contrôle total sur ton art — tu n'es simplement plus obligé de tout décider seul, dans ta chambre, à deux heures du matin.",
-    note: "Le doute n'est pas un problème. Le doute sans interlocuteur, si.",
+      "Une proposition reçue, un featuring, un changement d'image, une opportunité qui a l'air belle. Tu l'envoies, tu as un avis argumenté avant de répondre — pas six mois après, quand c'est déjà fait.",
+    gain: "Les mauvaises décisions coûtent des années. Celles-là, tu ne les prendras pas.",
   },
 ]
 
-const VERDICTS = [
-  "Ce morceau est bon. Mais ce n'est pas celui que je sortirais maintenant.",
-  "Cette opportunité est intéressante. Celle-là, laisse tomber.",
-  "Ton identité commence à fonctionner. Maintenant, allons plus loin.",
-  "Tu n'as pas besoin de travailler plus. Tu as besoin de travailler sur autre chose.",
-]
-
-const CYCLE = [
+const OBJECTIONS = [
   {
-    n: "01",
-    nom: "DIAGNOSTIC",
-    texte:
-      "On comprend ton projet en profondeur : ta musique, ton identité, ton audience réelle, ton niveau, tes objectifs et surtout tes blocages. Pas un questionnaire — une vraie mise à plat.",
+    q: "« 299 € par mois, c'est beaucoup pour moi. »",
+    r: "C'est le prix d'une journée de studio, ou de deux campagnes de promo qui ne donneront rien. La différence : une journée de studio produit un fichier, un cycle produit une direction — qui rend utiles toutes les journées de studio suivantes. Si le budget n'y est vraiment pas, commence à 149 € : mieux vaut un niveau tenu six mois qu'un niveau abandonné au deuxième.",
   },
   {
-    n: "02",
-    nom: "CAP",
-    texte:
-      "On identifie les deux ou trois actions susceptibles d'avoir le plus d'impact ce mois-ci, et on écarte tout le reste. Un cap, c'est autant ce qu'on décide de ne pas faire.",
+    q: "« Je peux avoir ces conseils gratuitement sur YouTube. »",
+    r: "Tu peux avoir des conseils généraux sur l'industrie, et certains sont excellents. Ce que tu ne peux pas avoir, c'est quelqu'un qui écoute tes quatorze morceaux, regarde tes visuels, connaît ton stade exact et te dit lequel sortir. Un conseil général s'applique à tout le monde ; c'est précisément pour ça qu'il ne change la trajectoire de personne.",
   },
   {
-    n: "03",
-    nom: "EXÉCUTION",
-    texte:
-      "Tu crées. Tu sors. Tu expérimentes. C'est ton travail et il ne change pas. La différence : les décisions importantes passent par un regard extérieur avant d'être prises.",
+    q: "« Et si tu ne comprends pas mon style ? »",
+    r: "Dis-le-moi dans ta candidature. Je préfère refuser un projet que je ne saurais pas servir plutôt que d'encaisser trois mois avant qu'on s'en aperçoive tous les deux. Ce qui se transpose d'un style à l'autre, ce n'est pas le goût — c'est l'architecture : positionnement, cohérence, séquence de sorties.",
   },
   {
-    n: "04",
-    nom: "CORRECTION",
-    texte:
-      "Chaque fin de mois, on regarde ce qui a fonctionné, ce qui n'a pas fonctionné, et ce qu'on change. Pas de plan figé pendant six mois : la stratégie évolue avec le projet.",
+    q: "« Je n'ai pas assez avancé pour mériter ça. »",
+    r: "C'est l'objection la plus fréquente et la plus coûteuse. Attendre d'avoir « réussi » pour agir en professionnel, c'est exactement ce qui fait perdre des années. Il te faut un projet déjà commencé et une vraie envie de construire. Pas un contrat, pas cent mille abonnés.",
   },
-]
-
-const AVANT = [
-  "Tu avances au feeling.",
-  "Tu changes de direction tous les deux mois.",
-  "Tu doutes de tes décisions après les avoir prises.",
-  "Tu travailles beaucoup sans savoir quoi prioriser.",
-  "Tu vois passer des opportunités sans savoir lesquelles saisir.",
-]
-
-const APRES = [
-  "Tu sais ce que tu construis, et pourquoi.",
-  "Ta direction tient dans une phrase que tu peux dire à voix haute.",
-  "Tu sais quelles sorties méritent ton énergie.",
-  "Tu sais quoi faire ce mois-ci, en trois priorités.",
-  "Tu construis une carrière volontairement, au lieu d'espérer qu'elle arrive.",
-]
-
-const POUR = [
-  "Tu es artiste indépendant et tu as déjà commencé à sortir.",
-  "Tu veux progresser sérieusement, pas être rassuré.",
-  "Tu acceptes les critiques honnêtes sur ton travail.",
-  "Tu es prêt à exécuter entre deux sessions.",
-  "Tu n'as pas encore les moyens — ni le besoin — d'une équipe complète.",
-]
-
-const PAS_POUR = [
-  "Tu cherches une garantie de viralité.",
-  "Tu cherches un contrat de label ou une playlist promise.",
-  "Tu veux quelqu'un qui fasse le travail à ta place.",
-  "Tu veux qu'on te dise que ton projet est déjà parfait.",
-  "Tu cherches des contacts à acheter plutôt qu'une trajectoire à construire.",
+  {
+    q: "« Et si ça ne marche pas ? »",
+    r: "Je ne peux garantir ni streams, ni playlist, ni signature — personne ne le peut, et quiconque te le promet te vend autre chose. Ce que je garantis, c'est le premier cycle : s'il ne t'apprend rien sur ton projet, tu es remboursé intégralement.",
+  },
 ]
 
 const FAQ = [
   {
-    q: "Est-ce que tu acceptes tous les artistes ?",
-    r: `Non, et c'est volontaire : je n'accompagne que ${CAPACITE} artistes à la fois. Je privilégie les artistes indépendants, émergents ou intermédiaires, qui ont déjà commencé à sortir et une réelle volonté de construire. Si ton profil ne correspond pas au moment où tu candidates, je te le dis franchement plutôt que de prendre ton argent.`,
-  },
-  {
-    q: "Est-ce que tu écoutes vraiment mes morceaux ?",
-    r: "Oui, en entier, plusieurs fois, et le retour est écrit. C'est le cœur de l'accompagnement : sans écoute réelle, un conseil sur ta carrière n'est qu'une opinion générale sur l'industrie.",
-  },
-  {
-    q: "Est-ce que tu analyses mes clips et mes visuels ?",
-    r: "Oui. L'objectif est d'avoir une vision cohérente de l'ensemble du projet, pas seulement de la musique. Une pochette qui ment sur le son coûte plus cher qu'un mauvais couplet.",
-  },
-  {
-    q: "Est-ce que tu peux m'aider à sortir un morceau ?",
-    r: "Oui : choix du morceau, positionnement, concept, calendrier, contenus qui accompagnent la sortie, et ce qu'on regarde ensuite pour savoir si ça a fonctionné.",
-  },
-  {
-    q: "Est-ce que tu me trouves des opportunités ?",
-    r: "Je fais la veille, je filtre et je te propose ce qui est cohérent avec ton projet et ton niveau, avec la manière de t'y présenter. Je ne garantis aucun résultat : personne ne peut garantir qu'un média répond ou qu'une playlist ajoute un titre.",
-  },
-  {
-    q: "Est-ce que je peux te contacter entre les sessions ?",
-    r: "En Advisor, l'échange est concentré sur la session mensuelle et les retours écrits. En Development, tu peux m'écrire en asynchrone. En Partner, tu as un accès direct avec une réponse sous 24 h ouvrées.",
-  },
-  {
-    q: "Puis-je arrêter quand je veux ?",
-    r: "Oui. L'accompagnement fonctionne au mois, sans engagement de durée. Les modalités exactes sont précisées avant l'inscription. Un accompagnement qu'on subit ne sert à rien.",
+    q: "Comment se passe concrètement un mois ?",
+    r: "Une visio de soixante minutes en début de mois pour fixer le cap, tes envois de morceaux et de visuels au fil des semaines avec mes retours écrits, une seconde visio pour arbitrer les décisions en cours, et un bilan écrit en fin de mois qui pose le cap du suivant.",
   },
   {
     q: "Est-ce que tu prends un pourcentage sur ma carrière ?",
-    r: "Non, jamais. Abonnement mensuel fixe. Tu gardes 100 % de tes droits, de tes revenus et de tes décisions. C'est aussi ce qui garantit que mes conseils servent ton projet et pas mes intérêts.",
+    r: "Jamais. Abonnement mensuel fixe, tu gardes 100 % de tes droits, de tes revenus et de tes décisions. C'est aussi la garantie que mes conseils servent ton projet et pas mes intérêts : je n'ai rien à gagner à te pousser vers une signature.",
+  },
+  {
+    q: "Est-ce que tu produis ou tu composes pour moi ?",
+    r: "Non. Je conseille, tu crées. C'est une frontière que je tiens : un conseiller qui met les mains dans le son finit par te fabriquer sa musique à lui, et ton identité disparaît.",
+  },
+  {
+    q: "Mes morceaux inédits sont-ils protégés ?",
+    r: "Tout ce que tu envoies est confidentiel et n'est partagé avec personne. Je ne revendique aucun droit, aucune part d'édition et aucun crédit sur ce que tu produis pendant l'accompagnement.",
+  },
+  {
+    q: "Puis-je arrêter quand je veux ?",
+    r: "Oui, au mois, sans justification. Sois lucide cependant : un mois donne un diagnostic, pas une trajectoire. L'écart se mesure sur trois cycles.",
+  },
+  {
+    q: "Pourquoi seulement six artistes ?",
+    r: "Parce qu'au-delà, je ne peux plus écouter chaque projet en profondeur — et un conseil donné sans écoute réelle ne vaut rien. C'est une limite d'attention, pas une mise en scène commerciale.",
   },
 ]
 
 export default function Accueil() {
   return (
     <>
-      {/* ═══════════════════ HERO ═══════════════════ */}
+      {/* ═══════════════ HERO — négation + trou de curiosité ═══════════════ */}
       <section className="relative flex min-h-[92vh] items-center overflow-hidden pt-[68px]">
         <div className="pointer-events-none absolute inset-0 opacity-[0.55]">
           <Trajectoires variante="fond" className="h-full w-full" />
@@ -190,145 +150,196 @@ export default function Accueil() {
           </Reveal>
 
           <Reveal delay={220}>
-            <p className="chapo mt-9 max-w-[54ch]">
-              Tu écris, tu produis, tu sors des morceaux, tu construis ton univers. Et pourtant, chaque décision qui
-              compte, tu la prends seul. MOMENTUM, c'est un conseiller stratégique dans ton coin, chaque mois — pour
-              arrêter de t'agiter et commencer à construire une trajectoire.
+            <p className="chapo mt-9 max-w-[52ch]">
+              Douze titres sortis cette année. Et décembre ressemble à janvier. Ce n&rsquo;est ni ton niveau, ni
+              l&rsquo;algorithme, ni ton budget&nbsp;: c&rsquo;est que tes sorties ne se relient à rien. Voici comment on
+              répare ça.
             </p>
           </Reveal>
 
           <Reveal delay={320}>
-            <div className="mt-11 flex flex-col gap-3.5 sm:flex-row">
+            <div className="mt-11">
               <Link href="/candidature" className="bouton bouton-plein">
-                Parler de mon projet →
-              </Link>
-              <Link href="/offres" className="bouton bouton-vide">
-                Voir les trois formules
+                Candidater →
               </Link>
             </div>
           </Reveal>
 
           <Reveal delay={420}>
-            <p className="etiquette mt-10">
-              À partir de 149 € / mois · {CAPACITE} artistes accompagnés à la fois · Aucun pourcentage
-            </p>
+            <div className="mt-10">
+              <Places />
+            </div>
           </Reveal>
         </div>
       </section>
 
-      {/* ═══════════════════ 01 · LE CONSTAT ═══════════════════ */}
+      {/* ═══════════════ 01 · LA SCÈNE ═══════════════ */}
       <section className="bloc border-t border-filet">
+        <div className="cadre-md">
+          <TeteSection index="01" etiquette="TU CONNAIS CE MOMENT" titre="Deux heures du matin." />
+
+          <Reveal>
+            <div className="space-y-6">
+              <p className="corps text-[16.5px]">
+                Tu réécoutes le même mix pour la trentième fois et tu ne sais plus si le morceau est bon ou si tu es
+                simplement fatigué. Tu ouvres Instagram deux minutes. Un type que tu trouves moins bon que toi vient de
+                passer les cent mille écoutes. Tu refermes.
+              </p>
+              <p className="corps text-[16.5px]">Tu te dis que tu vas travailler plus.</p>
+              <p className="verdict mt-10">Tu travailles déjà plus que lui.</p>
+              <p className="corps mt-10 text-[16.5px]">
+                Le vrai coût de l&rsquo;indépendance, ce n&rsquo;est pas l&rsquo;argent. C&rsquo;est le nombre de
+                décisions qui engagent des mois de ta vie et que tu prends seul, à deux heures du matin, sans personne à
+                qui les soumettre.
+              </p>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ═══════════════ 02 · FAUSSE SOLUTION ═══════════════ */}
+      <section className="bloc border-t border-filet bg-encre-haute">
         <div className="cadre">
           <TeteSection
-            index="01"
-            etiquette="LE CONSTAT"
-            titre={
-              <>
-                Tu peux passer quarante heures sur un morceau
-                <br className="hidden md:block" /> et ne pas voir le problème principal.
-              </>
-            }
-            chapo="Le vrai coût de l'indépendance, ce n'est pas l'argent. C'est le nombre de décisions importantes que tu prends sans personne à qui les soumettre."
+            index="02"
+            etiquette="CE QUE TU AS DÉJÀ ESSAYÉ"
+            titre="Tout le monde te dit la même chose : travaille plus, sors plus, poste plus."
+            chapo="C'est le conseil le plus répandu du milieu. C'est aussi celui qui a coûté le plus d'années au plus grand nombre d'artistes talentueux."
           />
 
-          <div className="grid gap-x-14 gap-y-0 md:grid-cols-2">
-            {QUESTIONS.map((q, i) => (
-              <Reveal key={q} delay={i * 70}>
-                <div className="flex items-baseline gap-5 border-b border-filet py-6">
-                  <span className="font-mono text-[11px] text-craie-24">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <p className="font-serif text-[1.2rem] leading-snug text-craie-80 md:text-[1.4rem]">{q}</p>
+          <div className="border-t border-filet">
+            {FAUSSES_SOLUTIONS.map((f, i) => (
+              <Reveal key={f.essai} delay={i * 70}>
+                <div className="grid gap-2 border-b border-filet py-6 md:grid-cols-[1fr_1.25fr] md:gap-12">
+                  <p className="font-serif text-[1.2rem] leading-snug text-craie-50 line-through decoration-1 decoration-craie-24">
+                    {f.essai}
+                  </p>
+                  <p className="text-[15px] font-light leading-relaxed text-craie-80">{f.effet}</p>
                 </div>
               </Reveal>
             ))}
           </div>
 
           <Reveal delay={200}>
-            <p className="corps mt-12 max-w-2xl">
-              Tu peux passer des mois sur ton projet sans jamais savoir si tu prends les bonnes décisions. Et le pire,
-              c'est que tu ne le sauras qu'après — quand le temps, lui, sera déjà dépensé.
+            <p className="corps mt-12 max-w-2xl text-[16px]">
+              Aucune de ces actions n&rsquo;est stupide. Elles échouent toutes pour la même raison, et cette raison
+              n&rsquo;a rien à voir avec ton niveau d&rsquo;effort.
             </p>
           </Reveal>
         </div>
       </section>
 
-      {/* ═══════════════════ 02 · LA VRAIE CAUSE ═══════════════════ */}
-      <section className="bloc border-t border-filet bg-encre-haute">
-        <div className="cadre">
-          <TeteSection
-            index="02"
-            etiquette="LA VRAIE CAUSE"
-            titre={
-              <>
-                Ce n'est pas ton niveau. Ce n'est pas ton budget.
-                <br className="hidden md:block" /> C'est ton <em className="italic text-cobalt-vif">absence de cap</em>.
-              </>
-            }
-          />
-
-          <div className="grid gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-            <Reveal>
-              <div className="space-y-6">
-                <p className="corps">
-                  L'agitation ressemble au travail. Elle en a les heures, la fatigue et le goût. Elle n'en a pas les
-                  effets. On peut sortir douze titres dans l'année, poster tous les jours, contacter cinquante personnes,
-                  et terminer décembre exactement au point où on a commencé janvier.
-                </p>
-                <p className="corps">
-                  Un élan, en physique, c'est une masse et une direction. La plupart des artistes indépendants ont la
-                  masse : le travail, le talent, les heures, l'obsession. Ce qui manque, c'est la direction. Sans
-                  direction, l'énergie ne s'accumule pas — elle se dissipe.
-                </p>
-                <p className="verdict mt-9">
-                  Le problème de la plupart des artistes indépendants n'est pas leur motivation. C'est leur manque de
-                  recul.
-                </p>
-              </div>
-            </Reveal>
-
-            <Reveal delay={140}>
-              <figure className="carte p-4! md:p-7!">
-                <Trajectoires variante="demo" className="h-auto w-full" />
-                <figcaption className="mt-5 grid gap-3 border-t border-filet pt-5 sm:grid-cols-2">
-                  <div className="flex items-start gap-3">
-                    <span aria-hidden className="mt-[9px] h-px w-5 shrink-0 bg-craie-38" />
-                    <p className="text-[13px] font-light leading-snug text-craie-50">
-                      <span className="text-craie-80">L'agitation.</span> Beaucoup de mouvement, aucune progression.
-                    </p>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <span aria-hidden className="mt-[9px] h-px w-5 shrink-0 bg-cobalt-vif" />
-                    <p className="text-[13px] font-light leading-snug text-craie-50">
-                      <span className="text-craie-80">L'élan.</span> Plus lent au début. Puis ça n'a plus rien à voir.
-                    </p>
-                  </div>
-                </figcaption>
-              </figure>
-              <p className="etiquette mt-4">Même talent. Même nombre d'heures. Douze mois.</p>
-            </Reveal>
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════════════════ 03 · CE QUE JE T'APPORTE ═══════════════════ */}
+      {/* ═══════════════ 03 · LA VRAIE CAUSE ═══════════════ */}
       <section className="bloc border-t border-filet">
         <div className="cadre">
           <TeteSection
             index="03"
-            etiquette="CE QUE JE T'APPORTE"
+            etiquette="LA VRAIE CAUSE"
+            titre={
+              <>
+                Tes sorties ne s&rsquo;additionnent pas
+                <br className="hidden md:block" /> parce qu&rsquo;elles ne{" "}
+                <em className="italic text-cobalt-vif">se racontent</em> pas.
+              </>
+            }
+          />
+
+          <Reveal>
+            <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
+              <div className="space-y-6">
+                <p className="corps text-[16px]">
+                  Un auditeur qui découvre ton titre aujourd&rsquo;hui n&rsquo;a aucune raison de chercher le suivant.
+                  Rien ne le relie au précédent&nbsp;: ni le monde, ni l&rsquo;image, ni la promesse. Chaque sortie
+                  repart donc de zéro, avec la même audience à reconquérir.
+                </p>
+                <p className="corps text-[16px]">
+                  C&rsquo;est arithmétique&nbsp;: sept titres isolés font sept fois un. Sept titres chaînés font autre
+                  chose — chacun hérite de l&rsquo;audience, de l&rsquo;identité et de l&rsquo;attente du précédent.
+                  Même travail, même talent, même nombre d&rsquo;heures.
+                </p>
+                <p className="verdict mt-9">
+                  Ce qui te manque n&rsquo;est pas un morceau de plus. C&rsquo;est ce qui relie ceux que tu as déjà.
+                </p>
+              </div>
+
+              <figure className="carte p-4! md:p-8!">
+                <Arc className="h-auto w-full" />
+                <figcaption className="etiquette mt-6 border-t border-filet pt-5 leading-relaxed">
+                  L&rsquo;écart entre les deux bandes n&rsquo;est pas une différence de talent. C&rsquo;est une
+                  différence de liaison.
+                </figcaption>
+              </figure>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ═══════════════ 04 · LE MÉCANISME ═══════════════ */}
+      <section className="bloc border-t border-filet bg-encre-haute">
+        <div className="cadre-md">
+          <TeteSection
+            index="04"
+            etiquette="LE MÉCANISME"
+            titre={
+              <>
+                On ne travaille plus une sortie à la fois.
+                <br className="hidden md:block" /> On travaille <em className="italic text-cobalt-vif">un arc</em>.
+              </>
+            }
+          />
+
+          <Reveal>
+            <div className="space-y-6">
+              <p className="corps text-[16px]">
+                Un arc, c&rsquo;est une suite de trois à six sorties conçues ensemble, où chacune prépare la suivante et
+                confirme la précédente. Le même principe qui fait qu&rsquo;on regarde huit épisodes d&rsquo;affilée
+                alors qu&rsquo;on n&rsquo;aurait jamais regardé huit courts-métrages sans lien.
+              </p>
+              <p className="corps text-[16px]">
+                Concrètement&nbsp;: on définit d&rsquo;abord ce que ton projet promet — en une phrase que tu peux dire à
+                voix haute sans avoir honte. Puis on choisit les titres qui tiennent cette promesse et l&rsquo;ordre dans
+                lequel ils la construisent. Puis, chaque mois, on exécute un maillon et on corrige le suivant avec ce
+                qu&rsquo;on vient d&rsquo;apprendre.
+              </p>
+              <p className="corps text-[16px]">
+                Ce n&rsquo;est ni un calendrier ni un plan de communication. Un calendrier périme au deuxième mois. Un
+                arc, lui, se corrige sans perdre sa direction — c&rsquo;est exactement pour ça qu&rsquo;il accumule au
+                lieu de se dissiper.
+              </p>
+              <p className="mt-10 border-l-2 border-cuivre pl-6 font-mono text-[13.5px] leading-relaxed text-craie-80">
+                {PROPOSITION}
+              </p>
+              <p className="corps">
+                <Link
+                  href="/methode"
+                  className="text-cobalt-vif underline decoration-filet-cobalt underline-offset-4 hover:decoration-cobalt-vif"
+                >
+                  Le cycle mensuel en détail
+                </Link>
+              </p>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ═══════════════ 05 · CE QUE TU OBTIENS ═══════════════ */}
+      <section className="bloc border-t border-filet">
+        <div className="cadre">
+          <TeteSection
+            index="05"
+            etiquette="CE QUE TU OBTIENS"
             titre="Quatre choses que tu ne peux pas te donner à toi-même."
             chapo="Aucune ne remplace ton travail. Toutes déterminent ce que ton travail produit."
           />
 
           <div className="grid gap-5 md:grid-cols-2">
-            {APPORTS.map((a, i) => (
+            {CE_QUE_TU_OBTIENS.map((a, i) => (
               <Reveal key={a.n} delay={i * 90} className="h-full">
                 <article className="carte flex h-full flex-col">
                   <span className="index">{a.n}</span>
                   <h3 className="titre-3 mt-4">{a.titre}</h3>
                   <p className="corps mt-4">{a.texte}</p>
-                  <p className="mt-auto pt-6 font-serif text-[1.05rem] italic leading-snug text-cuivre-vif">{a.note}</p>
+                  <p className="mt-auto pt-6 font-serif text-[1.05rem] italic leading-snug text-cuivre-vif">{a.gain}</p>
                 </article>
               </Reveal>
             ))}
@@ -336,262 +347,160 @@ export default function Accueil() {
         </div>
       </section>
 
-      {/* ═══════════════════ 04 · LES VERDICTS ═══════════════════ */}
-      <section className="bloc border-t border-filet bg-encre-haute">
-        <div className="cadre-md">
-          <TeteSection
-            index="04"
-            etiquette="CONCRÈTEMENT"
-            titre="À quoi ça ressemble, un mois d'accompagnement."
-            chapo="Pas à un rapport de trente pages. À quatre phrases que personne d'autre ne te dira."
-          />
-
-          <div className="space-y-9 md:space-y-11">
-            {VERDICTS.map((v, i) => (
-              <Reveal key={v} delay={i * 110}>
-                <p className="verdict">{v}</p>
-              </Reveal>
-            ))}
-          </div>
-
-          <Reveal delay={200}>
-            <p className="corps mt-14">
-              C'est ça, le produit. Pas de la théorie sur l'industrie : des décisions tranchées sur{" "}
-              <span className="text-craie">ton</span> projet, chaque mois, par quelqu'un qui l'écoute vraiment.
-            </p>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ═══════════════════ 05 · LE CYCLE ═══════════════════ */}
-      <section className="bloc border-t border-filet">
-        <div className="cadre">
-          <TeteSection
-            index="05"
-            etiquette="LA MÉTHODE"
-            titre="Le cycle. Un tour complet, chaque mois."
-            chapo="Quatre temps qui se répètent. C'est la répétition qui crée l'élan — pas l'intensité d'un seul mois."
-          />
-
-          <div className="grid gap-px overflow-hidden border border-filet bg-filet md:grid-cols-2 lg:grid-cols-4">
-            {CYCLE.map((c, i) => (
-              <Reveal key={c.n} delay={i * 90} className="h-full">
-                <div className="flex h-full flex-col bg-encre p-7 md:p-8">
-                  <span className="font-mono text-[11px] tracking-[0.22em] text-cobalt-vif">{c.n}</span>
-                  <h3 className="mt-4 font-mono text-[12.5px] uppercase tracking-[0.2em] text-craie">{c.nom}</h3>
-                  <p className="corps mt-4 text-[14.5px]">{c.texte}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-
-          <Reveal delay={200}>
-            <p className="corps mt-9 max-w-2xl">
-              Aucun plan n'est figé six mois à l'avance. Une carrière artistique ne se planifie pas comme un lancement
-              produit : elle se corrige.{" "}
-              <Link href="/methode" className="text-cobalt-vif underline decoration-filet-cobalt underline-offset-4 hover:decoration-cobalt-vif">
-                Voir le cycle en détail
-              </Link>
-              .
-            </p>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ═══════════════════ 06 · AVANT / APRÈS ═══════════════════ */}
+      {/* ═══════════════ 06 · PREUVE ═══════════════ */}
       <section className="bloc border-t border-filet bg-encre-haute">
         <div className="cadre">
           <TeteSection
             index="06"
-            etiquette="CE QUI CHANGE"
-            titre="Le but n'est pas de te donner des conseils. C'est de faire bouger ton projet."
+            etiquette="POURQUOI M'ÉCOUTER MOI"
+            titre="Un artiste comprend ton art. Un stratège comprend ton marché."
+            chapo="Il t'en faut un qui fasse les deux. C'est la seule raison valable de me confier un regard sur ta carrière, et c'est la seule que je revendique."
           />
 
-          <div className="grid gap-px overflow-hidden border border-filet bg-filet md:grid-cols-2">
-            <Reveal className="h-full">
-              <div className="h-full bg-encre p-8 md:p-10">
-                <p className="etiquette">AUJOURD'HUI</p>
-                <ul className="mt-7 space-y-5">
-                  {AVANT.map((x) => (
-                    <li key={x} className="flex gap-4 text-[15px] font-light leading-relaxed text-craie-50">
-                      <span aria-hidden className="mt-[11px] h-px w-3.5 shrink-0 bg-craie-24" />
-                      {x}
-                    </li>
-                  ))}
-                </ul>
+          <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr]">
+            <Reveal>
+              <div className="space-y-5">
+                <p className="corps text-[15.5px]">
+                  Je m&rsquo;appelle Hamza El Jaouahiry. Réalisateur et compositeur depuis 2019, formé au cinéma à
+                  l&rsquo;Université Gustave Eiffel puis à la Sorbonne Nouvelle, passé par le studio comme ingénieur du
+                  son. Je produis et compose mon propre projet musical, MORI, chroniqué en Espagne, au Royaume-Uni et au
+                  Brésil.
+                </p>
+                <p className="corps text-[15.5px]">
+                  Le reste de mon temps, je construis des identités de marque&nbsp;: je dirige Strawberry Production,
+                  studio de narration de marque pour fondateurs, et j&rsquo;ai publié en 2026 deux ouvrages sur le récit
+                  de marque, dont un atlas de trente architectures narratives. Je bâtis aussi depuis 2024 un univers
+                  transmédia, Sinbury.
+                </p>
+                <p className="corps text-[15.5px]">
+                  Autrement dit&nbsp;: je connais ton problème de l&rsquo;intérieur parce que je le vis, et sa solution
+                  de l&rsquo;extérieur parce que c&rsquo;est mon métier.
+                </p>
+                <p className="corps">
+                  <Link
+                    href="/a-propos"
+                    className="text-cobalt-vif underline decoration-filet-cobalt underline-offset-4 hover:decoration-cobalt-vif"
+                  >
+                    Le parcours complet
+                  </Link>
+                </p>
               </div>
             </Reveal>
-            <Reveal delay={120} className="h-full">
-              <div
-                className="h-full p-8 md:p-10"
-                style={{ background: "linear-gradient(180deg, rgba(59,111,212,0.09), rgba(11,13,16,0.5))" }}
-              >
-                <p className="index">APRÈS QUELQUES MOIS</p>
-                <ul className="mt-7 space-y-5">
-                  {APRES.map((x) => (
-                    <li key={x} className="flex gap-4 text-[15px] font-light leading-relaxed text-craie-80">
-                      <span aria-hidden className="mt-[11px] h-px w-3.5 shrink-0 bg-cobalt-vif" />
-                      {x}
-                    </li>
-                  ))}
-                </ul>
+
+            <Reveal delay={120}>
+              <div className="carte h-full">
+                <p className="etiquette">CE QUE JE NE PEUX PAS TE MONTRER</p>
+                <p className="corps mt-4 text-[14.5px]">
+                  Des témoignages clients&nbsp;: MOMENTUM est jeune et je préfère une page vide à des avis fabriqués.
+                  Quand les premiers arcs auront un an, ils seront ici, avec des chiffres vérifiables et des noms.
+                </p>
+                <p className="etiquette mt-9">CE QUE JE PEUX TE MONTRER</p>
+                <p className="corps mt-4 text-[14.5px]">
+                  Mon propre travail — un projet musical qui a passé les frontières sans label, un studio de marque, deux
+                  ouvrages. Et, si tu candidates, un retour écrit sur l&rsquo;un de tes morceaux avant que tu paies quoi
+                  que ce soit. Tu jugeras la qualité du conseil sur pièce.
+                </p>
               </div>
             </Reveal>
           </div>
         </div>
       </section>
 
-      {/* ═══════════════════ 07 · LES OFFRES ═══════════════════ */}
+      {/* ═══════════════ 07 · L'OFFRE UNIQUE ═══════════════ */}
       <section className="bloc border-t border-filet">
         <div className="cadre">
           <TeteSection
             index="07"
-            etiquette="LES FORMULES"
-            titre="Trois niveaux. Un seul engagement : au mois."
-            chapo="Un manager traditionnel coûte 2 000 € par mois et n'accepte pas les artistes à ton stade. Une agence coûte davantage et ne t'écoute pas. Voici ce qui existe entre les deux."
+            etiquette="L'OFFRE"
+            titre="Un manager coûte 2 000 € par mois. Et il ne prend pas les artistes à ton stade."
+            chapo="Entre « je fais tout tout seul » et « j'ai une équipe complète », il existe un niveau intermédiaire. C'est celui-là."
           />
-          <GrilleOffres />
-          <Reveal delay={200}>
-            <p className="corps mt-9 max-w-2xl">
-              Comparatif ligne par ligne, en chiffres réels, sur la{" "}
-              <Link href="/offres" className="text-cobalt-vif underline decoration-filet-cobalt underline-offset-4 hover:decoration-cobalt-vif">
-                page des offres
-              </Link>
-              .
-            </p>
+          <OffreUnique />
+          <Reveal delay={150}>
+            <div className="mt-5">
+              <Garantie />
+            </div>
           </Reveal>
         </div>
       </section>
 
-      {/* ═══════════════════ 08 · QUI TE PARLE ═══════════════════ */}
+      {/* ═══════════════ 08 · OBJECTIONS ═══════════════ */}
       <section className="bloc border-t border-filet bg-encre-haute">
         <div className="cadre-md">
-          <TeteSection index="08" etiquette="QUI TE PARLE" titre="Pourquoi tu devrais m'écouter, moi." />
+          <TeteSection
+            index="08"
+            etiquette="CE QUE TU ES EN TRAIN DE TE DIRE"
+            titre="Les cinq objections, dans l'ordre où elles arrivent."
+          />
+          <div className="space-y-11">
+            {OBJECTIONS.map((o, i) => (
+              <Reveal key={o.q} delay={i * 80}>
+                <div>
+                  <p className="font-serif text-[1.3rem] italic leading-snug text-craie md:text-[1.5rem]">{o.q}</p>
+                  <p className="corps mt-4 max-w-2xl">{o.r}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
 
+      {/* ═══════════════ 09 · IDENTITÉ ═══════════════ */}
+      <section className="bloc border-t border-filet">
+        <div className="cadre-md">
+          <TeteSection index="09" etiquette="AU FOND" titre="Il y a deux catégories d'artistes indépendants." />
           <Reveal>
             <div className="space-y-6">
-              <p className="corps">
-                Je m'appelle Hamza El Jaouahiry. Je ne suis pas un consultant qui parle de musique de l'extérieur : je
-                suis réalisateur et compositeur depuis 2019, formé au cinéma à l'Université Gustave Eiffel et à la
-                Sorbonne Nouvelle, et j'ai travaillé comme ingénieur du son en studio.
+              <p className="corps text-[16px]">
+                Ceux qui publient et ceux qui construisent. De l&rsquo;extérieur, la première année, ils sont
+                indiscernables&nbsp;: mêmes plateformes, même matériel, souvent le même niveau. À la troisième année,
+                plus personne ne les confond.
               </p>
-              <p className="corps">
-                Je produis mon propre projet musical, <span className="text-craie">MORI</span>, salué par la presse en
-                Espagne, au Royaume-Uni et au Brésil. Je connais très précisément ce que tu vis, parce que je le vis
-                aussi : le doute avant une sortie, la tentation de tout changer, la fatigue de décider seul.
-              </p>
-              <p className="corps">
-                Le reste de mon temps, je le passe à construire des identités de marque. Je dirige{" "}
-                <span className="text-craie">Strawberry Production</span>, un studio de narration de marque pour
-                fondateurs et dirigeants, et j'ai publié en 2026 deux ouvrages sur le récit de marque, dont un atlas de
-                trente architectures narratives. Je construis aussi un univers transmédia,{" "}
-                <span className="text-craie">Sinbury</span>, depuis 2024.
+              <p className="corps text-[16px]">
+                Ce n&rsquo;est pas une question de chance, et ce n&rsquo;est presque jamais une question de talent. Ceux
+                qui construisent ont simplement arrêté plus tôt de décider seuls.
               </p>
               <p className="verdict mt-10">
-                C'est cette double position qui fait la valeur : un artiste comprend ton art, un stratège comprend ton
-                marché. Il t'en faut un qui fasse les deux.
-              </p>
-              <p className="corps">
-                <Link
-                  href="/a-propos"
-                  className="text-cobalt-vif underline decoration-filet-cobalt underline-offset-4 hover:decoration-cobalt-vif"
-                >
-                  Le parcours complet
-                </Link>
-                .
+                Tu n&rsquo;as pas besoin d&rsquo;attendre qu&rsquo;on te découvre. Tu as besoin d&rsquo;une direction.
               </p>
             </div>
           </Reveal>
         </div>
       </section>
 
-      {/* ═══════════════════ 09 · POUR QUI ═══════════════════ */}
-      <section className="bloc border-t border-filet">
-        <div className="cadre">
-          <TeteSection
-            index="09"
-            etiquette="POUR QUI"
-            titre="Tu n'as pas besoin d'être connu. Tu as besoin de vouloir construire."
-          />
-
-          <div className="grid gap-10 md:grid-cols-2 md:gap-16">
-            <Reveal>
-              <p className="index mb-7">TU ES AU BON ENDROIT SI</p>
-              <ul className="space-y-5">
-                {POUR.map((x) => (
-                  <li key={x} className="flex gap-4 text-[15px] font-light leading-relaxed text-craie-80">
-                    <span aria-hidden className="mt-[11px] h-px w-3.5 shrink-0 bg-cobalt-vif" />
-                    {x}
-                  </li>
-                ))}
-              </ul>
-            </Reveal>
-            <Reveal delay={120}>
-              <p className="etiquette mb-7">CE N'EST PAS POUR TOI SI</p>
-              <ul className="space-y-5">
-                {PAS_POUR.map((x) => (
-                  <li key={x} className="flex gap-4 text-[15px] font-light leading-relaxed text-craie-38">
-                    <span aria-hidden className="mt-[11px] h-px w-3.5 shrink-0 bg-craie-24" />
-                    {x}
-                  </li>
-                ))}
-              </ul>
-            </Reveal>
-          </div>
-
-          <Reveal delay={200}>
-            <p className="corps mt-14 max-w-2xl">
-              Je ne peux pas garantir ton succès. Personne ne le peut, et quiconque te dit le contraire te vend quelque
-              chose. Ce que je peux faire : t'aider à prendre de meilleures décisions, à mieux présenter ton travail, et
-              à augmenter la qualité de ta trajectoire.
-            </p>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ═══════════════════ 10 · CONTRE-POSITIONNEMENT ═══════════════════ */}
+      {/* ═══════════════ 10 · FAQ ═══════════════ */}
       <section className="bloc border-t border-filet bg-encre-haute">
         <div className="cadre-md">
-          <TeteSection index="10" etiquette="CE QUE JE NE SUIS PAS" titre="Je ne suis pas ton manager. Et c'est volontaire." />
-
-          <Reveal>
-            <div className="space-y-6">
-              <p className="corps">
-                Un manager devient pertinent quand un artiste a déjà de l'activité, des revenus, un réseau et un
-                potentiel commercial mesurable. C'est un métier légitime, à sa place, à son moment.
-              </p>
-              <p className="corps">
-                Mais avant ça ? Entre « je fais tout tout seul » et « j'ai une équipe complète autour de moi », il y a un
-                trou de plusieurs années dans lequel des milliers d'artistes talentueux se perdent — non pas faute de
-                travail, mais faute d'interlocuteur.
-              </p>
-              <p className="verdict mt-9">C'est cet espace que j'occupe. Un conseiller artistique externe.</p>
-              <div className="mt-10 grid gap-px overflow-hidden border border-filet bg-filet sm:grid-cols-4">
-                {["Accessible", "Flexible", "Impliqué", "Orienté carrière"].map((m) => (
-                  <p key={m} className="bg-encre px-5 py-6 text-center font-mono text-[11px] uppercase tracking-[0.18em] text-craie-65">
-                    {m}
-                  </p>
-                ))}
-              </div>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ═══════════════════ 11 · FAQ ═══════════════════ */}
-      <section className="bloc border-t border-filet">
-        <div className="cadre-md">
-          <TeteSection index="11" etiquette="QUESTIONS FRÉQUENTES" titre="Ce qu'on me demande avant de commencer." />
+          <TeteSection index="10" etiquette="QUESTIONS FRÉQUENTES" titre="Le reste, en clair." />
           <Reveal>
             <Faq items={FAQ} />
           </Reveal>
         </div>
       </section>
 
-      <BandeCta
-        titre="Ton projet est peut-être plus près du niveau supérieur que tu ne le penses."
-        texte="Mais pour le savoir, il faut arrêter de tout faire seul. Quelques questions sur ton projet, tes objectifs et ton niveau actuel — et je te dis franchement si je peux t'être utile."
-      />
+      {/* ═══════════════ ACTION UNIQUE ═══════════════ */}
+      <section className="bloc border-t border-filet">
+        <div className="cadre-md text-center">
+          <Reveal>
+            <h2 className="titre-2 text-balance">Dans un an, tu auras sorti une dizaine de titres de plus.</h2>
+            <p className="chapo mx-auto mt-7 max-w-xl text-balance">
+              La seule question, c&rsquo;est de savoir s&rsquo;ils formeront un catalogue ou une trajectoire. Quelques
+              questions sur ton projet — et un retour écrit sur un morceau, avant que tu paies quoi que ce soit.
+            </p>
+            <div className="mt-10 flex justify-center">
+              <Link href="/candidature" className="bouton bouton-plein">
+                Candidater →
+              </Link>
+            </div>
+            <div className="mt-9 flex justify-center">
+              <Places compact />
+            </div>
+            <p className="etiquette mt-5">
+              Réponse sous 72 h · Sans engagement · Premier cycle remboursé si tu n&rsquo;en tires rien
+            </p>
+          </Reveal>
+        </div>
+      </section>
     </>
   )
 }

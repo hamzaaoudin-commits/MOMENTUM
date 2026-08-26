@@ -12,6 +12,33 @@ export const CONTACT = {
 /** Nombre d'artistes accompagnés simultanément. Chiffre réel, pas décoratif. */
 export const CAPACITE = 6
 
+/**
+ * Places encore ouvertes. Rareté quantitative : « je privilégie certains
+ * profils » ne fait agir personne, « 2 places sur 6 » oui. À tenir à jour
+ * honnêtement — une rareté qu'on découvre fausse détruit tout le reste.
+ */
+export const PLACES_OUVERTES = 2
+
+/**
+ * Renversement du risque. Sans garantie, le prospect paie pour découvrir si ça
+ * marche ; avec elle, c'est moi qui porte le risque du premier cycle.
+ */
+export const GARANTIE = {
+  titre: "La garantie du premier cycle",
+  texte:
+    "Si au bout du premier mois tu estimes que l'accompagnement ne t'a rien appris sur ton projet, tu me le dis et je te rembourse intégralement. Sans discussion et sans que tu aies à te justifier.",
+} as const
+
+/**
+ * Proposition de valeur : bénéfice + durée + différenciation.
+ * Une phrase. Ce n'est pas un slogan — c'est ce qui doit rester en tête.
+ */
+export const PROPOSITION =
+  "Passer de sorties isolées à un arc qui se construit, en trois cycles, avec quelqu'un qui écoute chaque morceau au lieu d'appliquer une recette."
+
+/** L'offre unique poussée sur la page d'accueil. La règle de l'Un : une offre, une action. */
+export const OFFRE_PRINCIPALE = "development"
+
 export type Offre = {
   id: string
   nom: string

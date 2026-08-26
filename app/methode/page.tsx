@@ -5,9 +5,9 @@ import { Trajectoires } from "@/components/trajectoires"
 import { BandeCta } from "@/components/bande-cta"
 
 export const metadata: Metadata = {
-  title: "Le cycle",
+  title: "La méthode",
   description:
-    "La méthode MOMENTUM : quatre temps qui se répètent chaque mois — diagnostic, cap, exécution, correction. C'est la répétition qui crée l'élan, pas l'intensité d'un seul mois.",
+    "L'ARC : on ne travaille plus une sortie à la fois, mais une suite de sorties qui héritent les unes des autres. Et chaque mois, un cycle en quatre temps pour construire un maillon de plus.",
 }
 
 const TEMPS = [
@@ -51,13 +51,14 @@ export default function Methode() {
       <section className="bloc pt-[150px] md:pt-[190px]">
         <div className="cadre">
           <Reveal>
-            <p className="index">LA MÉTHODE</p>
-            <h1 className="titre-1 mt-7 max-w-[16ch] text-balance">
-              Le cycle. Un tour complet, <em className="italic text-cobalt-vif">chaque mois</em>.
+            <p className="index">LE MÉCANISME</p>
+            <h1 className="titre-1 mt-7 max-w-[15ch] text-balance">
+              Une sortie ne construit rien. Un <em className="italic text-cobalt-vif">arc</em>, si.
             </h1>
             <p className="chapo mt-8 max-w-[56ch]">
-              Quatre temps qui se répètent. Rien de spectaculaire pris isolément — et c'est exactement le point : c'est
-              la répétition qui crée l'élan, jamais l'intensité d'un seul mois héroïque.
+              Un arc, c'est trois à six sorties conçues ensemble, où chacune prépare la suivante et confirme la
+              précédente. Chaque mois, un cycle en quatre temps construit un maillon de plus. Rien de spectaculaire pris
+              isolément — et c'est exactement le point.
             </p>
           </Reveal>
         </div>
@@ -69,7 +70,7 @@ export default function Methode() {
             <figure className="carte p-4! md:p-8!">
               <Trajectoires variante="demo" className="h-auto w-full" />
               <figcaption className="etiquette mt-5 border-t border-filet pt-5">
-                Le résultat d'un cycle tenu douze mois, comparé à douze mois d'agitation.
+                Douze mois d'arc tenu, comparés à douze mois de sorties isolées. Même travail, même talent.
               </figcaption>
             </figure>
           </Reveal>
@@ -100,7 +101,7 @@ export default function Methode() {
 
       <section className="bloc border-t border-filet bg-encre-haute">
         <div className="cadre-md">
-          <TeteSection index="05" etiquette="CE QUE LE CYCLE N'EST PAS" titre="Un plan figé sur six mois." />
+          <TeteSection index="05" etiquette="CE QUE L'ARC N'EST PAS" titre="Un plan de communication figé sur six mois." />
           <Reveal>
             <div className="space-y-6">
               <p className="corps">
@@ -121,9 +122,9 @@ export default function Methode() {
       </section>
 
       <BandeCta
-        titre="Le premier cycle commence par un diagnostic."
-        texte="Candidate en quelques questions. Si ton projet correspond, on cale le diagnostic et on définit le niveau d'accompagnement adapté."
-        cta="Lancer le diagnostic"
+        titre="Ton arc commence par un diagnostic."
+        texte="Quelques questions sur ton projet — et un retour écrit sur l'un de tes morceaux, avant que tu paies quoi que ce soit."
+        cta="Candidater"
       />
     </>
   )

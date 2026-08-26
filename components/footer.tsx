@@ -9,18 +9,19 @@ export function Footer() {
           <div>
             <p className="font-mono text-[15px] font-medium tracking-[0.34em] text-craie">MOMENTUM</p>
             <p className="corps mt-4 max-w-xs">
-              Conseil stratégique pour artistes indépendants. {CAPACITE} artistes accompagnés à la fois, depuis {CONTACT.ville}.
+              Conseil stratégique pour artistes indépendants. On ne travaille pas une sortie à la fois&nbsp;: on
+              travaille un arc. {CAPACITE} artistes accompagnés à la fois, depuis {CONTACT.ville}.
             </p>
-            <p className="etiquette mt-6">Pas de pourcentage. Pas de promesse de viralité.</p>
+            <p className="etiquette mt-6">Aucun pourcentage. Aucune promesse de viralité.</p>
           </div>
 
           <div>
             <p className="etiquette mb-4">Le site</p>
             <ul className="space-y-2.5">
               {[
-                ["/methode", "Le cycle"],
+                ["/methode", "La méthode"],
                 ["/offres", "Les offres"],
-                ["/a-propos", "Qui je suis"],
+                ["/a-propos", "Qui te parle"],
                 ["/candidature", "Candidater"],
               ].map(([href, label]) => (
                 <li key={href}>
