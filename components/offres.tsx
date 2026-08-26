@@ -33,7 +33,7 @@ function Carte({ o, i }: { o: Offre; i: number }) {
         <p className="corps mt-auto pt-8 text-[13.5px] italic text-craie-50">{o.pour}</p>
 
         <Link
-          href={`/candidature?offre=${o.id}`}
+          href={`/?offre=${o.id}#candidature`}
           className={`bouton mt-6 justify-center ${o.vedette ? "bouton-plein" : "bouton-vide"}`}
         >
           {o.cta}

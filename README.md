@@ -24,16 +24,28 @@ Même architecture que Strawberry-Prod, identité visuelle distincte.
 - `lib/config.ts` — `CONTACT.email`, `CONTACT.instagram`, `CAPACITE`.
 - Une image Open Graph (`public/og.jpg`, 1200×630) référencée dans `app/layout.tsx`.
 
+## Structure
+
+Le site tient sur **une seule page** (`app/page.tsx`), en douze sections
+numérotées qui se lisent dans l'ordre. Les anciennes routes (`/offres`,
+`/methode`, `/a-propos`, `/candidature`) redirigent en 301 vers les ancres
+correspondantes — voir `next.config.mjs`.
+
+Ancres disponibles : `#methode`, `#qui`, `#offres`, `#candidature`.
+
+Seule ARTIST DEVELOPMENT est visible par défaut. Les deux autres niveaux et le
+comparatif sont sur la page, repliés derrière un clic (`components/depliant.tsx`) :
+présents pour qui les cherche, invisibles pour qui est déjà convaincu.
+
 ## Où modifier quoi
 
 | Je veux changer… | Fichier |
 |---|---|
-| Un prix, le contenu d'une formule, le nombre de places | `lib/config.ts` |
+| Un prix, le contenu d'une formule, le nombre de places, la garantie | `lib/config.ts` |
 | Les couleurs, les typos, les boutons, l'espacement | `app/globals.css` |
-| Le texte de la page d'accueil | `app/page.tsx` |
-| Le cycle en détail | `app/methode/page.tsx` |
-| La bio | `app/a-propos/page.tsx` |
+| N'importe quel texte du site | `app/page.tsx` |
 | Les champs du formulaire | `components/formulaire.tsx` + `app/api/candidature/route.ts` |
+| Les visuels signature | `components/trajectoires.tsx`, `components/arc.tsx` |
 
 ## Identité — « ACIER »
 

@@ -7,7 +7,7 @@ export default function Introuvable() {
         <p className="index">ERREUR 404</p>
         <h1 className="titre-2 mt-6">Cette page n'existe pas.</h1>
         <p className="corps mt-6">
-          Le lien est peut-être ancien, ou l'adresse mal recopiée. Tout le site tient en quatre pages.
+          Le lien est peut-être ancien, ou l'adresse mal recopiée. Tout le site tient sur une seule page.
         </p>
         <div className="mt-10 flex flex-wrap gap-3">
           <Link href="/" className="bouton bouton-vide">Accueil</Link>

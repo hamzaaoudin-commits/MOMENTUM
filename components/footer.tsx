@@ -16,18 +16,18 @@ export function Footer() {
           </div>
 
           <div>
-            <p className="etiquette mb-4">Le site</p>
+            <p className="etiquette mb-4">La page</p>
             <ul className="space-y-2.5">
               {[
-                ["/methode", "La méthode"],
-                ["/offres", "Les offres"],
-                ["/a-propos", "Qui te parle"],
-                ["/candidature", "Candidater"],
+                ["#methode", "La méthode"],
+                ["#offres", "L'offre"],
+                ["#qui", "Qui te parle"],
+                ["#candidature", "Candidater"],
               ].map(([href, label]) => (
                 <li key={href}>
-                  <Link href={href} className="text-[14px] font-light text-craie-50 transition-colors hover:text-craie">
+                  <a href={href} className="text-[14px] text-craie-50 transition-colors hover:text-craie">
                     {label}
-                  </Link>
+                  </a>
                 </li>
               ))}
             </ul>

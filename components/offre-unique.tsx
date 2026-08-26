@@ -1,4 +1,3 @@
-import Link from "next/link"
 import { CAPACITE, PLACES_OUVERTES, GARANTIE, OFFRES, OFFRE_PRINCIPALE } from "@/lib/config"
 import { Reveal } from "./reveal"
 
@@ -82,19 +81,16 @@ export function OffreUnique() {
             <Places />
           </div>
 
-          <Link href="/candidature" className="bouton bouton-plein mt-8 justify-center">
-            Candidater →
-          </Link>
+          <a href="#candidature" className="bouton bouton-plein mt-8 justify-center">
+            Candidater ↓
+          </a>
           <p className="etiquette mt-4 leading-relaxed">
             Réponse sous 72 h · Premier cycle remboursé si tu n&rsquo;en tires rien
           </p>
 
           <p className="corps mt-auto pt-9 text-[13px]">
-            Deux autres niveaux existent, à 149 € et 499 €.{" "}
-            <Link href="/offres" className="text-cobalt-vif underline decoration-filet-cobalt underline-offset-4">
-              Les comparer
-            </Link>{" "}
-            — mais si tu hésites, celui-ci est le bon.
+            Deux autres niveaux existent, à 149 € et 499 €&nbsp;: le comparatif est juste en dessous. Mais si tu
+            hésites, celui-ci est le bon.
           </p>
         </div>
       </div>

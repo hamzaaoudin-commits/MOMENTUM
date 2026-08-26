@@ -117,6 +117,10 @@
   .bloc { padding-top: 8.5rem; padding-bottom: 8.5rem; }
 }
 
+@utility ancre {
+  scroll-margin-top: 68px;
+}
+
 @utility cadre     { margin-inline: auto; width: 100%; max-width: 1180px; }
 @utility cadre-md  { margin-inline: auto; width: 100%; max-width: 920px; }
 @utility cadre-sm  { margin-inline: auto; width: 100%; max-width: 700px; }

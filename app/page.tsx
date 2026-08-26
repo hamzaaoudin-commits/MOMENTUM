@@ -1,33 +1,42 @@
 import Link from "next/link"
+import { Suspense } from "react"
 import { Reveal } from "@/components/reveal"
 import { TeteSection } from "@/components/section"
 import { Trajectoires } from "@/components/trajectoires"
 import { Arc } from "@/components/arc"
 import { OffreUnique, Garantie, Places } from "@/components/offre-unique"
+import { GrilleOffres, Comparatif } from "@/components/offres"
+import { Depliant } from "@/components/depliant"
 import { Faq } from "@/components/faq"
-import { PROPOSITION } from "@/lib/config"
+import { Formulaire } from "@/components/formulaire"
+import { PROPOSITION, CONTACT, CAPACITE } from "@/lib/config"
 
 /* ===========================================================================
-   PAGE D'ACCUEIL — LA RÈGLE DE L'UN
+   PAGE UNIQUE
    ===========================================================================
-   UN LECTEUR   Un artiste indépendant de 22 à 30 ans. Il sort depuis deux ou
-                trois ans. Quelques milliers d'auditeurs mensuels. Il écrit,
-                enregistre et monte lui-même. Il a déjà payé de la promo qui n'a
+   Tout le site tient ici. Les anciennes routes (/offres, /methode, /a-propos,
+   /candidature) redirigent vers les ancres correspondantes — voir
+   next.config.mjs — pour que rien de déjà partagé ne tombe en 404.
+
+   UN LECTEUR   Un artiste indépendant de 22 à 30 ans, qui sort depuis deux ou
+                trois ans, fait tout lui-même, a déjà payé de la promo qui n'a
                 rien donné. Sa peur : avoir trente-deux ans et se dire qu'il a
-                perdu dix ans. Son désir : qu'un professionnel compétent lui
-                dise « ton truc est bon, voilà comment on le fait exister ».
+                perdu dix ans.
 
    UNE IDÉE     Tes sorties ne s'additionnent pas parce qu'elles ne se racontent
                 pas. Un arc les relie ; sans arc, chaque titre repart de zéro.
 
-   UNE OFFRE    ARTIST DEVELOPMENT, 299 €/mois. Les deux autres niveaux vivent
-                sur /offres — pas ici. Trois cartes côte à côte transforment un
-                prospect convaincu en comparateur, et un comparateur reporte.
+   UNE OFFRE    ARTIST DEVELOPMENT, 299 €/mois — seule visible par défaut. Les
+                deux autres niveaux sont sur la page, repliés derrière un clic :
+                présents pour qui les cherche, invisibles pour qui est déjà
+                convaincu.
 
-   UNE ACTION   Candidater. Aucun autre bouton principal sur la page.
+   UNE ACTION   Candidater. Tous les boutons de la page mènent au même
+                formulaire, en bas.
 
-   SÉQUENCE     problème → agitation → fausse solution → impact → vraie cause
-                → mécanisme → bénéfices → preuve → offre → risque → action.
+   SÉQUENCE     problème → fausse solution → vraie cause → mécanisme → cycle
+                → bénéfices → preuve → offre → risque → objections → tri
+                → questions → action.
    =========================================================================== */
 
 const FAUSSES_SOLUTIONS = [
@@ -36,6 +45,41 @@ const FAUSSES_SOLUTIONS = [
   { essai: "Poster tous les jours", effet: "Tu produis du contenu au lieu de produire une œuvre." },
   { essai: "Changer de style pour ce qui marche", effet: "Tu arrives en retard sur une vague, sans rien qui t'appartienne." },
   { essai: "Envoyer cent messages à des blogs et des labels", effet: "Personne ne répond, parce que rien ne dit qui tu es." },
+]
+
+const TEMPS = [
+  {
+    n: "01",
+    nom: "DIAGNOSTIC",
+    quand: "Le premier mois, puis tous les trimestres",
+    texte:
+      "On met ton projet à plat. Ta musique d'abord — écoutée en entier, plusieurs fois, sans complaisance. Puis ton identité : ce que ton univers promet, et ce qu'il tient réellement. Puis ton audience réelle, pas ton nombre d'abonnés. Puis tes objectifs, formulés jusqu'à ce qu'ils deviennent vérifiables. Et enfin tes blocages, y compris ceux que tu n'oses pas nommer.",
+    sortie: "Un document écrit : où en est ton projet, et ce qui le retient.",
+  },
+  {
+    n: "02",
+    nom: "CAP",
+    quand: "Chaque début de mois",
+    texte:
+      "On choisit deux ou trois actions — jamais dix. La compétence rare n'est pas de trouver des idées : c'est de renoncer aux bonnes idées qui ne sont pas prioritaires maintenant. Un cap, c'est autant une liste de choses qu'on décide de ne pas faire.",
+    sortie: "Trois priorités écrites, et la liste explicite de ce qu'on abandonne ce mois-ci.",
+  },
+  {
+    n: "03",
+    nom: "EXÉCUTION",
+    quand: "Tout le mois",
+    texte:
+      "Tu crées. Tu sors. Tu postes. Tu expérimentes. Ce travail-là ne change pas et ne doit pas changer : c'est le tien. La seule différence, c'est que les décisions importantes passent par un regard extérieur avant d'être prises, pas après.",
+    sortie: "Des retours écrits sur ce que tu produis, au fil du mois.",
+  },
+  {
+    n: "04",
+    nom: "CORRECTION",
+    quand: "Chaque fin de mois",
+    texte:
+      "On regarde ce qui a fonctionné, ce qui n'a pas fonctionné, et surtout pourquoi. La plupart des artistes changent de stratégie sans jamais mesurer l'ancienne — ils confondent nouveauté et correction. Ici, on ne change que ce qu'on a compris.",
+    sortie: "Un bilan écrit, et le cap du mois suivant.",
+  },
 ]
 
 const CE_QUE_TU_OBTIENS = [
@@ -67,6 +111,15 @@ const CE_QUE_TU_OBTIENS = [
       "Une proposition reçue, un featuring, un changement d'image, une opportunité qui a l'air belle. Tu l'envoies, tu as un avis argumenté avant de répondre — pas six mois après, quand c'est déjà fait.",
     gain: "Les mauvaises décisions coûtent des années. Celles-là, tu ne les prendras pas.",
   },
+]
+
+const REPERES = [
+  { annee: "2019", texte: "Premiers projets comme réalisateur et compositeur." },
+  { annee: "2021", texte: "Licences Cinéma & Audiovisuel — Université Gustave Eiffel, puis Sorbonne Nouvelle." },
+  { annee: "2023", texte: "Ingénieur du son en studio (Dans Le Labo)." },
+  { annee: "2024", texte: "Lancement de Sinbury, univers transmédia : une ville fictive et son écosystème culturel." },
+  { annee: "2025", texte: "MORI — projet musical produit et composé seul, chroniqué en Espagne, au Royaume-Uni et au Brésil." },
+  { annee: "2026", texte: "Publication de « 30 Architectures — An Atlas of Narrative Patterns » et de l'essai « Le Narratif de Marque à l'Ère de l'IA »." },
 ]
 
 const OBJECTIONS = [
@@ -119,10 +172,26 @@ const FAQ = [
   },
 ]
 
+const POUR = [
+  "Tu es artiste indépendant et tu as déjà commencé à sortir.",
+  "Tu veux progresser sérieusement, pas être rassuré.",
+  "Tu acceptes les critiques honnêtes sur ton travail.",
+  "Tu es prêt à exécuter entre deux sessions.",
+  "Tu n'as pas encore les moyens — ni le besoin — d'une équipe complète.",
+]
+
+const PAS_POUR = [
+  "Tu cherches une garantie de viralité.",
+  "Tu cherches un contrat de label ou une playlist promise.",
+  "Tu veux quelqu'un qui fasse le travail à ta place.",
+  "Tu veux qu'on te dise que ton projet est déjà parfait.",
+  "Tu cherches des contacts à acheter plutôt qu'une trajectoire à construire.",
+]
+
 export default function Accueil() {
   return (
     <>
-      {/* ═══════════════ HERO — négation + trou de curiosité ═══════════════ */}
+      {/* ═══════════════ HERO ═══════════════ */}
       <section className="relative flex min-h-[92vh] items-center overflow-hidden pt-[68px]">
         <div className="pointer-events-none absolute inset-0 opacity-[0.42]">
           <Trajectoires variante="fond" className="h-full w-full" />
@@ -158,9 +227,9 @@ export default function Accueil() {
 
           <Reveal delay={320}>
             <div className="mt-11">
-              <Link href="/candidature" className="bouton bouton-plein">
-                Candidater →
-              </Link>
+              <a href="#candidature" className="bouton bouton-plein">
+                Candidater ↓
+              </a>
             </div>
           </Reveal>
 
@@ -176,7 +245,6 @@ export default function Accueil() {
       <section className="bloc border-t border-filet">
         <div className="cadre-md">
           <TeteSection index="01" etiquette="TU CONNAIS CE MOMENT" titre="Deux heures du matin." />
-
           <Reveal>
             <div className="space-y-6">
               <p className="corps text-[16.5px]">
@@ -205,20 +273,18 @@ export default function Accueil() {
             titre="Tout le monde te dit la même chose : travaille plus, sors plus, poste plus."
             chapo="C'est le conseil le plus répandu du milieu. C'est aussi celui qui a coûté le plus d'années au plus grand nombre d'artistes talentueux."
           />
-
           <div className="border-t border-filet">
             {FAUSSES_SOLUTIONS.map((f, i) => (
               <Reveal key={f.essai} delay={i * 70}>
                 <div className="grid gap-2 border-b border-filet py-6 md:grid-cols-[1fr_1.25fr] md:gap-12">
-                  <p className="font-sans text-[1.2rem] font-medium leading-snug text-craie-50 line-through decoration-1 decoration-craie-24">
+                  <p className="text-[1.2rem] font-medium leading-snug text-craie-50 line-through decoration-1 decoration-craie-24">
                     {f.essai}
                   </p>
-                  <p className="text-[15px] font-light leading-relaxed text-craie-80">{f.effet}</p>
+                  <p className="text-[15px] leading-relaxed text-craie-80">{f.effet}</p>
                 </div>
               </Reveal>
             ))}
           </div>
-
           <Reveal delay={200}>
             <p className="corps mt-12 max-w-2xl text-[16px]">
               Aucune de ces actions n&rsquo;est stupide. Elles échouent toutes pour la même raison, et cette raison
@@ -242,7 +308,6 @@ export default function Accueil() {
               </>
             }
           />
-
           <Reveal>
             <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
               <div className="space-y-6">
@@ -260,7 +325,6 @@ export default function Accueil() {
                   Ce qui te manque n&rsquo;est pas un morceau de plus. C&rsquo;est ce qui relie ceux que tu as déjà.
                 </p>
               </div>
-
               <figure className="carte p-4! md:p-8!">
                 <Arc className="h-auto w-full" />
                 <figcaption className="etiquette mt-6 border-t border-filet pt-5 leading-relaxed">
@@ -274,8 +338,8 @@ export default function Accueil() {
       </section>
 
       {/* ═══════════════ 04 · LE MÉCANISME ═══════════════ */}
-      <section className="bloc border-t border-filet bg-encre-haute">
-        <div className="cadre-md">
+      <section id="methode" className="ancre bloc border-t border-filet bg-encre-haute">
+        <div className="cadre">
           <TeteSection
             index="04"
             etiquette="LE MÉCANISME"
@@ -287,50 +351,80 @@ export default function Accueil() {
             }
           />
 
-          <Reveal>
-            <div className="space-y-6">
-              <p className="corps text-[16px]">
-                Un arc, c&rsquo;est une suite de trois à six sorties conçues ensemble, où chacune prépare la suivante et
-                confirme la précédente. Le même principe qui fait qu&rsquo;on regarde huit épisodes d&rsquo;affilée
-                alors qu&rsquo;on n&rsquo;aurait jamais regardé huit courts-métrages sans lien.
-              </p>
-              <p className="corps text-[16px]">
-                Concrètement&nbsp;: on définit d&rsquo;abord ce que ton projet promet — en une phrase que tu peux dire à
-                voix haute sans avoir honte. Puis on choisit les titres qui tiennent cette promesse et l&rsquo;ordre dans
-                lequel ils la construisent. Puis, chaque mois, on exécute un maillon et on corrige le suivant avec ce
-                qu&rsquo;on vient d&rsquo;apprendre.
-              </p>
-              <p className="corps text-[16px]">
-                Ce n&rsquo;est ni un calendrier ni un plan de communication. Un calendrier périme au deuxième mois. Un
-                arc, lui, se corrige sans perdre sa direction — c&rsquo;est exactement pour ça qu&rsquo;il accumule au
-                lieu de se dissiper.
-              </p>
-              <p className="mt-10 border-l-2 border-craie pl-6 font-mono text-[13.5px] leading-relaxed text-craie-80">
-                {PROPOSITION}
-              </p>
-              <p className="corps">
-                <Link
-                  href="/methode"
-                  className="text-cobalt-vif underline decoration-filet-cobalt underline-offset-4 hover:decoration-cobalt-vif"
-                >
-                  Le cycle mensuel en détail
-                </Link>
-              </p>
-            </div>
-          </Reveal>
+          <div className="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+            <Reveal>
+              <div className="space-y-6">
+                <p className="corps text-[16px]">
+                  Un arc, c&rsquo;est une suite de trois à six sorties conçues ensemble, où chacune prépare la suivante
+                  et confirme la précédente. Le même principe qui fait qu&rsquo;on regarde huit épisodes
+                  d&rsquo;affilée alors qu&rsquo;on n&rsquo;aurait jamais regardé huit courts-métrages sans lien.
+                </p>
+                <p className="corps text-[16px]">
+                  Concrètement&nbsp;: on définit d&rsquo;abord ce que ton projet promet — en une phrase que tu peux dire
+                  à voix haute sans avoir honte. Puis on choisit les titres qui tiennent cette promesse et
+                  l&rsquo;ordre dans lequel ils la construisent. Puis, chaque mois, on exécute un maillon et on corrige
+                  le suivant avec ce qu&rsquo;on vient d&rsquo;apprendre.
+                </p>
+                <p className="corps text-[16px]">
+                  Ce n&rsquo;est ni un calendrier ni un plan de communication. Un calendrier périme au deuxième mois. Un
+                  arc, lui, se corrige sans perdre sa direction — c&rsquo;est exactement pour ça qu&rsquo;il accumule au
+                  lieu de se dissiper.
+                </p>
+                <p className="mt-9 border-l-3 border-craie pl-6 font-mono text-[13.5px] leading-relaxed text-craie-80">
+                  {PROPOSITION}
+                </p>
+              </div>
+            </Reveal>
+            <Reveal delay={120}>
+              <figure className="carte p-4! md:p-7!">
+                <Trajectoires variante="demo" className="h-auto w-full" />
+                <figcaption className="etiquette mt-5 border-t border-filet pt-5 leading-relaxed">
+                  Douze mois d&rsquo;arc tenu, comparés à douze mois de sorties isolées.
+                </figcaption>
+              </figure>
+            </Reveal>
+          </div>
         </div>
       </section>
 
-      {/* ═══════════════ 05 · CE QUE TU OBTIENS ═══════════════ */}
+      {/* ═══════════════ 05 · LE CYCLE ═══════════════ */}
       <section className="bloc border-t border-filet">
-        <div className="cadre">
+        <div className="cadre-md">
           <TeteSection
             index="05"
+            etiquette="LE CYCLE MENSUEL"
+            titre="Quatre temps, répétés chaque mois."
+            chapo="Rien de spectaculaire pris isolément — et c'est exactement le point. C'est la répétition qui crée l'élan, jamais l'intensité d'un seul mois héroïque."
+          />
+          {TEMPS.map((t, i) => (
+            <Reveal key={t.n} delay={i * 60}>
+              <article className="grid gap-6 border-t border-filet py-10 md:grid-cols-[110px_1fr] md:gap-10 md:py-12">
+                <div>
+                  <p className="font-mono text-[11px] tracking-[0.2em] text-cobalt-vif">{t.n}</p>
+                  <p className="etiquette mt-3 leading-relaxed">{t.quand}</p>
+                </div>
+                <div>
+                  <h3 className="font-mono text-[13px] uppercase tracking-[0.22em] text-craie">{t.nom}</h3>
+                  <p className="corps mt-4 text-[15.5px]">{t.texte}</p>
+                  <p className="mt-5 border-l-3 border-craie pl-5 text-[1.02rem] font-semibold leading-snug text-craie">
+                    {t.sortie}
+                  </p>
+                </div>
+              </article>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      {/* ═══════════════ 06 · CE QUE TU OBTIENS ═══════════════ */}
+      <section className="bloc border-t border-filet bg-encre-haute">
+        <div className="cadre">
+          <TeteSection
+            index="06"
             etiquette="CE QUE TU OBTIENS"
             titre="Quatre choses que tu ne peux pas te donner à toi-même."
             chapo="Aucune ne remplace ton travail. Toutes déterminent ce que ton travail produit."
           />
-
           <div className="grid gap-5 md:grid-cols-2">
             {CE_QUE_TU_OBTIENS.map((a, i) => (
               <Reveal key={a.n} delay={i * 90} className="h-full">
@@ -338,7 +432,7 @@ export default function Accueil() {
                   <span className="index">{a.n}</span>
                   <h3 className="titre-3 mt-4">{a.titre}</h3>
                   <p className="corps mt-4">{a.texte}</p>
-                  <p className="mt-auto pt-6 font-sans text-[0.98rem] font-semibold leading-snug text-craie">{a.gain}</p>
+                  <p className="mt-auto pt-6 text-[0.98rem] font-semibold leading-snug text-craie">{a.gain}</p>
                 </article>
               </Reveal>
             ))}
@@ -346,11 +440,11 @@ export default function Accueil() {
         </div>
       </section>
 
-      {/* ═══════════════ 06 · PREUVE ═══════════════ */}
-      <section className="bloc border-t border-filet bg-encre-haute">
+      {/* ═══════════════ 07 · PREUVE ═══════════════ */}
+      <section id="qui" className="ancre bloc border-t border-filet">
         <div className="cadre">
           <TeteSection
-            index="06"
+            index="07"
             etiquette="POURQUOI M'ÉCOUTER MOI"
             titre="Un artiste comprend ton art. Un stratège comprend ton marché."
             chapo="Il t'en faut un qui fasse les deux. C'est la seule raison valable de me confier un regard sur ta carrière, et c'est la seule que je revendique."
@@ -375,14 +469,14 @@ export default function Accueil() {
                   Autrement dit&nbsp;: je connais ton problème de l&rsquo;intérieur parce que je le vis, et sa solution
                   de l&rsquo;extérieur parce que c&rsquo;est mon métier.
                 </p>
-                <p className="corps">
-                  <Link
-                    href="/a-propos"
-                    className="text-cobalt-vif underline decoration-filet-cobalt underline-offset-4 hover:decoration-cobalt-vif"
-                  >
-                    Le parcours complet
-                  </Link>
-                </p>
+                <div className="mt-9 border-t border-filet">
+                  {REPERES.map((r) => (
+                    <div key={r.annee} className="grid gap-2 border-b border-filet py-4 md:grid-cols-[92px_1fr] md:gap-6">
+                      <p className="font-mono text-[12px] tracking-[0.16em] text-cobalt-vif">{r.annee}</p>
+                      <p className="text-[14px] leading-relaxed text-craie-65">{r.texte}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
             </Reveal>
 
@@ -399,17 +493,20 @@ export default function Accueil() {
                   ouvrages. Et, si tu candidates, un retour écrit sur l&rsquo;un de tes morceaux avant que tu paies quoi
                   que ce soit. Tu jugeras la qualité du conseil sur pièce.
                 </p>
+                <p className="verdict mt-9" style={{ fontSize: "1.15rem" }}>
+                  Très peu de conseillers artistiques ont déjà eu peur d&rsquo;appuyer sur « publier ».
+                </p>
               </div>
             </Reveal>
           </div>
         </div>
       </section>
 
-      {/* ═══════════════ 07 · L'OFFRE UNIQUE ═══════════════ */}
-      <section className="bloc border-t border-filet">
+      {/* ═══════════════ 08 · L'OFFRE ═══════════════ */}
+      <section id="offres" className="ancre bloc border-t border-filet bg-encre-haute">
         <div className="cadre">
           <TeteSection
-            index="07"
+            index="08"
             etiquette="L'OFFRE"
             titre="Un manager coûte 2 000 € par mois. Et il ne prend pas les artistes à ton stade."
             chapo="Entre « je fais tout tout seul » et « j'ai une équipe complète », il existe un niveau intermédiaire. C'est celui-là."
@@ -420,14 +517,27 @@ export default function Accueil() {
               <Garantie />
             </div>
           </Reveal>
+          <Reveal delay={200}>
+            <div className="mt-5">
+              <Depliant
+                libelle="Voir les trois niveaux et le comparatif ligne par ligne"
+                libelleOuvert="Replier les trois niveaux"
+              >
+                <GrilleOffres />
+                <div className="mt-10">
+                  <Comparatif />
+                </div>
+              </Depliant>
+            </div>
+          </Reveal>
         </div>
       </section>
 
-      {/* ═══════════════ 08 · OBJECTIONS ═══════════════ */}
-      <section className="bloc border-t border-filet bg-encre-haute">
+      {/* ═══════════════ 09 · OBJECTIONS ═══════════════ */}
+      <section className="bloc border-t border-filet">
         <div className="cadre-md">
           <TeteSection
-            index="08"
+            index="09"
             etiquette="CE QUE TU ES EN TRAIN DE TE DIRE"
             titre="Les cinq objections, dans l'ordre où elles arrivent."
           />
@@ -435,7 +545,7 @@ export default function Accueil() {
             {OBJECTIONS.map((o, i) => (
               <Reveal key={o.q} delay={i * 80}>
                 <div>
-                  <p className="font-sans text-[1.3rem] font-bold leading-snug text-craie md:text-[1.5rem]">{o.q}</p>
+                  <p className="text-[1.3rem] font-bold leading-snug text-craie md:text-[1.5rem]">{o.q}</p>
                   <p className="corps mt-4 max-w-2xl">{o.r}</p>
                 </div>
               </Reveal>
@@ -444,57 +554,132 @@ export default function Accueil() {
         </div>
       </section>
 
-      {/* ═══════════════ 09 · IDENTITÉ ═══════════════ */}
-      <section className="bloc border-t border-filet">
-        <div className="cadre-md">
-          <TeteSection index="09" etiquette="AU FOND" titre="Il y a deux catégories d'artistes indépendants." />
-          <Reveal>
-            <div className="space-y-6">
-              <p className="corps text-[16px]">
-                Ceux qui publient et ceux qui construisent. De l&rsquo;extérieur, la première année, ils sont
-                indiscernables&nbsp;: mêmes plateformes, même matériel, souvent le même niveau. À la troisième année,
-                plus personne ne les confond.
-              </p>
-              <p className="corps text-[16px]">
-                Ce n&rsquo;est pas une question de chance, et ce n&rsquo;est presque jamais une question de talent. Ceux
-                qui construisent ont simplement arrêté plus tôt de décider seuls.
-              </p>
-              <p className="verdict mt-10">
-                Tu n&rsquo;as pas besoin d&rsquo;attendre qu&rsquo;on te découvre. Tu as besoin d&rsquo;une direction.
-              </p>
-            </div>
+      {/* ═══════════════ 10 · POUR QUI ═══════════════ */}
+      <section className="bloc border-t border-filet bg-encre-haute">
+        <div className="cadre">
+          <TeteSection
+            index="10"
+            etiquette="POUR QUI"
+            titre="Tu n'as pas besoin d'être connu. Tu as besoin de vouloir construire."
+          />
+          <div className="grid gap-10 md:grid-cols-2 md:gap-16">
+            <Reveal>
+              <p className="index mb-7">TU ES AU BON ENDROIT SI</p>
+              <ul className="space-y-5">
+                {POUR.map((x) => (
+                  <li key={x} className="flex gap-4 text-[15px] leading-relaxed text-craie-80">
+                    <span aria-hidden className="mt-[11px] h-px w-3.5 shrink-0 bg-cobalt-vif" />
+                    {x}
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
+            <Reveal delay={120}>
+              <p className="etiquette mb-7">CE N&rsquo;EST PAS POUR TOI SI</p>
+              <ul className="space-y-5">
+                {PAS_POUR.map((x) => (
+                  <li key={x} className="flex gap-4 text-[15px] leading-relaxed text-craie-38">
+                    <span aria-hidden className="mt-[11px] h-px w-3.5 shrink-0 bg-craie-24" />
+                    {x}
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
+          </div>
+          <Reveal delay={200}>
+            <p className="corps mt-14 max-w-2xl">
+              Je ne peux pas garantir ton succès. Personne ne le peut, et quiconque te dit le contraire te vend quelque
+              chose. Ce que je peux faire&nbsp;: t&rsquo;aider à prendre de meilleures décisions, à mieux présenter ton
+              travail, et à augmenter la qualité de ta trajectoire.
+            </p>
           </Reveal>
         </div>
       </section>
 
-      {/* ═══════════════ 10 · FAQ ═══════════════ */}
-      <section className="bloc border-t border-filet bg-encre-haute">
+      {/* ═══════════════ 11 · FAQ ═══════════════ */}
+      <section className="bloc border-t border-filet">
         <div className="cadre-md">
-          <TeteSection index="10" etiquette="QUESTIONS FRÉQUENTES" titre="Le reste, en clair." />
+          <TeteSection index="11" etiquette="QUESTIONS FRÉQUENTES" titre="Le reste, en clair." />
           <Reveal>
             <Faq items={FAQ} />
           </Reveal>
         </div>
       </section>
 
-      {/* ═══════════════ ACTION UNIQUE ═══════════════ */}
+      {/* ═══════════════ 12 · L'ACTION ═══════════════ */}
+      <section id="candidature" className="ancre bloc border-t border-filet bg-encre-haute">
+        <div className="cadre grid gap-14 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
+          <div>
+            <Reveal>
+              <p className="index">12 — CANDIDATURE</p>
+              <h2 className="titre-2 mt-6 text-balance">
+                Envoie-moi un morceau. Je te dis ce que j&rsquo;en pense.
+              </h2>
+              <p className="corps mt-7 max-w-md">
+                Gratuitement, avant toute question d&rsquo;argent. C&rsquo;est la seule façon honnête de juger un
+                conseiller&nbsp;: sur la qualité de son conseil, pas sur celle de sa page de vente.
+              </p>
+              <p className="corps mt-5 max-w-md">
+                Je n&rsquo;accompagne que {CAPACITE} artistes à la fois. Ce formulaire n&rsquo;est pas une formalité —
+                c&rsquo;est déjà le début du diagnostic, et la qualité de tes réponses détermine celle de la mienne.
+              </p>
+              <div className="mt-8">
+                <Places />
+              </div>
+            </Reveal>
+
+            <Reveal delay={120}>
+              <div className="mt-12 border-t border-filet">
+                {[
+                  ["01", "Tu candidates", "Quelques questions honnêtes. Compte huit minutes si tu réponds sérieusement."],
+                  ["02", "Tu reçois un retour écrit", "J'écoute le morceau que tu m'envoies, en entier, et je t'écris ce que j'en pense. Gratuitement, que la suite se fasse ou non."],
+                  ["03", "On décide", "Si le profil correspond, un appel pour poser ton arc et le cap du premier mois. Sinon, je te dis pourquoi."],
+                ].map(([n, titre, texte]) => (
+                  <div key={n} className="grid grid-cols-[42px_1fr] gap-4 border-b border-filet py-6">
+                    <span className="font-mono text-[11px] tracking-[0.18em] text-cobalt-vif">{n}</span>
+                    <div>
+                      <p className="text-[14.5px] font-semibold text-craie">{titre}</p>
+                      <p className="corps mt-1.5 text-[13.5px]">{texte}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </Reveal>
+
+            <Reveal delay={200}>
+              <p className="etiquette mt-10 leading-relaxed">
+                Une question avant de candidater&nbsp;?<br />
+                <a href={`mailto:${CONTACT.email}`} className="text-craie transition-colors hover:text-cobalt-vif">
+                  {CONTACT.email}
+                </a>
+              </p>
+            </Reveal>
+          </div>
+
+          <Reveal delay={90}>
+            <div className="relative">
+              <Suspense fallback={<p className="etiquette">Chargement du formulaire…</p>}>
+                <Formulaire />
+              </Suspense>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ═══════════════ CLÔTURE ═══════════════ */}
       <section className="bloc border-t border-filet">
         <div className="cadre-md text-center">
           <Reveal>
             <h2 className="titre-2 text-balance">Dans un an, tu auras sorti une dizaine de titres de plus.</h2>
             <p className="chapo mx-auto mt-7 max-w-xl text-balance">
-              La seule question, c&rsquo;est de savoir s&rsquo;ils formeront un catalogue ou une trajectoire. Quelques
-              questions sur ton projet — et un retour écrit sur un morceau, avant que tu paies quoi que ce soit.
+              La seule question, c&rsquo;est de savoir s&rsquo;ils formeront un catalogue ou une trajectoire.
             </p>
             <div className="mt-10 flex justify-center">
-              <Link href="/candidature" className="bouton bouton-plein">
-                Candidater →
-              </Link>
+              <a href="#candidature" className="bouton bouton-plein">
+                Candidater ↑
+              </a>
             </div>
-            <div className="mt-9 flex justify-center">
-              <Places compact />
-            </div>
-            <p className="etiquette mt-5">
+            <p className="etiquette mt-8">
               Réponse sous 72 h · Sans engagement · Premier cycle remboursé si tu n&rsquo;en tires rien
             </p>
           </Reveal>

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useSearchParams } from "next/navigation"
 import { OFFRES } from "@/lib/config"
 
@@ -24,7 +24,12 @@ export function Formulaire() {
   const params = useSearchParams()
   const offreParDefaut = params.get("offre") ?? "development"
 
+  const [offre, setOffre] = useState(offreParDefaut)
   const [etat, setEtat] = useState<"repos" | "envoi" | "ok" | "erreur">("repos")
+
+  // Sur une page unique, le lecteur choisit son niveau plus haut puis descend
+  // ici : le champ doit suivre ce choix, ce qu'un defaultValue ne fait pas.
+  useEffect(() => setOffre(offreParDefaut), [offreParDefaut])
   const [message, setMessage] = useState("")
 
   async function envoyer(e: React.FormEvent<HTMLFormElement>) {
@@ -122,7 +127,14 @@ export function Formulaire() {
           <label className="champ-label" htmlFor="offre">
             Formule envisagée
           </label>
-          <select id="offre" name="offre" required className="champ" defaultValue={offreParDefaut}>
+          <select
+            id="offre"
+            name="offre"
+            required
+            className="champ"
+            value={offre}
+            onChange={(e) => setOffre(e.target.value)}
+          >
             {OFFRES.map((o) => (
               <option key={o.id} value={o.id}>
                 {o.nom} — {o.prix} €/mois
