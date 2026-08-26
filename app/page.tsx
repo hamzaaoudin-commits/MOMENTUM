@@ -124,16 +124,15 @@ export default function Accueil() {
     <>
       {/* ═══════════════ HERO — négation + trou de curiosité ═══════════════ */}
       <section className="relative flex min-h-[92vh] items-center overflow-hidden pt-[68px]">
-        <div className="pointer-events-none absolute inset-0 opacity-[0.55]">
+        <div className="pointer-events-none absolute inset-0 opacity-[0.42]">
           <Trajectoires variante="fond" className="h-full w-full" />
         </div>
+        {/* Pas de halo radial : un dégradé linéaire vers le bas, uniquement pour
+            que les tracés se fondent dans le pied de section. */}
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(ellipse 70% 60% at 20% 40%, rgba(59,111,212,0.14) 0%, transparent 70%), linear-gradient(to top, #0b0d10 4%, transparent 55%)",
-          }}
+          style={{ background: "linear-gradient(to top, #08090b 6%, transparent 60%)" }}
         />
 
         <div className="px-marge cadre relative z-10 py-20">
@@ -145,7 +144,7 @@ export default function Accueil() {
             <h1 className="titre-1 mt-8 max-w-[16ch] text-balance">
               Tu ne manques pas de travail.
               <br />
-              Tu manques <em className="italic text-cobalt-vif">d&rsquo;élan</em>.
+              Tu manques <em className="not-italic text-cobalt-vif">d&rsquo;élan</em>.
             </h1>
           </Reveal>
 
@@ -211,7 +210,7 @@ export default function Accueil() {
             {FAUSSES_SOLUTIONS.map((f, i) => (
               <Reveal key={f.essai} delay={i * 70}>
                 <div className="grid gap-2 border-b border-filet py-6 md:grid-cols-[1fr_1.25fr] md:gap-12">
-                  <p className="font-serif text-[1.2rem] leading-snug text-craie-50 line-through decoration-1 decoration-craie-24">
+                  <p className="font-sans text-[1.2rem] font-medium leading-snug text-craie-50 line-through decoration-1 decoration-craie-24">
                     {f.essai}
                   </p>
                   <p className="text-[15px] font-light leading-relaxed text-craie-80">{f.effet}</p>
@@ -239,7 +238,7 @@ export default function Accueil() {
               <>
                 Tes sorties ne s&rsquo;additionnent pas
                 <br className="hidden md:block" /> parce qu&rsquo;elles ne{" "}
-                <em className="italic text-cobalt-vif">se racontent</em> pas.
+                <em className="not-italic text-cobalt-vif">se racontent</em> pas.
               </>
             }
           />
@@ -283,7 +282,7 @@ export default function Accueil() {
             titre={
               <>
                 On ne travaille plus une sortie à la fois.
-                <br className="hidden md:block" /> On travaille <em className="italic text-cobalt-vif">un arc</em>.
+                <br className="hidden md:block" /> On travaille <em className="not-italic text-cobalt-vif">un arc</em>.
               </>
             }
           />
@@ -306,7 +305,7 @@ export default function Accueil() {
                 arc, lui, se corrige sans perdre sa direction — c&rsquo;est exactement pour ça qu&rsquo;il accumule au
                 lieu de se dissiper.
               </p>
-              <p className="mt-10 border-l-2 border-cuivre pl-6 font-mono text-[13.5px] leading-relaxed text-craie-80">
+              <p className="mt-10 border-l-2 border-craie pl-6 font-mono text-[13.5px] leading-relaxed text-craie-80">
                 {PROPOSITION}
               </p>
               <p className="corps">
@@ -339,7 +338,7 @@ export default function Accueil() {
                   <span className="index">{a.n}</span>
                   <h3 className="titre-3 mt-4">{a.titre}</h3>
                   <p className="corps mt-4">{a.texte}</p>
-                  <p className="mt-auto pt-6 font-serif text-[1.05rem] italic leading-snug text-cuivre-vif">{a.gain}</p>
+                  <p className="mt-auto pt-6 font-sans text-[0.98rem] font-semibold leading-snug text-craie">{a.gain}</p>
                 </article>
               </Reveal>
             ))}
@@ -436,7 +435,7 @@ export default function Accueil() {
             {OBJECTIONS.map((o, i) => (
               <Reveal key={o.q} delay={i * 80}>
                 <div>
-                  <p className="font-serif text-[1.3rem] italic leading-snug text-craie md:text-[1.5rem]">{o.q}</p>
+                  <p className="font-sans text-[1.3rem] font-bold leading-snug text-craie md:text-[1.5rem]">{o.q}</p>
                   <p className="corps mt-4 max-w-2xl">{o.r}</p>
                 </div>
               </Reveal>

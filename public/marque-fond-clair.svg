@@ -1,8 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="MOMENTUM">
-  <!-- Version sans fond, à poser sur l'encre (#0B0D10). Sur fond clair,
-       remplacer #3B6FD4 par #3B6FD4 : le cobalt vif est calibré pour le sombre. -->
-  <g fill="none" stroke-linecap="square" stroke-linejoin="miter" stroke-width="6">
-    <path d="M13 49 V31 L32 44 L51 15 V49" stroke="#3B6FD4"/>
-    <path d="M32 44 L51 15" stroke="#C77B52"/>
+  <!-- Sur fond clair : le trait d'élan passe en noir, le blanc y disparaîtrait. -->
+  <g fill="none" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="6.5">
+    <path d="M13 49 V31 L32 44 L51 15 V49" stroke="#1B3FD9"/>
+    <path d="M32 44 L51 15" stroke="#08090B"/>
   </g>
 </svg>

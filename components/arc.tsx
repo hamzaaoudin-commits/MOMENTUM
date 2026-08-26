@@ -10,7 +10,7 @@ import { useEffect, useRef, useState } from "react"
  *
  * En bas : les six mêmes sorties, mais chaînées. Chacune hérite de la
  * précédente, donc chacune est plus grosse et plus haute. La dernière est en
- * cuivre : c'est là qu'on arrive.
+ * blanc : c'est là qu'on arrive.
  *
  * L'écart entre les deux bandes n'est pas une différence de talent ni de
  * travail. C'est une différence de liaison. Tout l'argument de la page tient
@@ -132,7 +132,7 @@ export function Arc({ className = "" }: { className?: string }) {
             cx={p.x}
             cy={p.y}
             r={p.r}
-            fill={dernier ? "var(--color-cuivre)" : "var(--color-cobalt-vif)"}
+            fill={dernier ? "#ffffff" : "var(--color-cobalt-vif)"}
             style={{
               opacity: joue ? 1 : 0,
               transition: `opacity 500ms ease ${300 + i * 190}ms`,

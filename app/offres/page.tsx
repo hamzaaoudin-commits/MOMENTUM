@@ -44,7 +44,7 @@ export default function Offres() {
           <Reveal>
             <p className="index">LES FORMULES</p>
             <h1 className="titre-1 mt-7 max-w-[18ch] text-balance">
-              Trois niveaux. Un seul engagement&nbsp;: <em className="italic text-cobalt-vif">au mois</em>.
+              Trois niveaux. Un seul engagement&nbsp;: <em className="not-italic text-cobalt-vif">au mois</em>.
             </h1>
             <p className="chapo mt-8 max-w-[56ch]">
               Un manager demande environ 2 000 € par mois — et n'accepte pas les artistes à ton stade. Une agence coûte

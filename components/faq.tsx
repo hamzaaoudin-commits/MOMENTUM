@@ -20,7 +20,7 @@ export function Faq({ items }: { items: Question[] }) {
                 className="flex w-full items-start justify-between gap-6 py-6 text-left"
               >
                 <span
-                  className={`font-serif text-[1.15rem] leading-snug transition-colors duration-300 md:text-[1.3rem] ${
+                  className={`font-sans text-[1.08rem] font-semibold leading-snug transition-colors duration-300 md:text-[1.3rem] ${
                     actif ? "text-craie" : "text-craie-65"
                   }`}
                 >

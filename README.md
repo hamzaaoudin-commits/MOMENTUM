@@ -35,14 +35,23 @@ Même architecture que Strawberry-Prod, identité visuelle distincte.
 | La bio | `app/a-propos/page.tsx` |
 | Les champs du formulaire | `components/formulaire.tsx` + `app/api/candidature/route.ts` |
 
-## Identité — « BLEU DE TRAVAIL »
+## Identité — « ACIER »
 
-Deux accents, deux rôles, jamais mélangés :
+Une seule teinte chromatique, plus un blanc pur. Deux rôles :
 
-- **Cobalt `#3B6FD4`** — la structure : direction, méthode, index, filets, liens.
-- **Cuivre `#C77B52`** — l'humain : verdicts, prix, boutons d'action.
+- **Bleu `#2F5BFF`** — la structure : index, filets, liens, tracés, direction.
+- **Blanc `#FFFFFF`** — l'action : boutons, verdicts, points d'arrivée.
 
-Typographies : Instrument Serif (expression) · Geist (texte) · Geist Mono (index, prix, étiquettes).
+Typographies : **Archivo** (400 à 800) pour tout le texte, **JetBrains Mono**
+pour les index, les prix et les étiquettes. Ni Geist ni Inter ni serif
+élégante : ce sont les réglages par défaut de tout ce qui s'est lancé depuis
+deux ans, et ça se reconnaît en une seconde.
 
-L'italique serif est réservée aux **verdicts** — les phrases tranchées d'un conseiller.
-C'est la signature typographique du site : ne pas l'utiliser pour de l'emphase ordinaire.
+Le contraste typographique vient de l'écart de graisse à l'intérieur d'une
+seule famille (800 contre 400), pas d'un couple serif/sans.
+
+Aucun dégradé de surface, aucun halo radial, aucun angle arrondi. Une surface
+est plate, un filet est un trait.
+
+Pour changer l'accent : une seule ligne, `--color-cobalt-vif` dans
+`app/globals.css`. Deux alternatives tenues y sont commentées.

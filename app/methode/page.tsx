@@ -53,7 +53,7 @@ export default function Methode() {
           <Reveal>
             <p className="index">LE MÉCANISME</p>
             <h1 className="titre-1 mt-7 max-w-[15ch] text-balance">
-              Une sortie ne construit rien. Un <em className="italic text-cobalt-vif">arc</em>, si.
+              Une sortie ne construit rien. Un <em className="not-italic text-cobalt-vif">arc</em>, si.
             </h1>
             <p className="chapo mt-8 max-w-[56ch]">
               Un arc, c'est trois à six sorties conçues ensemble, où chacune prépare la suivante et confirme la
@@ -89,7 +89,7 @@ export default function Methode() {
                 <div>
                   <h2 className="font-mono text-[13px] uppercase tracking-[0.24em] text-craie">{t.nom}</h2>
                   <p className="corps mt-5 text-[15.5px]">{t.texte}</p>
-                  <p className="mt-6 border-l-2 border-cuivre pl-5 font-serif text-[1.05rem] italic leading-snug text-craie-80">
+                  <p className="mt-6 border-l-2 border-craie pl-5 font-sans text-[0.98rem] font-semibold leading-snug text-craie-80">
                     {t.sortie}
                   </p>
                 </div>

@@ -32,8 +32,10 @@ export function Nav() {
     >
       <div className="px-marge flex h-[68px] items-center justify-between">
         <Link href="/" className="group flex items-baseline gap-2.5" aria-label="MOMENTUM, accueil">
-          <span className="font-mono text-[15px] font-medium tracking-[0.34em] text-craie">MOMENTUM</span>
-          <span className="hidden h-[3px] w-[3px] rounded-full bg-cuivre sm:block" />
+          {/* Le lettrage reprend exactement celui de l'image de partage : c'est la
+              même marque, elle ne doit pas changer de police entre les deux. */}
+          <span className="text-[15px] font-extrabold uppercase tracking-[0.26em] text-craie">MOMENTUM</span>
+          <span className="hidden h-[4px] w-[4px] bg-cobalt-vif sm:block" />
         </Link>
 
         <nav className="hidden items-center gap-9 md:flex">
@@ -73,7 +75,7 @@ export function Nav() {
       {ouvert && (
         <nav className="px-marge border-t border-filet pb-7 pt-5 md:hidden">
           {LIENS.map((l) => (
-            <Link key={l.href} href={l.href} className="block py-3 font-serif text-2xl text-craie-80">
+            <Link key={l.href} href={l.href} className="block py-3 font-sans text-2xl font-bold text-craie-80">
               {l.label}
             </Link>
           ))}

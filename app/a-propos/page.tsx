@@ -26,7 +26,7 @@ export default function APropos() {
           <Reveal>
             <p className="index">QUI TE PARLE</p>
             <h1 className="titre-1 mt-7 max-w-[17ch] text-balance">
-              Un artiste comprend ton art. Un stratège comprend ton <em className="italic text-cobalt-vif">marché</em>.
+              Un artiste comprend ton art. Un stratège comprend ton <em className="not-italic text-cobalt-vif">marché</em>.
             </h1>
             <p className="chapo mt-8 max-w-[56ch]">
               Il t'en faut un qui fasse les deux. C'est la seule raison valable de me confier un regard sur ta carrière —

@@ -164,7 +164,7 @@ export function Formulaire() {
       </div>
 
       {etat === "erreur" && (
-        <p role="alert" className="border-l-2 border-cuivre pl-4 text-[14px] font-light text-craie-80">
+        <p role="alert" className="border-l-2 border-craie pl-4 text-[14px] font-light text-craie-80">
           {message}
         </p>
       )}

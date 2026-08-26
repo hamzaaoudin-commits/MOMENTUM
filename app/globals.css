@@ -1,60 +1,70 @@
 @import 'tailwindcss';
 
 /* ===========================================================================
-   MOMENTUM — SYSTÈME « BLEU DE TRAVAIL »
+   MOMENTUM — SYSTÈME « ACIER »
    ===========================================================================
-   Deux accents, deux rôles, jamais mélangés :
+   Ce qui a été retiré, et pourquoi :
 
-     COBALT  = la structure. Direction, système, méthode, cadre.
-               Traits, règles, index, numéros, liens.
-     CUIVRE  = l'humain. La chaleur, le verdict, le prix, l'action.
-               Réservé aux boutons, aux prix et aux verdicts.
+   — Le cuivre. Deux teintes chromatiques sur une même page obligent à arbitrer
+     en permanence. Une seule teinte, plus un blanc pur, ne se discute pas.
+     Le rôle que tenait le cuivre (l'action, le verdict) revient au BLANC PLEIN :
+     plus dur, plus contrasté, impossible à confondre avec autre chose.
 
-   Si les deux se retrouvent dans le même bloc à faire le même travail,
-   c'est une erreur : l'un des deux doit partir.
+   — Les gris pastel. Le texte secondaire n'est plus du blanc à 65 % d'opacité —
+     cette mécanique produit des lavis mous et bleutés. Ce sont maintenant des
+     gris froids opaques, choisis un par un.
+
+   — Les halos radiaux et les dégradés de surface. C'est la signature visuelle
+     des interfaces génératives. Ici une surface est plate et un filet est un
+     trait. Rien ne brille.
+
+   — Les angles arrondis. Tout est à 0.
+
+   DEUX RÔLES, DEUX VALEURS :
+     BLEU   la structure — index, filets, liens, tracés, direction.
+     BLANC  l'action — boutons, verdicts, points d'arrivée.
+
+   Pour changer l'accent, une seule ligne : --color-cobalt-vif ci-dessous.
+   Trois options tenues : #2F5BFF (bleu signal, actuel),
+   #C9F227 (acide, très agressif), #FF3B21 (rouge signal — attention,
+   c'est le territoire de Strawberry Production).
    =========================================================================== */
 
 :root {
-  --background: #0b0d10;
+  --background: #08090b;
   --foreground: #ffffff;
-  --radius: 0.5rem;
+  --radius: 0;
 }
 
 @theme inline {
-  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
-  --font-serif: var(--font-instrument), Georgia, serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --font-sans: var(--font-archivo), 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
-  /* --- Matière --- */
-  --color-encre: #0b0d10;        /* le fond : un noir bleuté, pas un noir écran */
-  --color-encre-haute: #10141a;  /* surface surélevée */
-  --color-encre-basse: #080a0d;  /* creux, pied de page */
+  /* --- Matière : noirs froids, écartés pour que les plans se lisent --- */
+  --color-encre: #08090b;
+  --color-encre-haute: #0e1014;
+  --color-encre-basse: #050506;
 
-  /* --- Cobalt : la structure --- */
-  --color-cobalt: #3b6fd4;
-  --color-cobalt-vif: #5b8df0;
-  --color-cobalt-sourd: #2a4f99;
+  /* --- Bleu : la structure. Saturé, dur, jamais délavé. --- */
+  --color-cobalt: #1b3fd9;
+  --color-cobalt-vif: #2f5bff;
+  --color-cobalt-sourd: #142d99;
 
-  /* --- Cuivre : l'humain --- */
-  --color-cuivre: #c77b52;
-  --color-cuivre-vif: #e0966b;
-
-  /* --- Rampe de texte sur fond sombre --- */
+  /* --- Rampe de texte : gris froids opaques, pas du blanc transparent --- */
   --color-craie: #ffffff;
-  --color-craie-80: rgba(255, 255, 255, 0.8);
-  --color-craie-65: rgba(255, 255, 255, 0.65);
-  --color-craie-50: rgba(255, 255, 255, 0.5);
-  --color-craie-38: rgba(255, 255, 255, 0.38);
-  --color-craie-24: rgba(255, 255, 255, 0.24);
+  --color-craie-80: #c9ccd1;
+  --color-craie-65: #9ba0a8;
+  --color-craie-50: #7a7f87;
+  --color-craie-38: #5c6067;
+  --color-craie-24: #3a3e44;
 
-  /* --- Filets --- */
-  --color-filet: rgba(255, 255, 255, 0.08);
-  --color-filet-fort: rgba(255, 255, 255, 0.16);
-  --color-filet-cobalt: rgba(59, 111, 212, 0.32);
-  --color-filet-cuivre: rgba(199, 123, 82, 0.32);
+  /* --- Filets : des traits, pas des voiles --- */
+  --color-filet: #1a1d22;
+  --color-filet-fort: #2a2e35;
+  --color-filet-cobalt: #1e3a8f;
 }
 
 @layer base {
@@ -73,14 +83,13 @@
     overflow-x: hidden;
   }
   ::selection {
-    background: rgba(59, 111, 212, 0.4);
+    background: var(--color-cobalt-vif);
     color: #fff;
   }
   ::-webkit-scrollbar { width: 6px; }
   ::-webkit-scrollbar-track { background: var(--color-encre-basse); }
-  ::-webkit-scrollbar-thumb { background: rgba(59, 111, 212, 0.45); }
+  ::-webkit-scrollbar-thumb { background: var(--color-cobalt); }
 
-  /* Plancher d'accessibilité : le focus doit rester visible partout. */
   :focus-visible {
     outline: 2px solid var(--color-cobalt-vif);
     outline-offset: 3px;
@@ -115,15 +124,20 @@
 /* ---------------------------------------------------------------------------
    TYPOGRAPHIE
    ---------------------------------------------------------------------------
-   Instrument Serif porte tout le poids expressif. Geist ne fait que servir le
-   texte. Geist Mono tient les index, les prix et les étiquettes — le registre
-   « console de studio ».
+   Une seule famille de labeur — Archivo, grotesque américaine large, à axe de
+   graisse complet — et une mono technique, JetBrains Mono.
+
+   Le contraste ne vient plus de deux familles opposées (une serif élégante
+   contre une sans neutre), qui est la mise en page par défaut de presque tout
+   ce qui s'est lancé depuis deux ans. Il vient de l'écart de graisse à
+   l'intérieur d'une seule famille : 800 contre 400. C'est plus exigeant à
+   régler, et ça n'appartient qu'à ce site.
    --------------------------------------------------------------------------- */
 
 @utility index {
   font-family: var(--font-mono);
   font-size: 11px;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--color-cobalt-vif);
   font-weight: 500;
@@ -132,87 +146,85 @@
 @utility etiquette {
   font-family: var(--font-mono);
   font-size: 10.5px;
-  letter-spacing: 0.24em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--color-craie-38);
 }
 
 @utility titre-1 {
-  font-family: var(--font-serif);
-  font-weight: 400;
-  line-height: 0.94;
-  letter-spacing: -0.025em;
-  font-size: clamp(2.75rem, 8.2vw, 6.5rem);
+  font-family: var(--font-sans);
+  font-weight: 800;
+  line-height: 0.9;
+  letter-spacing: -0.045em;
+  font-size: clamp(2.65rem, 7.8vw, 6.1rem);
 }
 
 @utility titre-2 {
-  font-family: var(--font-serif);
-  font-weight: 400;
-  line-height: 1.02;
-  letter-spacing: -0.02em;
-  font-size: clamp(2.1rem, 5vw, 3.75rem);
+  font-family: var(--font-sans);
+  font-weight: 800;
+  line-height: 0.96;
+  letter-spacing: -0.035em;
+  font-size: clamp(1.95rem, 4.6vw, 3.4rem);
 }
 
 @utility titre-3 {
-  font-family: var(--font-serif);
-  font-weight: 400;
-  line-height: 1.12;
-  letter-spacing: -0.015em;
-  font-size: clamp(1.4rem, 2.4vw, 1.85rem);
+  font-family: var(--font-sans);
+  font-weight: 700;
+  line-height: 1.14;
+  letter-spacing: -0.02em;
+  font-size: clamp(1.15rem, 1.9vw, 1.45rem);
 }
 
 @utility chapo {
-  font-size: clamp(1.05rem, 1.5vw, 1.25rem);
-  line-height: 1.6;
+  font-size: clamp(1.02rem, 1.4vw, 1.18rem);
+  line-height: 1.58;
   color: var(--color-craie-65);
-  font-weight: 300;
+  font-weight: 400;
 }
 
 @utility corps {
   font-size: 15.5px;
-  line-height: 1.72;
+  line-height: 1.7;
   color: var(--color-craie-65);
-  font-weight: 300;
+  font-weight: 400;
 }
 
 /* Le verdict : la signature typographique du site.
-   Un conseiller ne « communique » pas, il tranche. Chaque phrase tranchée est
-   posée en serif italique contre un filet cuivre — la voix humaine, isolée du
-   reste de la page. */
+   Plus d'italique serif — un bloc lourd, serré, blanc plein, contre un trait
+   blanc de 3 px. Un conseiller ne murmure pas une élégance, il tranche. */
 @utility verdict {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-weight: 400;
+  font-family: var(--font-sans);
+  font-weight: 800;
   font-size: clamp(1.25rem, 2.2vw, 1.75rem);
-  line-height: 1.32;
-  letter-spacing: -0.01em;
+  line-height: 1.16;
+  letter-spacing: -0.035em;
   color: var(--color-craie);
-  border-left: 2px solid var(--color-cuivre);
-  padding-left: clamp(1rem, 2vw, 1.75rem);
+  border-left: 3px solid var(--color-craie);
+  padding-left: clamp(1rem, 2vw, 1.6rem);
 }
 
 @utility prix {
   font-family: var(--font-mono);
-  font-weight: 500;
-  letter-spacing: -0.02em;
-  color: var(--color-cuivre-vif);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: var(--color-craie);
 }
 
 /* ---------------------------------------------------------------------------
-   SURFACES
+   SURFACES — plates. Aucun dégradé.
    --------------------------------------------------------------------------- */
 
 @utility carte {
   border: 1px solid var(--color-filet);
-  background: linear-gradient(180deg, rgba(255,255,255,0.028) 0%, rgba(255,255,255,0.008) 100%);
+  background: var(--color-encre-haute);
   padding: clamp(1.5rem, 3vw, 2.25rem);
-  transition: border-color 400ms cubic-bezier(.2,.7,.2,1);
-  &:hover { border-color: var(--color-filet-cobalt); }
+  transition: border-color 350ms cubic-bezier(.2,.7,.2,1);
+  &:hover { border-color: var(--color-filet-fort); }
 }
 
 @utility carte-active {
-  border: 1px solid var(--color-filet-cobalt);
-  background: linear-gradient(180deg, rgba(59,111,212,0.09) 0%, rgba(11,13,16,0.4) 100%);
+  border: 1px solid var(--color-cobalt);
+  background: var(--color-encre-haute);
   padding: clamp(1.5rem, 3vw, 2.25rem);
 }
 
@@ -223,65 +235,50 @@
 @utility bouton {
   display: inline-flex;
   align-items: center;
-  gap: 0.55rem;
+  gap: 0.6rem;
   font-family: var(--font-sans);
-  font-size: 14.5px;
-  font-weight: 500;
-  letter-spacing: 0.01em;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.005em;
   text-decoration: none;
-  padding: 14px 26px;
-  border-radius: 2px;
-  transition: transform 320ms cubic-bezier(.2,.7,.2,1), background-color 320ms ease, border-color 320ms ease, box-shadow 320ms ease;
+  padding: 15px 28px;
+  border-radius: 0;
+  transition: background-color 220ms ease, color 220ms ease, border-color 220ms ease;
 }
 
+/* L'action, en blanc plein sur noir. C'est le contraste maximal disponible :
+   aucune couleur ne peut faire mieux, et rien ne le fera passer pour un
+   composant générique. */
 @utility bouton-plein {
-  color: #120a05;
-  background: var(--color-cuivre-vif);
-  border: 1px solid var(--color-cuivre-vif);
-  &:hover {
-    background: #f0a87c;
-    border-color: #f0a87c;
-    transform: translateY(-2px);
-    box-shadow: 0 12px 30px rgba(199, 123, 82, 0.28);
-  }
-  &:active { transform: translateY(0); }
+  color: #08090b;
+  background: var(--color-craie);
+  border: 1px solid var(--color-craie);
+  &:hover { background: var(--color-cobalt-vif); border-color: var(--color-cobalt-vif); color: #fff; }
 }
 
 @utility bouton-vide {
   color: var(--color-craie);
   border: 1px solid var(--color-filet-fort);
   background: transparent;
-  &:hover {
-    border-color: var(--color-cobalt);
-    background: rgba(59, 111, 212, 0.08);
-    transform: translateY(-2px);
-  }
-  &:active { transform: translateY(0); }
+  &:hover { border-color: var(--color-craie); }
 }
 
 @utility champ {
   width: 100%;
   border: 1px solid var(--color-filet-fort);
-  background: rgba(255, 255, 255, 0.025);
-  padding: 13px 15px;
+  background: var(--color-encre-basse);
+  padding: 14px 15px;
   font-family: var(--font-sans);
   font-size: 15px;
   color: #fff;
-  border-radius: 2px;
-  transition: border-color 200ms ease, box-shadow 200ms ease;
+  border-radius: 0;
+  transition: border-color 180ms ease;
   &::placeholder { color: var(--color-craie-24); }
   &:focus {
     outline: none;
-    border-color: var(--color-cobalt);
-    box-shadow: 0 0 0 1px rgba(59, 111, 212, 0.45);
+    border-color: var(--color-cobalt-vif);
   }
-}
-
-/* Les listes déroulantes natives héritent du fond clair du système : sans
-   cette règle, les options s'affichent en blanc sur blanc sur plusieurs
-   navigateurs de bureau. */
-@utility champ {
-  & option { background: #10141a; color: #fff; }
+  & option { background: #0e1014; color: #fff; }
 }
 
 @utility champ-label {
@@ -290,30 +287,24 @@
   font-family: var(--font-mono);
   font-size: 10.5px;
   text-transform: uppercase;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.2em;
   color: var(--color-craie-50);
 }
 
 /* ---------------------------------------------------------------------------
-   MOUVEMENT
-   ---------------------------------------------------------------------------
-   Une seule courbe pour tout le site : cubic-bezier(.2,.7,.2,1), 800 ms.
-   Une apparition, jamais un effet.
+   MOUVEMENT — une apparition, jamais un effet.
    --------------------------------------------------------------------------- */
 
 .reveal {
   opacity: 0;
-  transform: translateY(22px);
-  transition: opacity 800ms cubic-bezier(.2,.7,.2,1), transform 800ms cubic-bezier(.2,.7,.2,1);
+  transform: translateY(18px);
+  transition: opacity 700ms cubic-bezier(.2,.7,.2,1), transform 700ms cubic-bezier(.2,.7,.2,1);
 }
 .reveal.vu {
   opacity: 1;
   transform: none;
 }
 
-/* Le tracé des deux trajectoires : la signature du site.
-   L'agitation et l'élan se dessinent au même rythme — c'est le point : deux
-   artistes qui travaillent autant, et dont un seul avance. */
 @keyframes mo-trace {
   from { stroke-dashoffset: var(--len); }
   to   { stroke-dashoffset: 0; }
@@ -332,9 +323,9 @@
 /* ---------------------------------------------------------------------------
    GRAIN
    ---------------------------------------------------------------------------
-   Le bleu de travail est une matière, pas une couleur d'écran. Bruit SVG en
-   data URI, posé par-dessus tout, assez discret pour qu'on le sente sans le
-   voir.
+   Monté à 0.055 : sur un noir aussi froid et des aplats aussi nets, c'est la
+   seule chose qui empêche les grandes surfaces de ressembler à du vide
+   numérique. Il doit se sentir sans se voir.
    --------------------------------------------------------------------------- */
 body::after {
   content: "";
@@ -342,9 +333,9 @@ body::after {
   inset: 0;
   z-index: 9998;
   pointer-events: none;
-  opacity: 0.04;
+  opacity: 0.055;
   mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 @media (prefers-reduced-motion: reduce) {

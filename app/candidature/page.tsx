@@ -58,7 +58,7 @@ export default function Candidature() {
           <Reveal delay={200}>
             <p className="etiquette mt-10 leading-relaxed">
               Une question avant de candidater ?<br />
-              <a href={`mailto:${CONTACT.email}`} className="text-cuivre-vif transition-colors hover:text-cuivre">
+              <a href={`mailto:${CONTACT.email}`} className="text-craie transition-colors hover:text-craie">
                 {CONTACT.email}
               </a>
             </p>

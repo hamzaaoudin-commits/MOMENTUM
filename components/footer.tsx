@@ -7,7 +7,7 @@ export function Footer() {
       <div className="px-marge cadre py-16 md:py-20">
         <div className="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr]">
           <div>
-            <p className="font-mono text-[15px] font-medium tracking-[0.34em] text-craie">MOMENTUM</p>
+            <p className="text-[15px] font-extrabold uppercase tracking-[0.26em] text-craie">MOMENTUM</p>
             <p className="corps mt-4 max-w-xs">
               Conseil stratégique pour artistes indépendants. On ne travaille pas une sortie à la fois&nbsp;: on
               travaille un arc. {CAPACITE} artistes accompagnés à la fois, depuis {CONTACT.ville}.
@@ -37,7 +37,7 @@ export function Footer() {
             <p className="etiquette mb-4">Contact</p>
             <a
               href={`mailto:${CONTACT.email}`}
-              className="text-[14px] font-light text-craie-50 transition-colors hover:text-cuivre-vif"
+              className="text-[14px] font-light text-craie-50 transition-colors hover:text-craie"
             >
               {CONTACT.email}
             </a>

@@ -18,7 +18,7 @@ export function Places({ compact = false }: { compact?: boolean }) {
           <span
             key={i}
             aria-hidden
-            className={`block h-[13px] w-[5px] ${i < CAPACITE - PLACES_OUVERTES ? "bg-craie-24" : "bg-cuivre"}`}
+            className={`block h-[13px] w-[5px] ${i < CAPACITE - PLACES_OUVERTES ? "bg-craie-24" : "bg-craie"}`}
           />
         ))}
       </span>
@@ -31,8 +31,8 @@ export function Places({ compact = false }: { compact?: boolean }) {
 
 export function Garantie() {
   return (
-    <div className="border border-filet-cuivre bg-[rgba(199,123,82,0.05)] p-7 md:p-9">
-      <p className="font-mono text-[10.5px] uppercase tracking-[0.24em] text-cuivre-vif">RISQUE DE TON CÔTÉ : AUCUN</p>
+    <div className="border border-filet-fort bg-encre-haute p-7 md:p-9">
+      <p className="font-mono text-[10.5px] uppercase tracking-[0.24em] text-craie">RISQUE DE TON CÔTÉ : AUCUN</p>
       <h3 className="titre-3 mt-4">{GARANTIE.titre}</h3>
       <p className="corps mt-4 max-w-xl">{GARANTIE.texte}</p>
     </div>
@@ -68,10 +68,7 @@ export function OffreUnique() {
           </ul>
         </div>
 
-        <div
-          className="flex flex-col p-8 md:p-11"
-          style={{ background: "linear-gradient(180deg, rgba(59,111,212,0.08), rgba(11,13,16,0.5))" }}
-        >
+        <div className="flex flex-col bg-encre-haute p-8 md:p-11">
           <p className="etiquette">CE QUE ÇA COÛTE</p>
           <p className="mt-4 flex items-baseline gap-2">
             <span className="prix text-[3.2rem] leading-none">{o.prix} €</span>

@@ -1,30 +1,28 @@
 import type { Metadata } from "next"
-import { Instrument_Serif, Geist, Geist_Mono } from "next/font/google"
+import { Archivo, JetBrains_Mono } from "next/font/google"
 import { Nav } from "@/components/nav"
 import { Footer } from "@/components/footer"
 import "./globals.css"
 
 /**
- * Instrument Serif porte l'expression, Geist le texte, Geist Mono les index et
- * les prix. Trois rôles, trois familles — aucune ne fait le travail d'une autre.
+ * Archivo pour tout le texte, JetBrains Mono pour les index et les prix.
+ *
+ * Ni Geist ni Inter : ce sont les polices par défaut des produits Vercel et
+ * OpenAI, et un œil un peu entraîné les reconnaît en une seconde. Archivo est
+ * une grotesque américaine large, taillée pour l'affiche, avec un axe de
+ * graisse complet — c'est cet axe qui remplace le couple serif/sans.
  */
-const instrument = Instrument_Serif({
+const archivo = Archivo({
   subsets: ["latin"],
-  weight: "400",
-  style: ["normal", "italic"],
-  variable: "--font-instrument",
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-archivo",
   display: "swap",
 })
 
-const geist = Geist({
+const jetbrains = JetBrains_Mono({
   subsets: ["latin"],
-  variable: "--font-geist",
-  display: "swap",
-})
-
-const geistMono = Geist_Mono({
-  subsets: ["latin"],
-  variable: "--font-geist-mono",
+  weight: ["400", "500", "700"],
+  variable: "--font-jetbrains",
   display: "swap",
 })
 
@@ -48,7 +46,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="fr" className={`${instrument.variable} ${geist.variable} ${geistMono.variable}`}>
+    <html lang="fr" className={`${archivo.variable} ${jetbrains.variable}`}>
       <body>
         <a
           href="#contenu"
