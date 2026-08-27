@@ -1,42 +1,28 @@
-# À SUPPRIMER DU DÉPÔT AVANT DE DÉPLOYER
+# UN SEUL FICHIER À SUPPRIMER
 
-`Add files via upload` sur GitHub **ajoute** des fichiers, il n'en supprime
-jamais. Les fichiers ci-dessous appartiennent aux versions précédentes du site.
-Tant qu'ils restent dans le dépôt, le build échoue : l'ancien `app/page.tsx`
-importe `PROPOSITION`, qui n'existe plus depuis que toute la copie est partie
-dans `lib/copy-fr.ts` et `lib/copy-en.ts`.
-
-## Le plus rapide
-
-Sur la page du dépôt GitHub, appuyez sur la touche `.` (point). Une fenêtre
-VS Code s'ouvre dans le navigateur. Sélectionnez les fichiers ci-dessous dans
-l'explorateur, supprimez-les, puis validez en un seul commit.
-
-## La liste
+À la racine du dépôt :
 
 ```
-app/page.tsx
-app/layout.tsx
-app/not-found.tsx
-app/opengraph-image.png
-app/opengraph-image.alt.txt
-app/merci/
-app/mentions-legales/
-app/offres/
-app/methode/
-app/a-propos/
-app/candidature/
-components/bande-cta.tsx
 middleware.ts
 ```
 
-Certains n'existent peut-être plus chez vous — c'est normal, ils ont été
-supprimés à des étapes différentes. Supprimez ceux qui sont là, ignorez les
-autres.
+C'est tout. Il fait doublon avec `proxy.ts`, qui le remplace, et Next refuse de
+construire quand les deux sont présents :
 
-## Comment vérifier que c'est bon
+```
+Both middleware file "./middleware.ts" and proxy file "./proxy.ts" are detected.
+```
 
-Après nettoyage, `app/` ne doit plus contenir que :
+`Add files via upload` sur GitHub ajoute des fichiers sans jamais en supprimer :
+c'est pour ça que l'ancien est resté.
+
+## Le plus rapide pour supprimer
+
+Sur la page du dépôt GitHub, appuyez sur la touche `.` (point). Une fenêtre
+VS Code s'ouvre dans le navigateur : sélectionnez le fichier, supprimez-le,
+validez.
+
+## À quoi doit ressembler le dépôt ensuite
 
 ```
 app/[lang]/layout.tsx
@@ -50,12 +36,24 @@ app/icon.svg
 app/apple-icon.png
 app/robots.ts
 app/sitemap.ts
+components/  (16 fichiers)
+lib/         (config, i18n, copy, copy-fr, copy-en)
+public/      (og-fr.png, og-en.png, marque.svg, marque-fond-clair.svg)
+proxy.ts
+next.config.mjs, package.json, postcss.config.mjs, tsconfig.json
 ```
 
-**Aucun `page.tsx` ni `layout.tsx` directement sous `app/`.** C'est la règle à
-retenir : depuis le passage en deux langues, la balise `<html>` vit dans
-`app/[lang]/layout.tsx`, et un layout racine au-dessus écraserait l'attribut
-`lang` de la version anglaise.
+**Aucun `page.tsx` ni `layout.tsx` directement sous `app/`**, et **pas de
+`middleware.ts`**.
 
-Et `middleware.ts` est remplacé par `proxy.ts` à la racine du dépôt : Next 16 a
-renommé la convention, l'ancienne alerte à chaque build.
+## Rappel Vercel
+
+Une variable d'environnement est nécessaire pour que le formulaire envoie :
+
+| Nom | Valeur |
+|---|---|
+| `FORMSPREE_ID` | l'identifiant de votre formulaire Formspree |
+
+Sans elle, le site se construit et s'affiche normalement, mais
+`/api/candidature` renvoie une erreur explicite au lieu de faire semblant
+d'envoyer.
