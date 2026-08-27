@@ -26,7 +26,7 @@ export const PLACES_OUVERTES = 2
 export const GARANTIE = {
   titre: "La garantie du premier cycle",
   texte:
-    "Si au bout du premier mois tu estimes que l'accompagnement ne t'a rien appris sur ton projet, tu me le dis et je te rembourse intégralement. Sans discussion et sans que tu aies à te justifier.",
+    "Si au bout du premier mois vous estimez que l'accompagnement ne vous a rien appris sur votre projet, vous me le dites et je vous rembourse intégralement. Sans discussion et sans que vous aiez à vous justifier.",
 } as const
 
 /**
@@ -59,9 +59,9 @@ export const OFFRES: Offre[] = [
     pour: "Pour les artistes qui commencent à prendre leur projet au sérieux.",
     inclus: [
       "1 session stratégique de 60 min par mois",
-      "2 retours écrits sur tes œuvres ou tes contenus",
+      "2 retours écrits sur vos œuvres ou vos contenus",
       "Les 3 priorités du mois, écrites",
-      "1 sélection d'opportunités adaptée à ton profil",
+      "1 sélection d'opportunités adaptée à votre profil",
       "Analyse des décisions importantes par écrit",
     ],
     cta: "Candidater en Advisor",
@@ -70,7 +70,7 @@ export const OFFRES: Offre[] = [
     id: "development",
     nom: "ARTIST DEVELOPMENT",
     prix: 299,
-    promesse: "Transformer ton projet en trajectoire.",
+    promesse: "Transformer votre projet en trajectoire.",
     pour: "Pour les artistes qui veulent construire, pas seulement publier.",
     vedette: true,
     inclus: [
@@ -78,7 +78,7 @@ export const OFFRES: Offre[] = [
       "Jusqu'à 6 retours écrits par mois (morceaux, textes, visuels, contenus)",
       "Positionnement et identité artistique",
       "Stratégie de sortie : choix du single, concept, calendrier",
-      "Stratégie de contenu adossée à ton identité",
+      "Stratégie de contenu adossée à votre identité",
       "Veille et sélection d'opportunités",
       "Roadmap trimestrielle + priorités mensuelles",
       "Bilan écrit à la fin de chaque mois",
@@ -96,7 +96,7 @@ export const OFFRES: Offre[] = [
       "Accès direct par message, réponse sous 24 h ouvrées",
       "Direction artistique stratégique des sorties",
       "Analyse des collaborations et des propositions reçues",
-      "Relecture de tes dossiers, pitchs et candidatures",
+      "Relecture de vos dossiers, pitchs et candidatures",
       "Préparation des sorties de bout en bout",
       "Bilan stratégique approfondi chaque mois",
     ],
@@ -108,7 +108,7 @@ export const OFFRES: Offre[] = [
 export const COMPARATIF: { ligne: string; advisor: string; development: string; partner: string }[] = [
   { ligne: "Prix mensuel", advisor: "149 €", development: "299 €", partner: "499 €" },
   { ligne: "Sessions stratégiques / mois", advisor: "1 × 60 min", development: "2 × 60 min", partner: "2 × 60 min + échanges" },
-  { ligne: "Retours écrits sur tes œuvres / mois", advisor: "2", development: "jusqu'à 6", partner: "sans plafond raisonnable" },
+  { ligne: "Retours écrits sur vos œuvres / mois", advisor: "2", development: "jusqu'à 6", partner: "sans plafond raisonnable" },
   { ligne: "Priorités du mois", advisor: "3, écrites", development: "3, écrites", partner: "3, écrites" },
   { ligne: "Positionnement & identité", advisor: "—", development: "oui", partner: "oui" },
   { ligne: "Stratégie de sortie", advisor: "—", development: "oui", partner: "direction artistique incluse" },

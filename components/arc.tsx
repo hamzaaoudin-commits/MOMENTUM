@@ -36,7 +36,7 @@ const MAILLONS = [
   "Sortie 1 — elle pose la promesse. Personne ne l'attend, et ce n'est pas grave : son rôle est de dire ce que sera la suite.",
   "Sortie 2 — elle confirme. C'est elle qui prouve que la première n'était pas un accident.",
   "Sortie 3 — elle élargit. Même monde, autre angle : on garde l'auditeur en lui montrant qu'il n'a pas fait le tour.",
-  "Sortie 4 — le point de bascule. Les auditeurs de la 1 reviennent d'eux-mêmes ; tu ne repars plus de zéro.",
+  "Sortie 4 — le point de bascule. Les auditeurs de la 1 reviennent d'eux-mêmes ; vous ne reparez plus de zéro.",
   "Sortie 5 — elle capitalise. C'est le moment de sortir le titre le plus fort : il hérite de tout ce qui précède.",
   "Sortie 6 — elle ouvre. Elle annonce la suite avant même que la suite existe.",
   "Sortie 7 — elle récolte. Le même travail qu'à la sortie 1, sur une audience qui, elle, n'est plus la même.",
@@ -183,7 +183,7 @@ export function Arc({ className = "" }: { className?: string }) {
           survol d'une bille. */}
       <p className="mt-5 min-h-[54px] border-t border-filet pt-4 text-[13.5px] leading-relaxed text-craie-80">
         {actif === null ? (
-          <span className="etiquette">Survole ou touche une sortie pour voir son rôle dans la chaîne.</span>
+          <span className="etiquette">Survolez ou touchez une sortie pour voir son rôle dans la chaîne.</span>
         ) : (
           MAILLONS[actif]
         )}

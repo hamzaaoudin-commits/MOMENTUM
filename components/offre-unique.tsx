@@ -31,7 +31,7 @@ export function Places({ compact = false }: { compact?: boolean }) {
 export function Garantie() {
   return (
     <div className="border border-filet-fort bg-encre-haute p-7 md:p-9">
-      <p className="font-mono text-[10.5px] uppercase tracking-[0.24em] text-craie">RISQUE DE TON CÔTÉ : AUCUN</p>
+      <p className="font-mono text-[10.5px] uppercase tracking-[0.24em] text-craie">RISQUE DE VOTRE CÔTÉ : AUCUN</p>
       <h3 className="titre-3 mt-4">{GARANTIE.titre}</h3>
       <p className="corps mt-4 max-w-xl">{GARANTIE.texte}</p>
     </div>
@@ -74,7 +74,7 @@ export function OffreUnique() {
             <span className="font-mono text-[12px] text-craie-38">/ mois</span>
           </p>
           <p className="corps mt-5 text-[14px]">
-            Sans engagement de durée. Aucun pourcentage sur tes droits, tes revenus ou tes futurs contrats.
+            Sans engagement de durée. Aucun pourcentage sur vos droits, vos revenus ou vos futurs contrats.
           </p>
 
           <div className="mt-8 border-t border-filet pt-8">
@@ -85,11 +85,11 @@ export function OffreUnique() {
             Candidater ↓
           </a>
           <p className="etiquette mt-4 leading-relaxed">
-            Réponse sous 72 h · Premier cycle remboursé si tu n&rsquo;en tires rien
+            Réponse sous 72 h · Premier cycle remboursé si vous n&rsquo;en tires rien
           </p>
 
           <p className="corps mt-auto pt-9 text-[13px]">
-            Deux autres niveaux existent, à 149 € et 499 €&nbsp;: le comparatif est juste en dessous. Mais si tu
+            Deux autres niveaux existent, à 149 € et 499 €&nbsp;: le comparatif est juste en dessous. Mais si vous
             hésites, celui-ci est le bon.
           </p>
         </div>

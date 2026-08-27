@@ -3,11 +3,13 @@ import { Suspense } from "react"
 import { Reveal } from "@/components/reveal"
 import { TeteSection } from "@/components/section"
 import { Trajectoires } from "@/components/trajectoires"
+import { Ascension } from "@/components/ascension"
 import { Arc } from "@/components/arc"
 import { OffreUnique, Garantie, Places } from "@/components/offre-unique"
 import { GrilleOffres, Comparatif } from "@/components/offres"
 import { Depliant } from "@/components/depliant"
 import { Diagnostic } from "@/components/diagnostic"
+import { Rature } from "@/components/rature"
 import { Faq } from "@/components/faq"
 import { Formulaire } from "@/components/formulaire"
 import { PROPOSITION, CONTACT, CAPACITE } from "@/lib/config"
@@ -24,7 +26,7 @@ import { PROPOSITION, CONTACT, CAPACITE } from "@/lib/config"
                 rien donné. Sa peur : avoir trente-deux ans et se dire qu'il a
                 perdu dix ans.
 
-   UNE IDÉE     Tes sorties ne s'additionnent pas parce qu'elles ne se racontent
+   UNE IDÉE     Vos sorties ne s'additionnent pas parce qu'elles ne se racontent
                 pas. Un arc les relie ; sans arc, chaque titre repart de zéro.
 
    UNE OFFRE    ARTIST DEVELOPMENT, 299 €/mois — seule visible par défaut. Les
@@ -41,11 +43,11 @@ import { PROPOSITION, CONTACT, CAPACITE } from "@/lib/config"
    =========================================================================== */
 
 const FAUSSES_SOLUTIONS = [
-  { essai: "Sortir plus souvent", effet: "Ton catalogue grossit, ton identité se dilue." },
+  { essai: "Sortir plus souvent", effet: "Votre catalogue grossit, votre identité se dilue." },
   { essai: "Payer de la promo ou un pack de playlists", effet: "Des écoutes qui n'écoutent pas, et zéro auditeur récurrent." },
-  { essai: "Poster tous les jours", effet: "Tu produis du contenu au lieu de produire une œuvre." },
-  { essai: "Changer de style pour ce qui marche", effet: "Tu arrives en retard sur une vague, sans rien qui t'appartienne." },
-  { essai: "Envoyer cent messages à des blogs et des labels", effet: "Personne ne répond, parce que rien ne dit qui tu es." },
+  { essai: "Poster tous les jours", effet: "Vous produisez du contenu au lieu de produire une œuvre." },
+  { essai: "Changer de style pour ce qui marche", effet: "Vous arrivez en retard sur une vague, sans rien qui vous appartienne." },
+  { essai: "Envoyer cent messages à des blogs et des labels", effet: "Personne ne répond, parce que rien ne dit qui vous êtes." },
 ]
 
 const TEMPS = [
@@ -54,8 +56,8 @@ const TEMPS = [
     nom: "DIAGNOSTIC",
     quand: "Le premier mois, puis tous les trimestres",
     texte:
-      "On met ton projet à plat. Ta musique d'abord — écoutée en entier, plusieurs fois, sans complaisance. Puis ton identité : ce que ton univers promet, et ce qu'il tient réellement. Puis ton audience réelle, pas ton nombre d'abonnés. Puis tes objectifs, formulés jusqu'à ce qu'ils deviennent vérifiables. Et enfin tes blocages, y compris ceux que tu n'oses pas nommer.",
-    sortie: "Un document écrit : où en est ton projet, et ce qui le retient.",
+      "On met votre projet à plat. Votre musique d'abord — écoutée en entier, plusieurs fois, sans complaisance. Puis votre identité : ce que votre univers promet, et ce qu'il tient réellement. Puis votre audience réelle, pas votre nombre d'abonnés. Puis vos objectifs, formulés jusqu'à ce qu'ils deviennent vérifiables. Et enfin vos blocages, y compris ceux que vous n'osez pas nommer.",
+    sortie: "Un document écrit : où en est votre projet, et ce qui le retient.",
   },
   {
     n: "02",
@@ -70,8 +72,8 @@ const TEMPS = [
     nom: "EXÉCUTION",
     quand: "Tout le mois",
     texte:
-      "Tu crées. Tu sors. Tu postes. Tu expérimentes. Ce travail-là ne change pas et ne doit pas changer : c'est le tien. La seule différence, c'est que les décisions importantes passent par un regard extérieur avant d'être prises, pas après.",
-    sortie: "Des retours écrits sur ce que tu produis, au fil du mois.",
+      "Vous créez. Vous sortez. Vous postez. Vous expérimentez. Ce travail-là ne change pas et ne doit pas changer : c'est le vôtre. La seule différence, c'est que les décisions importantes passent par un regard extérieur avant d'être prises, pas après.",
+    sortie: "Des retours écrits sur ce que vous produisez, au fil du mois.",
   },
   {
     n: "04",
@@ -83,34 +85,34 @@ const TEMPS = [
   },
 ]
 
-const CE_QUE_TU_OBTIENS = [
+const CE_QUE_VOUS_OBTENEZ = [
   {
     n: "01",
-    titre: "Tu sais enfin où tu en es vraiment",
+    titre: "Vous savez enfin où vous en êtes vraiment",
     texte:
-      "Tes morceaux écoutés en entier, plusieurs fois, par quelqu'un dont c'est le métier de faire du son et de construire des identités. Pas un « c'est propre » d'ami bienveillant : ce qui fonctionne, ce qui ne fonctionne pas, et ce qui rendrait le morceau meilleur.",
+      "Vos morceaux écoutés en entier, plusieurs fois, par quelqu'un dont c'est le métier de faire du son et de construire des identités. Pas un « c'est propre » d'ami bienveillant : ce qui fonctionne, ce qui ne fonctionne pas, et ce qui rendrait le morceau meilleur.",
     gain: "Le doute cesse d'être permanent. Il devient une question à laquelle on répond.",
   },
   {
     n: "02",
-    titre: "Tu sais quoi sortir, et dans quel ordre",
+    titre: "Vous savez quoi sortir, et dans quel ordre",
     texte:
       "Quel titre en single, avec quel concept, à quel moment, suivi de quoi. Chaque sortie est placée pour préparer la suivante au lieu de vivre trois semaines et de mourir.",
-    gain: "Tes sorties arrêtent de s'annuler entre elles et commencent à s'additionner.",
+    gain: "Vos sorties arrêtent de s'annuler entre elles et commencent à s'additionner.",
   },
   {
     n: "03",
-    titre: "Tu sais ce que tu dois arrêter",
+    titre: "Vous savez ce que vous doissez arrêter",
     texte:
-      "C'est la partie que personne ne te donnera jamais gratuitement. Trois priorités par mois, et la liste explicite de tout ce qu'on abandonne — y compris de bonnes idées qui ne sont simplement pas prioritaires maintenant.",
-    gain: "Tu récupères les heures que l'agitation te prenait.",
+      "C'est la partie que personne ne vous donnera jamais gratuitement. Trois priorités par mois, et la liste explicite de tout ce qu'on abandonne — y compris de bonnes idées qui ne sont simplement pas prioritaires maintenant.",
+    gain: "Vous récupèrez les heures que l'agitation vous prenait.",
   },
   {
     n: "04",
-    titre: "Tu n'es plus seul au moment de décider",
+    titre: "Vous n'êtes plus seul au moment de décider",
     texte:
-      "Une proposition reçue, un featuring, un changement d'image, une opportunité qui a l'air belle. Tu l'envoies, tu as un avis argumenté avant de répondre — pas six mois après, quand c'est déjà fait.",
-    gain: "Les mauvaises décisions coûtent des années. Celles-là, tu ne les prendras pas.",
+      "Une proposition reçue, un featuring, un changement d'image, une opportunité qui a l'air belle. Vous l'envoies, vous avez un avis argumenté avant de répondre — pas six mois après, quand c'est déjà fait.",
+    gain: "Les mauvaises décisions coûtent des années. Celles-là, vous ne les prendraez pas.",
   },
 ]
 
@@ -126,46 +128,46 @@ const REPERES = [
 const OBJECTIONS = [
   {
     q: "« 299 € par mois, c'est beaucoup pour moi. »",
-    r: "C'est le prix d'une journée de studio, ou de deux campagnes de promo qui ne donneront rien. La différence : une journée de studio produit un fichier, un cycle produit une direction — qui rend utiles toutes les journées de studio suivantes. Si le budget n'y est vraiment pas, commence à 149 € : mieux vaut un niveau tenu six mois qu'un niveau abandonné au deuxième.",
+    r: "C'est le prix d'une journée de studio, ou de deux campagnes de promo qui ne donneront rien. La différence : une journée de studio produit un fichier, un cycle produit une direction — qui rend utiles toutes les journées de studio suivantes. Si le budget n'y est vraiment pas, commencez à 149 € : mieux vaut un niveau tenu six mois qu'un niveau abandonné au deuxième.",
   },
   {
     q: "« Je peux avoir ces conseils gratuitement sur YouTube. »",
-    r: "Tu peux avoir des conseils généraux sur l'industrie, et certains sont excellents. Ce que tu ne peux pas avoir, c'est quelqu'un qui écoute tes quatorze morceaux, regarde tes visuels, connaît ton stade exact et te dit lequel sortir. Un conseil général s'applique à tout le monde ; c'est précisément pour ça qu'il ne change la trajectoire de personne.",
+    r: "Vous pouvez avoir des conseils généraux sur l'industrie, et certains sont excellents. Ce que vous ne pouvez pas avoir, c'est quelqu'un qui écoute vos quatorze morceaux, regarde vos visuels, connaît votre stade exact et vous dit lequel sortir. Un conseil général s'applique à tout le monde ; c'est précisément pour ça qu'il ne change la trajectoire de personne.",
   },
   {
-    q: "« Et si tu ne comprends pas mon style ? »",
-    r: "Dis-le-moi dans ta candidature. Je préfère refuser un projet que je ne saurais pas servir plutôt que d'encaisser trois mois avant qu'on s'en aperçoive tous les deux. Ce qui se transpose d'un style à l'autre, ce n'est pas le goût — c'est l'architecture : positionnement, cohérence, séquence de sorties.",
+    q: "« Et si vous ne comprendez pas mon style ? »",
+    r: "Dites-le-moi dans votre candidature. Je préfère refuser un projet que je ne saurais pas servir plutôt que d'encaisser trois mois avant qu'on s'en aperçoive tous les deux. Ce qui se transpose d'un style à l'autre, ce n'est pas le goût — c'est l'architecture : positionnement, cohérence, séquence de sorties.",
   },
   {
     q: "« Je n'ai pas assez avancé pour mériter ça. »",
-    r: "C'est l'objection la plus fréquente et la plus coûteuse. Attendre d'avoir « réussi » pour agir en professionnel, c'est exactement ce qui fait perdre des années. Il te faut un projet déjà commencé et une vraie envie de construire. Pas un contrat, pas cent mille abonnés.",
+    r: "C'est l'objection la plus fréquente et la plus coûteuse. Attendre d'avoir « réussi » pour agir en professionnel, c'est exactement ce qui fait perdre des années. Il vous faut un projet déjà commencé et une vraie envie de construire. Pas un contrat, pas cent mille abonnés.",
   },
   {
     q: "« Et si ça ne marche pas ? »",
-    r: "Je ne peux garantir ni streams, ni playlist, ni signature — personne ne le peut, et quiconque te le promet te vend autre chose. Ce que je garantis, c'est le premier cycle : s'il ne t'apprend rien sur ton projet, tu es remboursé intégralement.",
+    r: "Je ne peux garantir ni streams, ni playlist, ni signature — personne ne le peut, et quiconque vous le promet vous vend autre chose. Ce que je garantis, c'est le premier cycle : s'il ne vous apprend rien sur votre projet, vous êtes remboursé intégralement.",
   },
 ]
 
 const FAQ = [
   {
     q: "Comment se passe concrètement un mois ?",
-    r: "Une visio de soixante minutes en début de mois pour fixer le cap, tes envois de morceaux et de visuels au fil des semaines avec mes retours écrits, une seconde visio pour arbitrer les décisions en cours, et un bilan écrit en fin de mois qui pose le cap du suivant.",
+    r: "Une visio de soixante minutes en début de mois pour fixer le cap, vos envois de morceaux et de visuels au fil des semaines avec mes retours écrits, une seconde visio pour arbitrer les décisions en cours, et un bilan écrit en fin de mois qui pose le cap du suivant.",
   },
   {
-    q: "Est-ce que tu prends un pourcentage sur ma carrière ?",
-    r: "Jamais. Abonnement mensuel fixe, tu gardes 100 % de tes droits, de tes revenus et de tes décisions. C'est aussi la garantie que mes conseils servent ton projet et pas mes intérêts : je n'ai rien à gagner à te pousser vers une signature.",
+    q: "Est-ce que vous prenez un pourcentage sur ma carrière ?",
+    r: "Jamais. Abonnement mensuel fixe, vous gardez 100 % de vos droits, de vos revenus et de vos décisions. C'est aussi la garantie que mes conseils servent votre projet et pas mes intérêts : je n'ai rien à gagner à vous pousser vers une signature.",
   },
   {
-    q: "Est-ce que tu produis ou tu composes pour moi ?",
-    r: "Non. Je conseille, tu crées. C'est une frontière que je tiens : un conseiller qui met les mains dans le son finit par te fabriquer sa musique à lui, et ton identité disparaît.",
+    q: "Est-ce que vous produisez ou vous composez pour moi ?",
+    r: "Non. Je conseille, vous créez. C'est une frontière que je tiens : un conseiller qui met les mains dans le son finit par vous fabriquer sa musique à lui, et votre identité disparaît.",
   },
   {
     q: "Mes morceaux inédits sont-ils protégés ?",
-    r: "Tout ce que tu envoies est confidentiel et n'est partagé avec personne. Je ne revendique aucun droit, aucune part d'édition et aucun crédit sur ce que tu produis pendant l'accompagnement.",
+    r: "Tout ce que vous envoyez est confidentiel et n'est partagé avec personne. Je ne revendique aucun droit, aucune part d'édition et aucun crédit sur ce que vous produisez pendant l'accompagnement.",
   },
   {
     q: "Puis-je arrêter quand je veux ?",
-    r: "Oui, au mois, sans justification. Sois lucide cependant : un mois donne un diagnostic, pas une trajectoire. L'écart se mesure sur trois cycles.",
+    r: "Oui, au mois, sans justification. Soyez lucide cependant : un mois donne un diagnostic, pas une trajectoire. L'écart se mesure sur trois cycles.",
   },
   {
     q: "Pourquoi seulement six artistes ?",
@@ -174,19 +176,19 @@ const FAQ = [
 ]
 
 const POUR = [
-  "Tu es artiste indépendant et tu as déjà commencé à sortir.",
-  "Tu veux progresser sérieusement, pas être rassuré.",
-  "Tu acceptes les critiques honnêtes sur ton travail.",
-  "Tu es prêt à exécuter entre deux sessions.",
-  "Tu n'as pas encore les moyens — ni le besoin — d'une équipe complète.",
+  "Vous êtes artiste indépendant et vous avez déjà commencé à sortir.",
+  "Vous voulez progresser sérieusement, pas être rassuré.",
+  "Vous acceptez les critiques honnêtes sur votre travail.",
+  "Vous êtes prêt à exécuter entre deux sessions.",
+  "Vous n'avez pas encore les moyens — ni le besoin — d'une équipe complète.",
 ]
 
 const PAS_POUR = [
-  "Tu cherches une garantie de viralité.",
-  "Tu cherches un contrat de label ou une playlist promise.",
-  "Tu veux quelqu'un qui fasse le travail à ta place.",
-  "Tu veux qu'on te dise que ton projet est déjà parfait.",
-  "Tu cherches des contacts à acheter plutôt qu'une trajectoire à construire.",
+  "Vous cherchez une garantie de viralité.",
+  "Vous cherchez un contrat de label ou une playlist promise.",
+  "Vous voulez quelqu'un qui fasse le travail à votre place.",
+  "Vous voulez qu'on vous dise que votre projet est déjà parfait.",
+  "Vous cherchez des contacts à acheter plutôt qu'une trajectoire à construire.",
 ]
 
 export default function Accueil() {
@@ -194,15 +196,19 @@ export default function Accueil() {
     <>
       {/* ═══════════════ HERO ═══════════════ */}
       <section data-section data-label="MOMENTUM" className="relative flex min-h-[92vh] items-center overflow-hidden pt-[68px]">
-        <div className="pointer-events-none absolute inset-0 opacity-[0.42]">
-          <Trajectoires variante="fond" className="h-full w-full" />
+        <div className="pointer-events-none absolute inset-0">
+          <Ascension className="h-full w-full" />
         </div>
-        {/* Pas de halo radial : un dégradé linéaire vers le bas, uniquement pour
-            que les tracés se fondent dans le pied de section. */}
+        {/* Le texte s'écrit à gauche, la montée explose à droite : ce voile
+            assombrit le tiers gauche pour garantir le contraste du titre sans
+            rien retirer au graphique là où il compte. */}
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0"
-          style={{ background: "linear-gradient(to top, #08090b 6%, transparent 60%)" }}
+          style={{
+            background:
+              "linear-gradient(to right, #08090b 0%, rgba(8,9,11,0.92) 34%, rgba(8,9,11,0.55) 62%, rgba(8,9,11,0.15) 100%)",
+          }}
         />
 
         <div className="px-marge cadre relative z-10 py-20">
@@ -212,17 +218,18 @@ export default function Accueil() {
 
           <Reveal delay={110}>
             <h1 className="titre-1 mt-8 max-w-[16ch] text-balance">
-              Tu ne manques pas de travail.
+              Vous ne manquez pas de travail.
               <br />
-              Tu manques <em className="not-italic text-cobalt-vif">d&rsquo;élan</em>.
+              Vous manquez <em className="not-italic text-cobalt-vif">d&rsquo;élan</em>.
             </h1>
           </Reveal>
 
           <Reveal delay={220}>
-            <p className="chapo mt-9 max-w-[52ch]">
-              Douze titres sortis cette année. Et décembre ressemble à janvier. Ce n&rsquo;est ni ton niveau, ni
-              l&rsquo;algorithme, ni ton budget&nbsp;: c&rsquo;est que tes sorties ne se relient à rien. Voici comment on
-              répare ça.
+            <p className="chapo mt-9 max-w-[54ch]">
+              Douze titres sortis cette année, et décembre ressemble à janvier. Ce n&rsquo;est ni votre niveau, ni
+              l&rsquo;algorithme, ni votre budget&nbsp;: c&rsquo;est que vos sorties ne se relient à rien.{" "}
+              <span className="text-craie">Sept titres isolés font sept fois un.</span> Chaînés, ils font tout autre
+              chose — et c&rsquo;est la seule différence entre les deux courbes derrière ce texte.
             </p>
           </Reveal>
 
@@ -245,19 +252,19 @@ export default function Accueil() {
       {/* ═══════════════ 01 · LA SCÈNE ═══════════════ */}
       <section className="bloc border-t border-filet" data-section data-label="LA SCÈNE">
         <div className="cadre-md">
-          <TeteSection index="01" etiquette="TU CONNAIS CE MOMENT" titre="Deux heures du matin." />
+          <TeteSection index="01" etiquette="VOUS CONNAISSEZ CE MOMENT" titre="Deux heures du matin." />
           <Reveal>
             <div className="space-y-6">
               <p className="corps text-[16.5px]">
-                Tu réécoutes le même mix pour la trentième fois et tu ne sais plus si le morceau est bon ou si tu es
-                simplement fatigué. Tu ouvres Instagram deux minutes. Un type que tu trouves moins bon que toi vient de
-                passer les cent mille écoutes. Tu refermes.
+                Vous réécoutez le même mix pour la trentième fois et vous ne savez plus si le morceau est bon ou si vous êtes
+                simplement fatigué. Vous ouvrez Instagram deux minutes. Un type que vous trouvez moins bon que vous vient de
+                passer les cent mille écoutes. Vous refermez.
               </p>
-              <p className="corps text-[16.5px]">Tu te dis que tu vas travailler plus.</p>
-              <p className="verdict mt-10">Tu travailles déjà plus que lui.</p>
+              <p className="corps text-[16.5px]">Vous vous dites que vous allez travailler plus.</p>
+              <p className="verdict mt-10">Vous travaillez déjà plus que lui.</p>
               <p className="corps mt-10 text-[16.5px]">
                 Le vrai coût de l&rsquo;indépendance, ce n&rsquo;est pas l&rsquo;argent. C&rsquo;est le nombre de
-                décisions qui engagent des mois de ta vie et que tu prends seul, à deux heures du matin, sans personne à
+                décisions qui engagent des mois de votre vie et que vous prenez seul, à deux heures du matin, sans personne à
                 qui les soumettre.
               </p>
             </div>
@@ -266,30 +273,23 @@ export default function Accueil() {
       </section>
 
       {/* ═══════════════ 02 · FAUSSE SOLUTION ═══════════════ */}
-      <section className="bloc border-t border-filet bg-encre-haute" data-section data-label="CE QUE TU AS DÉJÀ ESSAYÉ">
+      <section className="bloc border-t border-filet bg-encre-haute" data-section data-label="CE QUE VOUS AVEZ DÉJÀ ESSAYÉ">
         <div className="cadre">
           <TeteSection
             index="02"
-            etiquette="CE QUE TU AS DÉJÀ ESSAYÉ"
-            titre="Tout le monde te dit la même chose : travaille plus, sors plus, poste plus."
+            etiquette="CE QUE VOUS AVEZ DÉJÀ ESSAYÉ"
+            titre="Tout le monde vous dit la même chose : travaille plus, sors plus, poste plus."
             chapo="C'est le conseil le plus répandu du milieu. C'est aussi celui qui a coûté le plus d'années au plus grand nombre d'artistes talentueux."
           />
           <div className="border-t border-filet">
             {FAUSSES_SOLUTIONS.map((f, i) => (
-              <Reveal key={f.essai} delay={i * 70}>
-                <div className="grid gap-2 border-b border-filet py-6 md:grid-cols-[1fr_1.25fr] md:gap-12">
-                  <p className="text-[1.2rem] font-medium leading-snug text-craie-50 line-through decoration-1 decoration-craie-24">
-                    {f.essai}
-                  </p>
-                  <p className="text-[15px] leading-relaxed text-craie-80">{f.effet}</p>
-                </div>
-              </Reveal>
+              <Rature key={f.essai} index={i} essai={f.essai} effet={f.effet} />
             ))}
           </div>
           <Reveal delay={200}>
             <p className="corps mt-12 max-w-2xl text-[16px]">
               Aucune de ces actions n&rsquo;est stupide. Elles échouent toutes pour la même raison, et cette raison
-              n&rsquo;a rien à voir avec ton niveau d&rsquo;effort.
+              n&rsquo;a rien à voir avec votre niveau d&rsquo;effort.
             </p>
           </Reveal>
         </div>
@@ -303,7 +303,7 @@ export default function Accueil() {
             etiquette="LA VRAIE CAUSE"
             titre={
               <>
-                Tes sorties ne s&rsquo;additionnent pas
+                Vos sorties ne s&rsquo;additionnent pas
                 <br className="hidden md:block" /> parce qu&rsquo;elles ne{" "}
                 <em className="not-italic text-cobalt-vif">se racontent</em> pas.
               </>
@@ -313,7 +313,7 @@ export default function Accueil() {
             <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
               <div className="space-y-6">
                 <p className="corps text-[16px]">
-                  Un auditeur qui découvre ton titre aujourd&rsquo;hui n&rsquo;a aucune raison de chercher le suivant.
+                  Un auditeur qui découvre votre titre aujourd&rsquo;hui n&rsquo;a aucune raison de chercher le suivant.
                   Rien ne le relie au précédent&nbsp;: ni le monde, ni l&rsquo;image, ni la promesse. Chaque sortie
                   repart donc de zéro, avec la même audience à reconquérir.
                 </p>
@@ -323,7 +323,7 @@ export default function Accueil() {
                   Même travail, même talent, même nombre d&rsquo;heures.
                 </p>
                 <p className="verdict mt-9">
-                  Ce qui te manque n&rsquo;est pas un morceau de plus. C&rsquo;est ce qui relie ceux que tu as déjà.
+                  Ce qui vous manque n&rsquo;est pas un morceau de plus. C&rsquo;est ce qui relie ceux que vous avez déjà.
                 </p>
               </div>
               <figure className="carte p-4! md:p-8!">
@@ -350,8 +350,8 @@ export default function Accueil() {
           <TeteSection
             index="04"
             etiquette="AVANT D'ALLER PLUS LOIN"
-            titre="Où en es-tu vraiment ?"
-            chapo="Cinq questions, deux minutes, aucune adresse e-mail. Aucune ne porte sur ton nombre de sorties : sortir beaucoup n'est pas un signe de santé, c'est souvent le symptôme."
+            titre="Où en es-vous vraiment ?"
+            chapo="Cinq questions, deux minutes, aucune adresse e-mail. Aucune ne porte sur votre nombre de sorties : sortir beaucoup n'est pas un signe de santé, c'est souvent le symptôme."
           />
           <Reveal>
             <Diagnostic />
@@ -382,7 +382,7 @@ export default function Accueil() {
                   d&rsquo;affilée alors qu&rsquo;on n&rsquo;aurait jamais regardé huit courts-métrages sans lien.
                 </p>
                 <p className="corps text-[16px]">
-                  Concrètement&nbsp;: on définit d&rsquo;abord ce que ton projet promet — en une phrase que tu peux dire
+                  Concrètement&nbsp;: on définit d&rsquo;abord ce que votre projet promet — en une phrase que vous pouvez dire
                   à voix haute sans avoir honte. Puis on choisit les titres qui tiennent cette promesse et
                   l&rsquo;ordre dans lequel ils la construisent. Puis, chaque mois, on exécute un maillon et on corrige
                   le suivant avec ce qu&rsquo;on vient d&rsquo;apprendre.
@@ -439,16 +439,16 @@ export default function Accueil() {
       </section>
 
       {/* ═══════════════ 07 · CE QUE TU OBTIENS ═══════════════ */}
-      <section className="bloc border-t border-filet" data-section data-label="CE QUE TU OBTIENS">
+      <section className="bloc border-t border-filet" data-section data-label="CE QUE VOUS OBTENEZ">
         <div className="cadre">
           <TeteSection
             index="07"
-            etiquette="CE QUE TU OBTIENS"
-            titre="Quatre choses que tu ne peux pas te donner à toi-même."
-            chapo="Aucune ne remplace ton travail. Toutes déterminent ce que ton travail produit."
+            etiquette="CE QUE VOUS OBTENEZ"
+            titre="Quatre choses que vous ne pouvez pas vous donner à vous-même."
+            chapo="Aucune ne remplace votre travail. Toutes déterminent ce que votre travail produit."
           />
           <div className="grid gap-5 md:grid-cols-2">
-            {CE_QUE_TU_OBTIENS.map((a, i) => (
+            {CE_QUE_VOUS_OBTENEZ.map((a, i) => (
               <Reveal key={a.n} delay={i * 90} className="h-full">
                 <article className="carte flex h-full flex-col">
                   <span className="index">{a.n}</span>
@@ -467,9 +467,9 @@ export default function Accueil() {
         <div className="cadre">
           <TeteSection
             index="08"
-            etiquette="POURQUOI M'ÉCOUTER MOI"
-            titre="Un artiste comprend ton art. Un stratège comprend ton marché."
-            chapo="Il t'en faut un qui fasse les deux. C'est la seule raison valable de me confier un regard sur ta carrière, et c'est la seule que je revendique."
+            etiquette="POURQUOI M'ÉCOUTER, MOI"
+            titre="Un artiste comprend votre art. Un stratège comprend votre marché."
+            chapo="Il vous en faut un qui fasse les deux. C'est la seule raison valable de me confier un regard sur votre carrière, et c'est la seule que je revendique."
           />
 
           <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr]">
@@ -488,7 +488,7 @@ export default function Accueil() {
                   transmédia, Sinbury.
                 </p>
                 <p className="corps text-[15.5px]">
-                  Autrement dit&nbsp;: je connais ton problème de l&rsquo;intérieur parce que je le vis, et sa solution
+                  Autrement dit&nbsp;: je connais votre problème de l&rsquo;intérieur parce que je le vis, et sa solution
                   de l&rsquo;extérieur parce que c&rsquo;est mon métier.
                 </p>
                 <div className="mt-9 border-t border-filet">
@@ -512,8 +512,8 @@ export default function Accueil() {
                 <p className="etiquette mt-9">CE QUE JE PEUX TE MONTRER</p>
                 <p className="corps mt-4 text-[14.5px]">
                   Mon propre travail — un projet musical qui a passé les frontières sans label, un studio de marque, deux
-                  ouvrages. Et, si tu candidates, un retour écrit sur l&rsquo;un de tes morceaux avant que tu paies quoi
-                  que ce soit. Tu jugeras la qualité du conseil sur pièce.
+                  ouvrages. Et, si vous candidatez, un retour écrit sur l&rsquo;un de vos morceaux avant que vous payez quoi
+                  que ce soit. Vous jugerez la qualité du conseil sur pièce.
                 </p>
                 <p className="verdict mt-9" style={{ fontSize: "1.15rem" }}>
                   Très peu de conseillers artistiques ont déjà eu peur d&rsquo;appuyer sur « publier ».
@@ -530,7 +530,7 @@ export default function Accueil() {
           <TeteSection
             index="09"
             etiquette="L'OFFRE"
-            titre="Un manager coûte 2 000 € par mois. Et il ne prend pas les artistes à ton stade."
+            titre="Un manager coûte 2 000 € par mois. Et il ne prend pas les artistes à votre stade."
             chapo="Entre « je fais tout tout seul » et « j'ai une équipe complète », il existe un niveau intermédiaire. C'est celui-là."
           />
           <OffreUnique />
@@ -560,7 +560,7 @@ export default function Accueil() {
         <div className="cadre-md">
           <TeteSection
             index="10"
-            etiquette="CE QUE TU ES EN TRAIN DE TE DIRE"
+            etiquette="CE QUE VOUS ÊTES EN TRAIN DE VOUS DIRE"
             titre="Les cinq objections, dans l'ordre où elles arrivent."
           />
           <div className="space-y-11">
@@ -582,11 +582,11 @@ export default function Accueil() {
           <TeteSection
             index="11"
             etiquette="POUR QUI"
-            titre="Tu n'as pas besoin d'être connu. Tu as besoin de vouloir construire."
+            titre="Vous n'avez pas besoin d'être connu. Vous avez besoin de vouloir construire."
           />
           <div className="grid gap-10 md:grid-cols-2 md:gap-16">
             <Reveal>
-              <p className="index mb-7">TU ES AU BON ENDROIT SI</p>
+              <p className="index mb-7">VOUS ÊTES AU BON ENDROIT SI</p>
               <ul className="space-y-5">
                 {POUR.map((x) => (
                   <li key={x} className="flex gap-4 text-[15px] leading-relaxed text-craie-80">
@@ -597,7 +597,7 @@ export default function Accueil() {
               </ul>
             </Reveal>
             <Reveal delay={120}>
-              <p className="etiquette mb-7">CE N&rsquo;EST PAS POUR TOI SI</p>
+              <p className="etiquette mb-7">CE N&rsquo;EST PAS POUR VOUS SI</p>
               <ul className="space-y-5">
                 {PAS_POUR.map((x) => (
                   <li key={x} className="flex gap-4 text-[15px] leading-relaxed text-craie-38">
@@ -610,9 +610,9 @@ export default function Accueil() {
           </div>
           <Reveal delay={200}>
             <p className="corps mt-14 max-w-2xl">
-              Je ne peux pas garantir ton succès. Personne ne le peut, et quiconque te dit le contraire te vend quelque
-              chose. Ce que je peux faire&nbsp;: t&rsquo;aider à prendre de meilleures décisions, à mieux présenter ton
-              travail, et à augmenter la qualité de ta trajectoire.
+              Je ne peux pas garantir votre succès. Personne ne le peut, et quiconque vous dit le contraire vous vend quelque
+              chose. Ce que je peux faire&nbsp;: t&rsquo;aider à prendre de meilleures décisions, à mieux présenter votre
+              travail, et à augmenter la qualité de votre trajectoire.
             </p>
           </Reveal>
         </div>
@@ -635,7 +635,7 @@ export default function Accueil() {
             <Reveal>
               <p className="index">13 — CANDIDATURE</p>
               <h2 className="titre-2 mt-6 text-balance">
-                Envoie-moi un morceau. Je te dis ce que j&rsquo;en pense.
+                Envoyez-moi un morceau. Je vous dis ce que j&rsquo;en pense.
               </h2>
               <p className="corps mt-7 max-w-md">
                 Gratuitement, avant toute question d&rsquo;argent. C&rsquo;est la seule façon honnête de juger un
@@ -643,7 +643,7 @@ export default function Accueil() {
               </p>
               <p className="corps mt-5 max-w-md">
                 Je n&rsquo;accompagne que {CAPACITE} artistes à la fois. Ce formulaire n&rsquo;est pas une formalité —
-                c&rsquo;est déjà le début du diagnostic, et la qualité de tes réponses détermine celle de la mienne.
+                c&rsquo;est déjà le début du diagnostic, et la qualité de vos réponses détermine celle de la mienne.
               </p>
               <div className="mt-8">
                 <Places />
@@ -653,9 +653,9 @@ export default function Accueil() {
             <Reveal delay={120}>
               <div className="mt-12 border-t border-filet">
                 {[
-                  ["01", "Tu candidates", "Quelques questions honnêtes. Compte huit minutes si tu réponds sérieusement."],
-                  ["02", "Tu reçois un retour écrit", "J'écoute le morceau que tu m'envoies, en entier, et je t'écris ce que j'en pense. Gratuitement, que la suite se fasse ou non."],
-                  ["03", "On décide", "Si le profil correspond, un appel pour poser ton arc et le cap du premier mois. Sinon, je te dis pourquoi."],
+                  ["01", "Vous candidatez", "Quelques questions honnêtes. Comptez huit minutes si vous répondez sérieusement."],
+                  ["02", "Vous recevez un retour écrit", "J'écoute le morceau que vous m'envoyez, en entier, et je vous écris ce que j'en pense. Gratuitement, que la suite se fasse ou non."],
+                  ["03", "On décide", "Si le profil correspond, un appel pour poser votre arc et le cap du premier mois. Sinon, je vous dis pourquoi."],
                 ].map(([n, titre, texte]) => (
                   <div key={n} className="grid grid-cols-[42px_1fr] gap-4 border-b border-filet py-6">
                     <span className="font-mono text-[11px] tracking-[0.18em] text-cobalt-vif">{n}</span>
@@ -692,7 +692,7 @@ export default function Accueil() {
       <section className="bloc border-t border-filet">
         <div className="cadre-md text-center">
           <Reveal>
-            <h2 className="titre-2 text-balance">Dans un an, tu auras sorti une dizaine de titres de plus.</h2>
+            <h2 className="titre-2 text-balance">Dans un an, vous aurez sorti une dizaine de titres de plus.</h2>
             <p className="chapo mx-auto mt-7 max-w-xl text-balance">
               La seule question, c&rsquo;est de savoir s&rsquo;ils formeront un catalogue ou une trajectoire.
             </p>
@@ -702,7 +702,7 @@ export default function Accueil() {
               </a>
             </div>
             <p className="etiquette mt-8">
-              Réponse sous 72 h · Sans engagement · Premier cycle remboursé si tu n&rsquo;en tires rien
+              Réponse sous 72 h · Sans engagement · Premier cycle remboursé si vous n&rsquo;en tires rien
             </p>
           </Reveal>
         </div>

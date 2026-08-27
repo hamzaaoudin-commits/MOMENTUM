@@ -32,9 +32,23 @@ numérotées qui se lisent dans l'ordre. Les anciennes routes (`/offres`,
 correspondantes — voir `next.config.mjs`.
 
 Ancres disponibles : `#diagnostic`, `#methode`, `#qui`, `#offres`, `#candidature`.
+L'en-tête ne contient plus de menu — tout est sur la page, un seul bouton mène
+au formulaire.
+
+Le site vouvoie. Si vous ajoutez du texte, gardez le « vous » de politesse :
+les accords restent au singulier (« vous êtes seul », jamais « seuls »).
 
 ### Interactions
 
+- **Le hero** (`components/ascension.tsx`) — cinquante-six barres qui montent
+  selon une courbe composée, levées une par une de gauche à droite, avec le
+  tracé des sommets par-dessus. La ligne plate en pointillé est la référence :
+  sans elle, une montée n'est qu'une forme. Le facteur `4.1` dans `hauteur()`
+  règle la brutalité de l'accélération.
+- **La rature** (`components/rature.tsx`) — dans « ce que vous avez déjà
+  essayé », le trait se dessine sous les yeux du lecteur, puis la conséquence
+  apparaît. Rature d'abord, verdict ensuite : l'inverse donnerait la réponse
+  avant la question.
 - **Le diagnostic** (`components/diagnostic.tsx`) — cinq questions, un score sur
   quinze, trois verdicts possibles. Le résultat part avec la candidature dans le
   champ caché `diagnostic` : tu sais dans quel état est le candidat avant même de

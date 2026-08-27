@@ -13,11 +13,66 @@ import { OFFRES } from "@/lib/config"
  * de trois mois, et le filtre à l'entrée protège autant l'artiste que moi.
  */
 
+/**
+ * Choix visible.
+ *
+ * Un <select> natif est gris, minuscule, ouvre un menu système que je ne
+ * contrôle pas, et rend la sélection invisible tant qu'on ne le déplie pas.
+ * Sur un formulaire de candidature — le dernier obstacle avant l'envoi —
+ * chacune de ces frictions coûte des candidatures.
+ *
+ * Ici : des blocs pleine largeur, cliquables, dont l'état sélectionné est
+ * blanc sur noir. Aucun doute possible sur ce qui est coché, et la même
+ * grammaire que les réponses du diagnostic plus haut.
+ */
+function Choix({
+  nom,
+  options,
+  valeur,
+  onChange,
+  colonnes = 1,
+}: {
+  nom: string
+  options: { valeur: string; label: string }[]
+  valeur: string
+  onChange: (v: string) => void
+  colonnes?: 1 | 2
+}) {
+  return (
+    <div role="radiogroup" aria-label={nom} className={`grid gap-2 ${colonnes === 2 ? "sm:grid-cols-2" : ""}`}>
+      <input type="hidden" name={nom} value={valeur} />
+      {options.map((o) => {
+        const actif = valeur === o.valeur
+        return (
+          <button
+            key={o.valeur}
+            type="button"
+            role="radio"
+            aria-checked={actif}
+            onClick={() => onChange(o.valeur)}
+            className={`flex items-center gap-3.5 border px-4 py-3.5 text-left text-[14.5px] leading-snug transition-colors duration-200 ${
+              actif
+                ? "border-craie bg-craie text-encre"
+                : "border-filet-fort text-craie-65 hover:border-craie hover:text-craie"
+            }`}
+          >
+            <span
+              aria-hidden
+              className={`h-2.5 w-2.5 shrink-0 border ${actif ? "border-encre bg-encre" : "border-craie-38"}`}
+            />
+            {o.label}
+          </button>
+        )
+      })}
+    </div>
+  )
+}
+
 const NIVEAUX = [
-  "Je commence à peine à sortir des morceaux",
-  "Je sors régulièrement, audience encore petite",
-  "J'ai une audience qui commence à répondre",
-  "Je vis en partie de ma musique",
+  { valeur: "debut", label: "Je commence à peine à sortir des morceaux" },
+  { valeur: "regulier", label: "Je sors régulièrement, audience encore petite" },
+  { valeur: "audience", label: "J'ai une audience qui commence à répondre" },
+  { valeur: "pro", label: "Je vis en partie de ma musique" },
 ]
 
 export function Formulaire() {
@@ -26,6 +81,7 @@ export function Formulaire() {
   const diag = params.get("diag") ?? ""
 
   const [offre, setOffre] = useState(offreParDefaut)
+  const [niveau, setNiveau] = useState("")
   const [etat, setEtat] = useState<"repos" | "envoi" | "ok" | "erreur">("repos")
 
   // Sur une page unique, le lecteur choisit son niveau plus haut puis descend
@@ -38,6 +94,12 @@ export function Formulaire() {
     if (etat === "envoi") return
     setEtat("envoi")
     setMessage("")
+
+    if (!niveau) {
+      setEtat("erreur")
+      setMessage("Indiquez où vous en êtes : c'est ce qui détermine le niveau d'accompagnement adapté.")
+      return
+    }
 
     const data = Object.fromEntries(new FormData(e.currentTarget).entries())
 
@@ -60,7 +122,7 @@ export function Formulaire() {
       setEtat("ok")
     } catch {
       setEtat("erreur")
-      setMessage("L'envoi n'a pas abouti. Vérifie ta connexion, ou écris-moi directement par e-mail.")
+      setMessage("L'envoi n'a pas abouti. Vérifie votre connexion, ou écris-moi directement par e-mail.")
     }
   }
 
@@ -68,11 +130,11 @@ export function Formulaire() {
     return (
       <div className="carte-active">
         <p className="index">CANDIDATURE REÇUE</p>
-        <h2 className="titre-3 mt-4">Tu reçois ton retour écrit sous 72 heures.</h2>
+        <h2 className="titre-3 mt-4">Vous recevez votre retour écrit sous 72 heures.</h2>
         <p className="corps mt-5 max-w-lg">
-          J'écoute ton morceau en entier, plusieurs fois, et je t'écris ce que j'en pense — que la suite se fasse ou
-          non. Si ton profil correspond, on cale ensuite un appel pour poser ton arc. Si ce n'est pas le bon moment, je
-          te le dis franchement, et je te dis pourquoi.
+          J'écoute votre morceau en entier, plusieurs fois, et je vous écris ce que j'en pense — que la suite se fasse ou
+          non. Si votre profil correspond, on cale ensuite un appel pour poser votre arc. Si ce n'est pas le bon moment, je
+          vous le dis franchement, et je vous dis pourquoi.
         </p>
       </div>
     )
@@ -95,64 +157,45 @@ export function Formulaire() {
           <label className="champ-label" htmlFor="nom">
             Nom d'artiste
           </label>
-          <input id="nom" name="nom" required maxLength={80} className="champ" placeholder="Sous quel nom tu sors" />
+          <input id="nom" name="nom" required maxLength={80} className="champ" placeholder="Sous quel nom vous sortez" />
         </div>
         <div>
           <label className="champ-label" htmlFor="email">
             E-mail
           </label>
-          <input id="email" name="email" type="email" required maxLength={120} className="champ" placeholder="toi@exemple.com" />
+          <input id="email" name="email" type="email" required maxLength={120} className="champ" placeholder="vous@exemple.com" />
         </div>
       </div>
 
       <div>
         <label className="champ-label" htmlFor="lien">
-          Le morceau sur lequel tu veux mon retour (Spotify, SoundCloud, YouTube, Drive…)
+          Le morceau sur lequel vous voulez mon retour (Spotify, SoundCloud, YouTube, Drive…)
         </label>
         <input id="lien" name="lien" required maxLength={300} className="champ" placeholder="https://" />
       </div>
 
-      <div className="grid gap-6 sm:grid-cols-2">
-        <div>
-          <label className="champ-label" htmlFor="niveau">
-            Où tu en es
-          </label>
-          <select id="niveau" name="niveau" required className="champ" defaultValue="">
-            <option value="" disabled>
-              Choisir…
-            </option>
-            {NIVEAUX.map((n) => (
-              <option key={n} value={n}>
-                {n}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div>
-          <label className="champ-label" htmlFor="offre">
-            Formule envisagée
-          </label>
-          <select
-            id="offre"
-            name="offre"
-            required
-            className="champ"
-            value={offre}
-            onChange={(e) => setOffre(e.target.value)}
-          >
-            {OFFRES.map((o) => (
-              <option key={o.id} value={o.id}>
-                {o.nom} — {o.prix} €/mois
-              </option>
-            ))}
-            <option value="indecis">Je ne sais pas encore</option>
-          </select>
-        </div>
+      <div>
+        <p className="champ-label">Où vous en êtes</p>
+        <Choix nom="niveau" options={NIVEAUX} valeur={niveau} onChange={setNiveau} />
+      </div>
+
+      <div>
+        <p className="champ-label">Formule envisagée</p>
+        <Choix
+          nom="offre"
+          colonnes={2}
+          valeur={offre}
+          onChange={setOffre}
+          options={[
+            ...OFFRES.map((o) => ({ valeur: o.id, label: `${o.nom} — ${o.prix} €/mois` })),
+            { valeur: "indecis", label: "Je ne sais pas encore" },
+          ]}
+        />
       </div>
 
       <div>
         <label className="champ-label" htmlFor="projet">
-          Ton projet en quelques lignes
+          Votre projet en quelques lignes
         </label>
         <textarea
           id="projet"
@@ -161,13 +204,13 @@ export function Formulaire() {
           rows={4}
           maxLength={1500}
           className="champ resize-y"
-          placeholder="Ce que tu fais, depuis quand, ce que tu veux construire."
+          placeholder="Ce que vous faites, depuis quand, ce que vous voulez construire."
         />
       </div>
 
       <div>
         <label className="champ-label" htmlFor="blocage">
-          Qu'est-ce qui te bloque en ce moment ?
+          Qu'est-ce qui vous bloque en ce moment ?
         </label>
         <textarea
           id="blocage"
@@ -176,7 +219,7 @@ export function Formulaire() {
           rows={4}
           maxLength={1500}
           className="champ resize-y"
-          placeholder="Sois précis. C'est le champ que je lis en premier."
+          placeholder="Soyez précis. C'est le champ que je lis en premier."
         />
       </div>
 

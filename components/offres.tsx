@@ -60,7 +60,7 @@ export function Comparatif() {
         <table className="w-full min-w-[720px] border-collapse text-left">
           <thead>
             <tr className="border-b border-filet-fort">
-              <th className="etiquette px-5 py-4 font-normal">Ce que tu obtiens</th>
+              <th className="etiquette px-5 py-4 font-normal">Ce que vous obtienez</th>
               {OFFRES.map((o) => (
                 <th
                   key={o.id}

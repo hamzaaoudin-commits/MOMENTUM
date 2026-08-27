@@ -5,7 +5,7 @@ export function Footer() {
   return (
     <footer className="border-t border-filet bg-encre-basse">
       <div className="px-marge cadre py-16 md:py-20">
-        <div className="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr]">
+        <div className="grid gap-12 md:grid-cols-[1.6fr_1fr]">
           <div>
             <p className="text-[15px] font-extrabold uppercase tracking-[0.26em] text-craie">MOMENTUM</p>
             <p className="corps mt-4 max-w-xs">
@@ -13,25 +13,6 @@ export function Footer() {
               travaille un arc. {CAPACITE} artistes accompagnés à la fois, depuis {CONTACT.ville}.
             </p>
             <p className="etiquette mt-6">Aucun pourcentage. Aucune promesse de viralité.</p>
-          </div>
-
-          <div>
-            <p className="etiquette mb-4">La page</p>
-            <ul className="space-y-2.5">
-              {[
-                ["#diagnostic", "Diagnostic gratuit"],
-                ["#methode", "La méthode"],
-                ["#offres", "L'offre"],
-                ["#qui", "Qui te parle"],
-                ["#candidature", "Candidater"],
-              ].map(([href, label]) => (
-                <li key={href}>
-                  <a href={href} className="text-[14px] text-craie-50 transition-colors hover:text-craie">
-                    {label}
-                  </a>
-                </li>
-              ))}
-            </ul>
           </div>
 
           <div>

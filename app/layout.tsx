@@ -33,11 +33,11 @@ export const metadata: Metadata = {
     template: "%s · MOMENTUM",
   },
   description:
-    "Tes sorties ne s'additionnent pas parce qu'elles ne se racontent pas. MOMENTUM t'aide à passer de titres isolés à un arc qui se construit : un conseiller stratégique dans ton coin, chaque mois. 299 €/mois, sans engagement, sans pourcentage.",
+    "Vos sorties ne s'additionnent pas parce qu'elles ne se racontent pas. MOMENTUM vous aide à passer de titres isolés à un arc qui se construit : un conseiller stratégique dans votre coin, chaque mois. 299 €/mois, sans engagement, sans pourcentage.",
   openGraph: {
     title: "MOMENTUM — Conseil stratégique pour artistes indépendants",
     description:
-      "Tu ne manques pas de travail. Tu manques d'élan. Un conseiller stratégique dans ton coin, chaque mois.",
+      "Vous ne manquez pas de travail. Vous manquez d'élan. Un conseiller stratégique dans votre coin, chaque mois.",
     locale: "fr_FR",
     type: "website",
   },

@@ -29,7 +29,7 @@ type Question = { id: string; texte: string; options: { label: string; points: n
 const QUESTIONS: Question[] = [
   {
     id: "phrase",
-    texte: "Peux-tu décrire ton projet en une phrase que tu assumes à voix haute ?",
+    texte: "Peux-vous décrire votre projet en une phrase que vous assumez à voix haute ?",
     options: [
       { label: "Oui, elle est écrite et je la connais par cœur", points: 3 },
       { label: "À peu près, mais elle change selon les jours", points: 1 },
@@ -38,7 +38,7 @@ const QUESTIONS: Question[] = [
   },
   {
     id: "suivant",
-    texte: "Quand tu sors un titre, tu sais déjà quel est le suivant ?",
+    texte: "Quand vous sortez un titre, vous savez déjà quel est le suivant ?",
     options: [
       { label: "Oui, les trois prochains, et pourquoi dans cet ordre", points: 3 },
       { label: "Le suivant seulement", points: 2 },
@@ -47,7 +47,7 @@ const QUESTIONS: Question[] = [
   },
   {
     id: "retour",
-    texte: "Après une sortie, récupères-tu des auditeurs qui reviennent pour la suivante ?",
+    texte: "Après une sortie, récupères-vous dez auditeurs qui reviennent pour la suivante ?",
     options: [
       { label: "Oui, une base qui répond à chaque fois", points: 3 },
       { label: "Quelques-uns, difficile à dire", points: 1 },
@@ -56,7 +56,7 @@ const QUESTIONS: Question[] = [
   },
   {
     id: "progression",
-    texte: "Ton dernier titre a-t-il fait mieux que le précédent ?",
+    texte: "Votre dernier titre a-t-il fait mieux que le précédent ?",
     options: [
       { label: "Oui, et je sais pourquoi", points: 3 },
       { label: "Oui, mais je ne sais pas pourquoi", points: 2 },
@@ -65,7 +65,7 @@ const QUESTIONS: Question[] = [
   },
   {
     id: "regard",
-    texte: "Qui te dit honnêtement ce qui ne va pas dans ton travail ?",
+    texte: "Qui vous dit honnêtement ce qui ne va pas dans votre travail ?",
     options: [
       { label: "Quelqu'un du métier, régulièrement", points: 3 },
       { label: "Des proches, quand j'insiste", points: 1 },
@@ -78,26 +78,26 @@ const RESULTATS = [
   {
     max: 5,
     code: "agitation",
-    titre: "Tu es en agitation",
+    titre: "Vous êtes en agitation",
     texte:
-      "Tu travailles, mais rien ne s'accumule. Aucune de tes sorties ne prépare la suivante, personne ne te renvoie une lecture honnête, et tu ne peux pas dire en une phrase ce que ton projet promet. Ce n'est pas un problème de talent ni d'effort : c'est un problème de liaison. Concrètement, à ce stade, une année de plus au même rythme te laissera exactement où tu es aujourd'hui — avec douze titres de plus dans le catalogue.",
+      "Vous travaillez, mais rien ne s'accumule. Aucune de vos sorties ne prépare la suivante, personne ne vous renvoie une lecture honnête, et vous ne pouvez pas dire en une phrase ce que votre projet promet. Ce n'est pas un problème de talent ni d'effort : c'est un problème de liaison. Concrètement, à ce stade, une année de plus au même rythme vous laissera exactement où vous êtes aujourd'hui — avec douze titres de plus dans le catalogue.",
     action: "C'est précisément le cas où le premier cycle change le plus de choses.",
   },
   {
     max: 10,
     code: "catalogue",
-    titre: "Tu as un catalogue, pas un arc",
+    titre: "Vous avez un catalogue, pas un arc",
     texte:
-      "Certaines choses tiennent déjà : tu as des intuitions justes, parfois une direction. Mais elle n'est pas explicite, donc elle n'est pas tenue, donc elle ne compose pas. Tes sorties se ressemblent sans se répondre. C'est le stade le plus frustrant, parce que le travail est là et que le résultat reste plat — et c'est aussi celui où quelques décisions bien placées produisent l'écart le plus visible.",
-    action: "Il te manque une direction écrite et quelqu'un pour te la faire tenir.",
+      "Certaines choses tiennent déjà : vous avez des intuitions justes, parfois une direction. Mais elle n'est pas explicite, donc elle n'est pas tenue, donc elle ne compose pas. Vos sorties se ressemblent sans se répondre. C'est le stade le plus frustrant, parce que le travail est là et que le résultat reste plat — et c'est aussi celui où quelques décisions bien placées produisent l'écart le plus visible.",
+    action: "Il vous manque une direction écrite et quelqu'un pour vous la faire tenir.",
   },
   {
     max: 15,
     code: "arc",
-    titre: "Ton arc a commencé",
+    titre: "Votre arc a commencé",
     texte:
-      "Tu as déjà l'essentiel : une direction que tu sais formuler, une idée de la suite, un début d'audience qui revient. Tu n'as pas besoin qu'on répare quoi que ce soit. Ce qui te ferait gagner du temps maintenant, c'est un regard extérieur régulier sur les arbitrages — quel titre en single, quelle opportunité vaut ton temps, quoi abandonner — pour ne pas casser toi-même ce que tu viens de construire.",
-    action: "Sois honnête : ce diagnostic vaut ce que valent tes réponses.",
+      "Vous avez déjà l'essentiel : une direction que vous savez formuler, une idée de la suite, un début d'audience qui revient. Vous n'avez pas besoin qu'on répare quoi que ce soit. Ce qui vous ferait gagner du temps maintenant, c'est un regard extérieur régulier sur les arbitrages — quel titre en single, quelle opportunité vaut votre temps, quoi abandonner — pour ne pas casser vous-même ce que vous venez de construire.",
+    action: "Soyez honnête : ce diagnostic vaut ce que valent vos réponses.",
   },
 ]
 
@@ -149,7 +149,7 @@ export function Diagnostic() {
           </button>
         </div>
         <p className="etiquette mt-6 leading-relaxed">
-          Ce diagnostic est une version réduite du premier temps du cycle. Le vrai porte sur ta musique, pas sur cinq
+          Ce diagnostic est une version réduite du premier temps du cycle. Le vrai porte sur votre musique, pas sur cinq
           cases.
         </p>
       </div>
