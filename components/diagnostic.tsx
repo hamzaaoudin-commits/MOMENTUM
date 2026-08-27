@@ -1,6 +1,8 @@
 "use client"
 
 import { useState } from "react"
+import type { Copy } from "@/lib/copy"
+import type { Lang } from "@/lib/i18n"
 
 /**
  * LE DIAGNOSTIC.
@@ -24,84 +26,10 @@ import { useState } from "react"
  * uniquement sur la liaison, la direction et le retour extérieur.
  */
 
-type Question = { id: string; texte: string; options: { label: string; points: number }[] }
 
-const QUESTIONS: Question[] = [
-  {
-    id: "phrase",
-    texte: "Peux-vous décrire votre projet en une phrase que vous assumez à voix haute ?",
-    options: [
-      { label: "Oui, elle est écrite et je la connais par cœur", points: 3 },
-      { label: "À peu près, mais elle change selon les jours", points: 1 },
-      { label: "Non, je n'ai jamais réussi à la formuler", points: 0 },
-    ],
-  },
-  {
-    id: "suivant",
-    texte: "Quand vous sortez un titre, vous savez déjà quel est le suivant ?",
-    options: [
-      { label: "Oui, les trois prochains, et pourquoi dans cet ordre", points: 3 },
-      { label: "Le suivant seulement", points: 2 },
-      { label: "Non, je décide au moment venu", points: 0 },
-    ],
-  },
-  {
-    id: "retour",
-    texte: "Après une sortie, récupères-vous dez auditeurs qui reviennent pour la suivante ?",
-    options: [
-      { label: "Oui, une base qui répond à chaque fois", points: 3 },
-      { label: "Quelques-uns, difficile à dire", points: 1 },
-      { label: "Non, chaque sortie repart de zéro", points: 0 },
-    ],
-  },
-  {
-    id: "progression",
-    texte: "Votre dernier titre a-t-il fait mieux que le précédent ?",
-    options: [
-      { label: "Oui, et je sais pourquoi", points: 3 },
-      { label: "Oui, mais je ne sais pas pourquoi", points: 2 },
-      { label: "Non, ou aucune idée", points: 0 },
-    ],
-  },
-  {
-    id: "regard",
-    texte: "Qui vous dit honnêtement ce qui ne va pas dans votre travail ?",
-    options: [
-      { label: "Quelqu'un du métier, régulièrement", points: 3 },
-      { label: "Des proches, quand j'insiste", points: 1 },
-      { label: "Personne", points: 0 },
-    ],
-  },
-]
-
-const RESULTATS = [
-  {
-    max: 5,
-    code: "agitation",
-    titre: "Vous êtes en agitation",
-    texte:
-      "Vous travaillez, mais rien ne s'accumule. Aucune de vos sorties ne prépare la suivante, personne ne vous renvoie une lecture honnête, et vous ne pouvez pas dire en une phrase ce que votre projet promet. Ce n'est pas un problème de talent ni d'effort : c'est un problème de liaison. Concrètement, à ce stade, une année de plus au même rythme vous laissera exactement où vous êtes aujourd'hui — avec douze titres de plus dans le catalogue.",
-    action: "C'est précisément le cas où le premier cycle change le plus de choses.",
-  },
-  {
-    max: 10,
-    code: "catalogue",
-    titre: "Vous avez un catalogue, pas un arc",
-    texte:
-      "Certaines choses tiennent déjà : vous avez des intuitions justes, parfois une direction. Mais elle n'est pas explicite, donc elle n'est pas tenue, donc elle ne compose pas. Vos sorties se ressemblent sans se répondre. C'est le stade le plus frustrant, parce que le travail est là et que le résultat reste plat — et c'est aussi celui où quelques décisions bien placées produisent l'écart le plus visible.",
-    action: "Il vous manque une direction écrite et quelqu'un pour vous la faire tenir.",
-  },
-  {
-    max: 15,
-    code: "arc",
-    titre: "Votre arc a commencé",
-    texte:
-      "Vous avez déjà l'essentiel : une direction que vous savez formuler, une idée de la suite, un début d'audience qui revient. Vous n'avez pas besoin qu'on répare quoi que ce soit. Ce qui vous ferait gagner du temps maintenant, c'est un regard extérieur régulier sur les arbitrages — quel titre en single, quelle opportunité vaut votre temps, quoi abandonner — pour ne pas casser vous-même ce que vous venez de construire.",
-    action: "Soyez honnête : ce diagnostic vaut ce que valent vos réponses.",
-  },
-]
-
-export function Diagnostic() {
+export function Diagnostic({ lang, t }: { lang: Lang; t: Copy }) {
+  const QUESTIONS = t.diagnostic.questions
+  const RESULTATS = t.diagnostic.resultats
   const [etape, setEtape] = useState(0)
   const [points, setPoints] = useState<number[]>([])
 
@@ -123,7 +51,7 @@ export function Diagnostic() {
     return (
       <div className="carte-active">
         <div className="flex flex-wrap items-baseline justify-between gap-4">
-          <p className="index">RÉSULTAT</p>
+          <p className="index">{t.diagnostic.resultat}</p>
           <p className="font-mono text-[11px] tracking-[0.2em] text-craie-38">
             {total} / {QUESTIONS.length * 3}
           </p>
@@ -141,16 +69,15 @@ export function Diagnostic() {
         <p className="verdict mt-8">{res.action}</p>
 
         <div className="mt-9 flex flex-wrap items-center gap-3.5">
-          <a href={`/?diag=${res.code}#candidature`} className="bouton bouton-plein">
-            Recevoir un vrai retour sur un morceau ↓
+          <a href={`/${lang}?diag=${res.code}#candidature`} className="bouton bouton-plein">
+            {t.diagnostic.ctaResultat}
           </a>
           <button onClick={recommencer} className="bouton bouton-vide">
-            Recommencer
+            {t.diagnostic.recommencer}
           </button>
         </div>
         <p className="etiquette mt-6 leading-relaxed">
-          Ce diagnostic est une version réduite du premier temps du cycle. Le vrai porte sur votre musique, pas sur cinq
-          cases.
+          {t.diagnostic.note}
         </p>
       </div>
     )
@@ -161,7 +88,7 @@ export function Diagnostic() {
   return (
     <div className="carte-active">
       <div className="flex flex-wrap items-baseline justify-between gap-4">
-        <p className="index">DIAGNOSTIC — 2 MINUTES</p>
+        <p className="index">{t.diagnostic.enTete}</p>
         <p className="font-mono text-[11px] tracking-[0.2em] text-craie-38">
           {String(etape + 1).padStart(2, "0")} / {String(QUESTIONS.length).padStart(2, "0")}
         </p>
@@ -196,7 +123,7 @@ export function Diagnostic() {
           }}
           className="etiquette mt-7 transition-colors hover:text-craie"
         >
-          ← Question précédente
+          {t.diagnostic.precedente}
         </button>
       )}
     </div>

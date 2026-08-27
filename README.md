@@ -24,6 +24,33 @@ Même architecture que Strawberry-Prod, identité visuelle distincte.
 - `lib/config.ts` — `CONTACT.email`, `CONTACT.instagram`, `CAPACITE`.
 - Une image Open Graph (`public/og.jpg`, 1200×630) référencée dans `app/layout.tsx`.
 
+## Deux langues
+
+Le site existe en `/fr` et `/en`, générés statiquement tous les deux. La racine
+`/` redirige selon l'en-tête `Accept-Language` du navigateur (`middleware.ts`) —
+le sélecteur FR/EN dans l'en-tête sert à corriger cette devinette, pas à la
+remplacer. Il conserve le chemin : basculer depuis `/en/mentions-legales`
+mène à `/fr/mentions-legales`, pas à l'accueil.
+
+**Toute la copie vit dans deux fichiers** : `lib/copy-fr.ts` et `lib/copy-en.ts`.
+Aucune chaîne destinée au lecteur n'est écrite ailleurs. Le fichier français
+définit le type `Copy` ; le fichier anglais est typé avec, donc **une clé
+oubliée en anglais fait échouer le build** au lieu de laisser un trou dans la
+page en ligne.
+
+`lib/config.ts` ne garde que ce qui ne se traduit pas : prix, capacité, contact.
+
+Quelques règles à tenir si vous ajoutez du texte :
+
+- Le français vouvoie, avec un « vous » de politesse : accords au singulier
+  (« vous êtes seul », jamais « seuls »).
+- Pas de fonction dans le dictionnaire — il traverse la frontière
+  serveur/client et React ne sérialise pas les fonctions. Pour un texte à
+  variables, utilisez un gabarit à jetons (`{n}`, `{total}`, `{s}` pour le
+  pluriel) et `remplir()` depuis `lib/copy.ts`.
+- L'image de partage est propre à chaque langue : `public/og-fr.png` et
+  `public/og-en.png`.
+
 ## Structure
 
 Le site tient sur **une seule page** (`app/page.tsx`), en douze sections

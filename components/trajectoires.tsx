@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
+import type { Copy } from "@/lib/copy"
 
 /**
  * LA SIGNATURE DU SITE.
@@ -25,9 +26,11 @@ const ELAN =
   "M40 312 C 210 310, 360 302, 486 276 C 626 247, 762 186, 850 122 C 900 86, 924 62, 934 44"
 
 export function Trajectoires({
+  t,
   variante = "fond",
   className = "",
 }: {
+  t?: Copy
   variante?: "fond" | "demo"
   className?: string
 }) {
@@ -74,11 +77,7 @@ export function Trajectoires({
       className={className}
       aria-hidden={fond}
       role={fond ? undefined : "img"}
-      aria-label={
-        fond
-          ? undefined
-          : "Deux trajectoires sur douze mois : l'agitation oscille beaucoup et revient à son point de départ, l'élan progresse lentement puis s'accélère."
-      }
+      aria-label={fond ? undefined : t?.arc.altTrajectoires}
     >
       {/* Grille : les douze mois d'une année de travail. */}
       <g stroke="rgba(255,255,255,0.05)" strokeWidth="1">
@@ -125,8 +124,8 @@ export function Trajectoires({
     <div>
       {graphe}
       <div className="mt-3 flex items-center justify-between">
-        <span className="etiquette">Mois 1</span>
-        <span className="etiquette">Mois 12</span>
+        <span className="etiquette">{t?.arc.mois1}</span>
+        <span className="etiquette">{t?.arc.mois12}</span>
       </div>
     </div>
   )

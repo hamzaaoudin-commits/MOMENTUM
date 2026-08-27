@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
+import type { Copy } from "@/lib/copy"
 
 /**
  * LE MÉCANISME, DESSINÉ.
@@ -30,18 +31,6 @@ const SANS = [
   { x: 920, y: 66 },
 ]
 
-/* Ce que fait chaque maillon. Le diagramme cesse d'être une illustration :
-   on peut l'interroger, et chaque réponse explique le mécanisme vendu. */
-const MAILLONS = [
-  "Sortie 1 — elle pose la promesse. Personne ne l'attend, et ce n'est pas grave : son rôle est de dire ce que sera la suite.",
-  "Sortie 2 — elle confirme. C'est elle qui prouve que la première n'était pas un accident.",
-  "Sortie 3 — elle élargit. Même monde, autre angle : on garde l'auditeur en lui montrant qu'il n'a pas fait le tour.",
-  "Sortie 4 — le point de bascule. Les auditeurs de la 1 reviennent d'eux-mêmes ; vous ne reparez plus de zéro.",
-  "Sortie 5 — elle capitalise. C'est le moment de sortir le titre le plus fort : il hérite de tout ce qui précède.",
-  "Sortie 6 — elle ouvre. Elle annonce la suite avant même que la suite existe.",
-  "Sortie 7 — elle récolte. Le même travail qu'à la sortie 1, sur une audience qui, elle, n'est plus la même.",
-]
-
 const AVEC = [
   { x: 90, y: 318, r: 4 },
   { x: 230, y: 311, r: 5 },
@@ -52,7 +41,8 @@ const AVEC = [
   { x: 920, y: 188, r: 13 },
 ]
 
-export function Arc({ className = "" }: { className?: string }) {
+export function Arc({ t, className = "" }: { t: Copy; className?: string }) {
+  const MAILLONS = t.arc.maillons
   const ref = useRef<SVGSVGElement | null>(null)
   const [joue, setJoue] = useState(false)
   const [actif, setActif] = useState<number | null>(null)
@@ -82,14 +72,14 @@ export function Arc({ className = "" }: { className?: string }) {
           Un texte posé dans un cadre de 1000 unités affiché sur 380 px tombe à
           quatre pixels : illisible, et le SVG ne recompose rien. En HTML, ils
           suivent la taille de police du système comme n'importe quel texte. */}
-      <p className="etiquette mb-3">Sept sorties, aucun lien</p>
+      <p className="etiquette mb-3">{t.arc.bandeHaute}</p>
 
     <svg
       ref={ref}
       viewBox="0 24 1000 292"
       className={className}
       role="img"
-      aria-label="En haut, sept sorties isolées de taille identique et sans lien entre elles. En bas, les sept mêmes sorties reliées les unes aux autres, chacune plus grande et plus haute que la précédente."
+      aria-label={t.arc.alt}
     >
       {/* ---------- BANDE HAUTE : sans arc ---------- */}
       <line x1="0" y1="100" x2="1000" y2="100" stroke="rgba(255,255,255,0.07)" />
@@ -179,13 +169,13 @@ export function Arc({ className = "" }: { className?: string }) {
       })}
     </svg>
 
-      <p className="index mt-3">Les sept mêmes sorties, chaînées</p>
+      <p className="index mt-3">{t.arc.bandeBasse}</p>
 
       {/* Hauteur figée : sans elle, la mise en page saute d'une ligne à chaque
           survol d'une bille. */}
       <p className="mt-5 min-h-[54px] border-t border-filet pt-4 text-[13.5px] leading-relaxed text-craie-80">
         {actif === null ? (
-          <span className="etiquette">Survolez ou touchez une sortie pour voir son rôle dans la chaîne.</span>
+          <span className="etiquette">{t.arc.invite}</span>
         ) : (
           MAILLONS[actif]
         )}
