@@ -99,5 +99,21 @@ un réglage esthétique.
 Aucun dégradé de surface, aucun halo radial, aucun angle arrondi. Une surface
 est plate, un filet est un trait.
 
+### Trois plans, trois densités, un aplat
+
+**Valeurs.** `encre #08090B` (fond par défaut) → `encre-haute #12151B` (une
+section sur deux) → `surface #191D25` (les cartes). Les cartes sont toujours
+au-dessus des deux fonds : c'est ce qui les empêche de disparaître selon la
+section qui les accueille.
+
+**Rythme.** `bloc-serre` pour les ratures (ça doit défiler vite), `bloc` en
+régime normal, `bloc-ample` pour le diagnostic, l'offre et la candidature (on
+ralentit). Plus deux `silence` : un écran, une phrase, rien d'autre.
+
+**L'aplat bleu.** Une seule fois dans la page, sur la garantie
+(`components/offre-unique.tsx`). C'est le seul endroit où le contraste
+s'inverse complètement. Ne le dupliquez nulle part ailleurs : son unicité est
+tout l'effet.
+
 Pour changer l'accent : une seule ligne, `--color-cobalt-vif` dans
 `app/globals.css`. Deux alternatives tenues y sont commentées.

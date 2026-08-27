@@ -78,17 +78,20 @@ export function Arc({ className = "" }: { className?: string }) {
 
   return (
     <div>
+      {/* Les libellés sortent du SVG.
+          Un texte posé dans un cadre de 1000 unités affiché sur 380 px tombe à
+          quatre pixels : illisible, et le SVG ne recompose rien. En HTML, ils
+          suivent la taille de police du système comme n'importe quel texte. */}
+      <p className="etiquette mb-3">Sept sorties, aucun lien</p>
+
     <svg
       ref={ref}
-      viewBox="0 0 1000 340"
+      viewBox="0 24 1000 292"
       className={className}
       role="img"
       aria-label="En haut, sept sorties isolées de taille identique et sans lien entre elles. En bas, les sept mêmes sorties reliées les unes aux autres, chacune plus grande et plus haute que la précédente."
     >
       {/* ---------- BANDE HAUTE : sans arc ---------- */}
-      <text x="0" y="22" fontFamily="var(--font-mono)" fontSize="11" letterSpacing="2.4" fill="rgba(255,255,255,0.38)">
-        SEPT SORTIES, AUCUN LIEN
-      </text>
       <line x1="0" y1="100" x2="1000" y2="100" stroke="rgba(255,255,255,0.07)" />
       {SANS.map((p, i) => (
         <circle
@@ -117,9 +120,6 @@ export function Arc({ className = "" }: { className?: string }) {
 
       {/* ---------- BANDE BASSE : avec arc ---------- */}
       <line x1="0" y1="128" x2="1000" y2="128" stroke="rgba(255,255,255,0.12)" />
-      <text x="0" y="158" fontFamily="var(--font-mono)" fontSize="11" letterSpacing="2.4" fill="var(--color-cobalt-vif)">
-        LES SEPT MÊMES SORTIES, CHAÎNÉES
-      </text>
       <path
         d={chaine}
         fill="none"
@@ -178,6 +178,8 @@ export function Arc({ className = "" }: { className?: string }) {
         )
       })}
     </svg>
+
+      <p className="index mt-3">Les sept mêmes sorties, chaînées</p>
 
       {/* Hauteur figée : sans elle, la mise en page saute d'une ligne à chaque
           survol d'une bille. */}

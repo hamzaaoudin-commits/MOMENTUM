@@ -273,7 +273,7 @@ export default function Accueil() {
       </section>
 
       {/* ═══════════════ 02 · FAUSSE SOLUTION ═══════════════ */}
-      <section className="bloc border-t border-filet bg-encre-haute" data-section data-label="CE QUE VOUS AVEZ DÉJÀ ESSAYÉ">
+      <section className="bloc-serre border-t border-filet bg-encre-haute" data-section data-label="CE QUE VOUS AVEZ DÉJÀ ESSAYÉ">
         <div className="cadre">
           <TeteSection
             index="02"
@@ -286,10 +286,21 @@ export default function Accueil() {
               <Rature key={f.essai} index={i} essai={f.essai} effet={f.effet} />
             ))}
           </div>
-          <Reveal delay={200}>
-            <p className="corps mt-12 max-w-2xl text-[16px]">
-              Aucune de ces actions n&rsquo;est stupide. Elles échouent toutes pour la même raison, et cette raison
-              n&rsquo;a rien à voir avec votre niveau d&rsquo;effort.
+        </div>
+      </section>
+
+      {/* ─── SILENCE ───
+          Cette phrase était le dernier paragraphe de la section précédente,
+          noyée dans le corps de texte. Elle porte le basculement de tout
+          l'argument : elle mérite un écran à elle seule. */}
+      <section className="silence border-t border-filet">
+        <div className="cadre">
+          <Reveal>
+            <p className="phrase max-w-[22ch] text-balance">
+              Aucune de ces actions n&rsquo;est stupide.
+            </p>
+            <p className="phrase mt-6 max-w-[26ch] text-balance text-cobalt-vif">
+              Elles échouent toutes pour la même raison.
             </p>
           </Reveal>
         </div>
@@ -344,7 +355,7 @@ export default function Accueil() {
         id="diagnostic"
         data-section
         data-label="LE DIAGNOSTIC"
-        className="ancre bloc border-t border-filet bg-encre-haute"
+        className="ancre bloc-ample border-t border-filet bg-encre-haute"
       >
         <div className="cadre-md">
           <TeteSection
@@ -428,7 +439,7 @@ export default function Accueil() {
                 <div>
                   <h3 className="font-mono text-[13px] uppercase tracking-[0.22em] text-craie">{t.nom}</h3>
                   <p className="corps mt-4 text-[15.5px]">{t.texte}</p>
-                  <p className="mt-5 border-l-3 border-craie pl-5 text-[1.02rem] font-semibold leading-snug text-craie">
+                  <p className="mt-5 border-l-3 border-cobalt-vif pl-5 text-[1.02rem] font-semibold leading-snug text-craie-80">
                     {t.sortie}
                   </p>
                 </div>
@@ -454,7 +465,7 @@ export default function Accueil() {
                   <span className="index">{a.n}</span>
                   <h3 className="titre-3 mt-4">{a.titre}</h3>
                   <p className="corps mt-4">{a.texte}</p>
-                  <p className="mt-auto pt-6 text-[0.98rem] font-semibold leading-snug text-craie">{a.gain}</p>
+                  <p className="mt-auto pt-6 text-[0.98rem] font-semibold leading-snug text-cobalt-vif">{a.gain}</p>
                 </article>
               </Reveal>
             ))}
@@ -524,8 +535,24 @@ export default function Accueil() {
         </div>
       </section>
 
+      {/* ─── SILENCE ───
+          Posé juste avant le prix. Le lecteur vient de lire qui je suis ; il
+          doit traverser une phrase nue avant de voir un chiffre. */}
+      <section className="silence border-t border-filet">
+        <div className="cadre">
+          <Reveal>
+            <p className="phrase max-w-[24ch] text-balance">
+              Vous n&rsquo;avez pas besoin qu&rsquo;on vous découvre.
+            </p>
+            <p className="phrase mt-6 max-w-[24ch] text-balance text-cobalt-vif">
+              Vous avez besoin d&rsquo;une direction.
+            </p>
+          </Reveal>
+        </div>
+      </section>
+
       {/* ═══════════════ 09 · L'OFFRE ═══════════════ */}
-      <section id="offres" className="ancre bloc border-t border-filet" data-section data-label="L'OFFRE">
+      <section id="offres" className="ancre bloc-ample border-t border-filet" data-section data-label="L'OFFRE">
         <div className="cadre">
           <TeteSection
             index="09"
@@ -629,7 +656,7 @@ export default function Accueil() {
       </section>
 
       {/* ═══════════════ 13 · L'ACTION ═══════════════ */}
-      <section id="candidature" data-section data-label="CANDIDATURE" className="ancre bloc border-t border-filet bg-encre-haute">
+      <section id="candidature" data-section data-label="CANDIDATURE" className="ancre bloc-ample border-t border-filet bg-encre-haute">
         <div className="cadre grid gap-14 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
           <div>
             <Reveal>

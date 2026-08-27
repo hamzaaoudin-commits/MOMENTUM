@@ -66,7 +66,7 @@ export function Trajectoires({
         }
       : { strokeDasharray: LEN, strokeDashoffset: LEN }
 
-  return (
+  const graphe = (
     <svg
       ref={ref}
       viewBox="0 0 1000 380"
@@ -112,14 +112,22 @@ export function Trajectoires({
         <>
           <circle cx={934} cy={44} r="4.5" fill="var(--color-cobalt-vif)" />
           <circle cx={934} cy={296} r="3.5" fill="rgba(255,255,255,0.4)" />
-          <text x={40} y={366} fontFamily="var(--font-mono)" fontSize="11" fill="rgba(255,255,255,0.38)" letterSpacing="1.6">
-            MOIS 1
-          </text>
-          <text x={950} y={366} textAnchor="end" fontFamily="var(--font-mono)" fontSize="11" fill="rgba(255,255,255,0.38)" letterSpacing="1.6">
-            MOIS 12
-          </text>
         </>
       )}
     </svg>
+  )
+
+  if (fond) return graphe
+
+  // Les bornes de l'axe sortent du SVG : à 380 px de large, un texte de 11 px
+  // posé dans un cadre de 1000 unités s'affiche à quatre pixels.
+  return (
+    <div>
+      {graphe}
+      <div className="mt-3 flex items-center justify-between">
+        <span className="etiquette">Mois 1</span>
+        <span className="etiquette">Mois 12</span>
+      </div>
+    </div>
   )
 }

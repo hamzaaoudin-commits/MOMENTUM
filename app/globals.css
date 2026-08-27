@@ -43,10 +43,22 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
-  /* --- Matière : noirs froids, écartés pour que les plans se lisent --- */
+  /* --- Matière : trois plans, réellement distincts ---------------------
+     L'ancienne alternance opposait #08090b à #0e1014 : six valeurs d'écart,
+     invisibles sur un écran mal calibré ou en plein jour. On payait la
+     complexité de l'alternance sans en toucher le bénéfice.
+
+     Trois marches nettes, chacune plus claire que la précédente :
+       ENCRE        le fond par défaut
+       ENCRE-HAUTE  une section sur deux
+       SURFACE      les cartes — toujours au-dessus des deux fonds, donc
+                    jamais invisibles, quelle que soit la section qui les
+                    accueille. C'était le vrai bogue : une carte posée sur un
+                    fond de sa propre valeur. */
   --color-encre: #08090b;
-  --color-encre-haute: #0e1014;
+  --color-encre-haute: #12151b;
   --color-encre-basse: #050506;
+  --color-surface: #191d25;
 
   /* --- Bleu : la structure. Saturé, dur, jamais délavé. --- */
   --color-cobalt: #1b3fd9;
@@ -62,8 +74,8 @@
   --color-craie-24: #3a3e44;
 
   /* --- Filets : des traits, pas des voiles --- */
-  --color-filet: #1a1d22;
-  --color-filet-fort: #2a2e35;
+  --color-filet: #22262e;
+  --color-filet-fort: #343945;
   --color-filet-cobalt: #1e3a8f;
 }
 
@@ -105,6 +117,16 @@
   padding-right: clamp(1.25rem, 5vw, 5rem);
 }
 
+/* Trois densités, pas une.
+   Quatorze sections au même rythme vertical, c'est un métronome : rien
+   n'accélère, rien ne s'effondre, et le lecteur ne peut pas sentir qu'il
+   approche d'un moment important. Une page qui parle à des musiciens ne peut
+   pas être entièrement en mezzo-forte.
+
+     bloc-serre  la liste des ratures — ça doit défiler vite
+     bloc        le régime normal
+     bloc-ample  le diagnostic, l'offre, la candidature — on ralentit */
+
 @utility bloc {
   padding-left: clamp(1.25rem, 5vw, 5rem);
   padding-right: clamp(1.25rem, 5vw, 5rem);
@@ -113,8 +135,51 @@
   position: relative;
 }
 
+@utility bloc-serre {
+  padding-left: clamp(1.25rem, 5vw, 5rem);
+  padding-right: clamp(1.25rem, 5vw, 5rem);
+  padding-top: 3.25rem;
+  padding-bottom: 3.25rem;
+  position: relative;
+}
+
+@utility bloc-ample {
+  padding-left: clamp(1.25rem, 5vw, 5rem);
+  padding-right: clamp(1.25rem, 5vw, 5rem);
+  padding-top: 7rem;
+  padding-bottom: 7rem;
+  position: relative;
+}
+
+/* Le silence : un écran, une phrase, rien d'autre.
+   Ces pauses ne coûtent qu'un peu de défilement et elles font exister ce qui
+   vient juste après. C'est la respiration entre deux mouvements. */
+@utility silence {
+  padding-left: clamp(1.25rem, 5vw, 5rem);
+  padding-right: clamp(1.25rem, 5vw, 5rem);
+  min-height: 62vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
 @media (min-width: 900px) {
   .bloc { padding-top: 8.5rem; padding-bottom: 8.5rem; }
+  .bloc-serre { padding-top: 4.5rem; padding-bottom: 4.5rem; }
+  .bloc-ample { padding-top: 12rem; padding-bottom: 12rem; }
+  .silence { min-height: 72vh; }
+}
+
+/* La phrase d'un silence : le plus gros corps de la page après le titre du
+   hero, et le seul endroit où une ligne peut occuper toute la largeur. */
+@utility phrase {
+  font-family: var(--font-sans);
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 0.96;
+  letter-spacing: -0.03em;
+  font-size: clamp(1.85rem, 5.2vw, 4rem);
+  color: var(--color-craie);
 }
 
 @utility ancre {
@@ -237,7 +302,7 @@
 
 @utility carte {
   border: 1px solid var(--color-filet);
-  background: var(--color-encre-haute);
+  background: var(--color-surface);
   padding: clamp(1.5rem, 3vw, 2.25rem);
   transition: border-color 350ms cubic-bezier(.2,.7,.2,1);
   &:hover { border-color: var(--color-filet-fort); }
@@ -245,8 +310,21 @@
 
 @utility carte-active {
   border: 1px solid var(--color-cobalt);
-  background: var(--color-encre-haute);
+  background: var(--color-surface);
   padding: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+/* L'aplat.
+   Un système à accent unique a besoin d'au moins un endroit où l'accent
+   envahit tout le champ. Sans ça, le bleu reste une couleur d'interface —
+   des numéros de 11 px et des filets — et ne devient jamais une couleur de
+   marque. Une seule fois dans la page, pas deux : c'est l'unicité qui fait
+   l'effet. */
+@utility aplat {
+  background: var(--color-cobalt-vif);
+  color: #06070a;
+  & .etiquette { color: rgba(6, 7, 10, 0.62); }
+  & .corps { color: rgba(6, 7, 10, 0.82); }
 }
 
 /* ---------------------------------------------------------------------------
@@ -287,7 +365,7 @@
 @utility champ {
   width: 100%;
   border: 1px solid var(--color-filet-fort);
-  background: var(--color-encre-basse);
+  background: var(--color-encre);
   padding: 14px 15px;
   font-family: var(--font-sans);
   font-size: 15px;
@@ -299,7 +377,7 @@
     outline: none;
     border-color: var(--color-cobalt-vif);
   }
-  & option { background: #0e1014; color: #fff; }
+  & option { background: #191d25; color: #fff; }
 }
 
 @utility champ-label {
