@@ -48,7 +48,7 @@ const T = {
     bookKicker: "The Book",
     bookTitle: "The Clearest Doctrine",
     bookSub: "Narrative Architecture in the Age of the Machine",
-    bookAuthor: "Hamza El Jaouahiry \u00b7 158 pages \u00b7 Strawberry Production, Paris",
+    bookAuthor: "Hamza El Jaouahiry \u00b7 158 pages \u00b7 MOMENTUM, Paris",
     bookEpigraph: "In a market where everyone has access to the same machine, the best product no longer wins. The clearest doctrine does.",
     bookP1: "The doctrine this studio works from is not improvised commission by commission. It is written down, argued at length, and published \u2014 in French and in English.",
     bookP2: "The book sets out why the machine made everyone identical, what the French school of narrative precision inherits, and the five-stage method by which a house is excavated rather than invented. Its final section demonstrates the method on three houses, end to end.",
@@ -58,7 +58,7 @@ const T = {
     founderName: "Hamza El Jaouahiry.",
     founderCaption: "The Sorbonne \u00b7 Keynote on brand survival in the age of AI",
     founderP1: "I come from film and music. A director and composer since 2019, I learned that a release is prepared: what you show, what you hold back, the order in which you reveal it. Watching brands, venues and artists announce their moments, I kept seeing the opposite: competent documents, interchangeable announcements, stories erased by the very language meant to carry them.",
-    founderP2: "Strawberry Production is the studio I would have hired. A small atelier, working at full attention, writing every word by hand, refusing the vocabulary of the field. The work is editorial in shape because it inherits a French school where editorial writing was never separate from intellectual seriousness.",
+    founderP2: "MOMENTUM is the studio I would have hired. A small atelier, working at full attention, writing every word by hand, refusing the vocabulary of the field. The work is editorial in shape because it inherits a French school where editorial writing was never separate from intellectual seriousness.",
     founderP3: "When you commission a story or a moment, you commission the person who will write it. No account manager stands between you and the writing, no junior is substituted after signature, no scope is negotiated downward. The document you receive carries the name of whoever wrote it.",
     founderQuote: "\"I do not build brands. I write what a house declares at the moment that counts — what it is, what it refuses — and I decide how the world discovers it.\"",
     founderSig: "Hamza El Jaouahiry \u00b7 Founder",
@@ -98,7 +98,7 @@ const T = {
     bookKicker: "Le Livre",
     bookTitle: "La Doctrine la plus claire",
     bookSub: "L'architecture narrative \u00e0 l'\u00e2ge de la machine",
-    bookAuthor: "Hamza El Jaouahiry \u00b7 158 pages \u00b7 Strawberry Production, Paris",
+    bookAuthor: "Hamza El Jaouahiry \u00b7 158 pages \u00b7 MOMENTUM, Paris",
     bookEpigraph: "Sur un march\u00e9 o\u00f9 tout le monde a acc\u00e8s \u00e0 la m\u00eame machine, le meilleur produit ne gagne plus. C'est la doctrine la plus claire qui gagne.",
     bookP1: "La doctrine dont ce studio travaille n'est pas improvis\u00e9e commande apr\u00e8s commande. Elle est \u00e9crite, argument\u00e9e sur la longueur, et publi\u00e9e \u2014 en fran\u00e7ais et en anglais.",
     bookP2: "Le livre expose pourquoi la machine a rendu tout le monde identique, ce dont h\u00e9rite l'\u00e9cole fran\u00e7aise de pr\u00e9cision narrative, et la m\u00e9thode en cinq \u00e9tapes par laquelle une maison s'excave au lieu de s'inventer. Sa derni\u00e8re partie d\u00e9montre la m\u00e9thode sur trois maisons, de bout en bout.",
@@ -108,7 +108,7 @@ const T = {
     founderName: "Hamza El Jaouahiry.",
     founderCaption: "La Sorbonne \u00b7 Keynote sur la survie des marques \u00e0 l'\u00e8re de l'IA",
     founderP1: "Je viens du cinéma et de la musique. Réalisateur et compositeur depuis 2019, j'ai appris qu'une sortie se prépare : ce qu'on montre, ce qu'on garde, l'ordre dans lequel on révèle. En regardant les marques, les lieux et les artistes annoncer leurs moments, je voyais l'inverse : des documents corrects, des annonces interchangeables, des récits effacés par le langage même qui devait les porter.",
-    founderP2: "Strawberry Production est le studio que j'aurais engag\u00e9. Un atelier restreint, \u00e0 pleine attention, \u00e9crivant chaque mot \u00e0 la main, refusant le vocabulaire du champ. Le travail est \u00e9ditorial dans sa forme parce qu'il h\u00e9rite d'une \u00e9cole fran\u00e7aise o\u00f9 l'\u00e9criture \u00e9ditoriale n'a jamais \u00e9t\u00e9 s\u00e9par\u00e9e du s\u00e9rieux intellectuel.",
+    founderP2: "MOMENTUM est le studio que j'aurais engag\u00e9. Un atelier restreint, \u00e0 pleine attention, \u00e9crivant chaque mot \u00e0 la main, refusant le vocabulaire du champ. Le travail est \u00e9ditorial dans sa forme parce qu'il h\u00e9rite d'une \u00e9cole fran\u00e7aise o\u00f9 l'\u00e9criture \u00e9ditoriale n'a jamais \u00e9t\u00e9 s\u00e9par\u00e9e du s\u00e9rieux intellectuel.",
     founderP3: "Quand vous commandez un récit ou un moment, vous commandez celui qui l'\u00e9crira. Aucun chef de projet ne s'interpose entre vous et l'\u00e9criture, aucun junior n'est substitu\u00e9 apr\u00e8s signature, aucun p\u00e9rim\u00e8tre n'est n\u00e9goci\u00e9 \u00e0 la baisse. Le document que vous recevez porte le nom de celui qui l'a \u00e9crit.",
     founderQuote: "\u00ab Je ne construis pas des marques. J'\u00e9cris ce qu'une maison d\u00e9clare au moment qui compte — ce qu'elle est, ce qu'elle refuse — et je d\u00e9cide comment le monde le d\u00e9couvre. \u00bb",
     founderSig: "Hamza El Jaouahiry \u00b7 Fondateur",
@@ -427,7 +427,7 @@ export default function AboutPage() {
                 <span className="bracket-br" aria-hidden />
 
                 <div className="text-center font-sans text-[9px] uppercase tracking-[0.3em] text-chalk-40">
-                  Strawberry Production · Paris
+                  MOMENTUM · Paris
                 </div>
 
                 <div className="text-center">
@@ -493,7 +493,7 @@ export default function AboutPage() {
               <div style={{ position: "relative" }}>
                 <Image
                   src="/founder.jpg"
-                  alt="Hamza El Jaouahiry — Strawberry Production"
+                  alt="Hamza El Jaouahiry — MOMENTUM"
                   width={900}
                   height={1200}
                   sizes="(max-width: 768px) 100vw, 50vw"

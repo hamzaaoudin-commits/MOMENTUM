@@ -39,7 +39,7 @@ const T = {
     noteKicker: "A note",
     noteP1: "“Most founders arrive with fragments. A sentence they've used a hundred times. A pitch that almost works. A story they haven't found the words for yet.",
     noteP2: "What you ordered is the thing they were circling. You will recognise it the moment you read it.”",
-    noteSig: "Hamza · Strawberry Production · Paris",
+    noteSig: "Hamza · MOMENTUM · Paris",
     waitH2: "While you wait —",
     waitP: "Read the method, or one of the two published samples. The more clearly you see what is being built, the more precise your answers to the questionnaire will be.",
     waitCta1: "Read the method →",
@@ -72,7 +72,7 @@ const T = {
     noteKicker: "Un mot",
     noteP1: "« La plupart des fondateurs arrivent avec des fragments. Une phrase utilisée cent fois. Un pitch qui fonctionne presque. Une histoire dont ils n'ont pas encore trouvé les mots.",
     noteP2: "Ce que vous avez commandé, c'est la chose autour de laquelle ils tournaient. Vous la reconnaîtrez à l'instant où vous la lirez. »",
-    noteSig: "Hamza · Strawberry Production · Paris",
+    noteSig: "Hamza · MOMENTUM · Paris",
     waitH2: "En attendant —",
     waitP: "Lisez la méthode, ou l'un des deux exemples publiés. Plus vous voyez clairement ce qui se construit, plus vos réponses au questionnaire seront précises.",
     waitCta1: "Lire la méthode →",
@@ -429,8 +429,8 @@ export default function ThankYouPage() {
             <p style={{ fontFamily: SANS, fontSize: 11, color: "rgba(255,255,255,0.35)", letterSpacing: "0.18em", textTransform: "uppercase", margin: "0 0 8px" }}>
               {t.contact}
             </p>
-            <a href="mailto:hamza@gostrawberryprod.com" style={{ fontFamily: SERIF, fontSize: "1rem",  color: "rgba(255,255,255,0.55)", textDecoration: "none" }}>
-              hamza@gostrawberryprod.com
+            <a href="mailto:contact@momentum.studio" style={{ fontFamily: SERIF, fontSize: "1rem",  color: "rgba(255,255,255,0.55)", textDecoration: "none" }}>
+              contact@momentum.studio
             </a>
           </div>
         </div>

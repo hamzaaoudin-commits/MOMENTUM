@@ -3,8 +3,8 @@ import { alternatesPair, SITE } from '@/lib/routing'
 import { isLang, type Lang } from '@/lib/lang'
 
 const COPY: Record<Lang, { title: string; description: string }> = {
-  fr: { title: "Mentions légales (EN)", description: "Legal notice for Strawberry Production." },
-  en: { title: "Legal notice", description: "Legal notice for Strawberry Production." },
+  fr: { title: "Mentions légales (EN)", description: "Legal notice for MOMENTUM." },
+  en: { title: "Legal notice", description: "Legal notice for MOMENTUM." },
 }
 
 export async function generateMetadata({

@@ -46,18 +46,18 @@ const OG_LOCALE: Record<Lang, string> = { fr: 'fr_FR', en: 'en_US' }
 
 const COPY: Record<Lang, { title: string; description: string; ogTitle: string; ogDesc: string }> = {
   fr: {
-    title: 'Strawberry Production · Narration des moments décisifs',
+    title: 'MOMENTUM · Narration des moments décisifs',
     description:
-      "Un lancement, une ouverture, une sortie, une levée de fonds. Strawberry Production écrit le récit de votre moment, puis le met en scène jusqu'au jour J et au-delà. Depuis Paris.",
-    ogTitle: 'Strawberry Production · Narration des moments décisifs',
+      "Un lancement, une ouverture, une sortie, une levée de fonds. MOMENTUM écrit le récit de votre moment, puis le met en scène jusqu'au jour J et au-delà. Depuis Paris.",
+    ogTitle: 'MOMENTUM · Narration des moments décisifs',
     ogDesc:
       "Un moment décisif n'arrive qu'une fois. Nous écrivons ce que le monde en retiendra, puis nous le mettons en scène. Un studio de narration, depuis Paris.",
   },
   en: {
-    title: 'Strawberry Production · Narrative for decisive moments',
+    title: 'MOMENTUM · Narrative for decisive moments',
     description:
-      'A launch, an opening, a release, a fundraise. Strawberry Production writes the story of your moment, then stages it, up to the day and beyond. From Paris.',
-    ogTitle: 'Strawberry Production · Narrative for decisive moments',
+      'A launch, an opening, a release, a fundraise. MOMENTUM writes the story of your moment, then stages it, up to the day and beyond. From Paris.',
+    ogTitle: 'MOMENTUM · Narrative for decisive moments',
     ogDesc:
       "A decisive moment only happens once. We write what the world will remember, then we stage it. A narrative studio from Paris.",
   },
@@ -74,11 +74,11 @@ export async function generateMetadata({
 
   return {
     metadataBase: new URL(SITE),
-    title: { default: c.title, template: '%s · Strawberry Production' },
+    title: { default: c.title, template: '%s · MOMENTUM' },
     description: c.description,
     authors: [{ name: 'Hamza El Jaouahiry', url: SITE }],
     creator: 'Hamza El Jaouahiry',
-    publisher: 'Strawberry Production',
+    publisher: 'MOMENTUM',
     formatDetection: { email: false, address: false, telephone: false },
     alternates: alternatesFor('/', lang),
     openGraph: {
@@ -86,7 +86,7 @@ export async function generateMetadata({
       locale: OG_LOCALE[lang],
       alternateLocale: LANGS.filter((l) => l !== lang).map((l) => OG_LOCALE[l]),
       url: `${SITE}/${lang}`,
-      siteName: 'Strawberry Production',
+      siteName: 'MOMENTUM',
       title: c.ogTitle,
       description: c.ogDesc,
       images: [
@@ -94,7 +94,7 @@ export async function generateMetadata({
           url: '/og-image.png',
           width: 1200,
           height: 630,
-          alt: 'Strawberry Production — Narration des moments décisifs · Paris',
+          alt: 'MOMENTUM — Narration des moments décisifs · Paris',
           type: 'image/png',
         },
       ],
@@ -146,7 +146,7 @@ export default async function LocaleLayout({
             __html: JSON.stringify({
               '@context': 'https://schema.org',
               '@type': 'ProfessionalService',
-              name: 'Strawberry Production',
+              name: 'MOMENTUM',
               url: `${SITE}/${lang}`,
               founder: { '@type': 'Person', name: 'Hamza El Jaouahiry' },
               description: COPY[lang].description,

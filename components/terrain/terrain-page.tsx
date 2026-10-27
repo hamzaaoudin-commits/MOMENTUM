@@ -349,7 +349,7 @@ export function TerrainPage({ copy }: { copy: TerrainCopy }) {
           textDecoration: "none",
         }}
       >
-        STRAWBERRY PROD.
+        MOMENTUM.
       </a>
 
       <main id="main">

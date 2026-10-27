@@ -7,7 +7,7 @@ const T = {
     kicker: "The Book",
     title: "The Clearest Doctrine",
     sub: "Narrative Architecture in the Age of the Machine",
-    author: "Hamza El Jaouahiry · 158 pages · Strawberry Production, Paris",
+    author: "Hamza El Jaouahiry · 158 pages · MOMENTUM, Paris",
     epigraph:
       "In a market where everyone has access to the same machine, the best product no longer wins. The clearest doctrine does.",
     body: "This studio does not improvise its doctrine commission by commission. It is written down, argued across 158 pages — including the five-stage method, demonstrated end to end on three houses.",
@@ -25,7 +25,7 @@ const T = {
     kicker: "Le Livre",
     title: "La Doctrine la plus claire",
     sub: "L'architecture narrative à l'âge de la machine",
-    author: "Hamza El Jaouahiry · 158 pages · Strawberry Production, Paris",
+    author: "Hamza El Jaouahiry · 158 pages · MOMENTUM, Paris",
     epigraph:
       "Sur un marché où tout le monde a accès à la même machine, le meilleur produit ne gagne plus. C'est la doctrine la plus claire qui gagne.",
     body: "Ce studio n'improvise pas sa doctrine commande après commande. Elle est écrite, argumentée sur 158 pages — méthode en cinq étapes comprise, démontrée de bout en bout sur trois maisons.",
@@ -54,7 +54,7 @@ export function BookSection({ lang }: { lang: Lang }) {
               <span className="bracket-br" aria-hidden />
 
               <div className="text-center font-sans text-[8px] uppercase tracking-[0.3em] text-chalk-40">
-                Strawberry Production · Paris
+                MOMENTUM · Paris
               </div>
 
               <div className="text-center">

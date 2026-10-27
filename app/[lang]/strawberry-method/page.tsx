@@ -25,12 +25,12 @@ const T = {
     lCommission: "THE NARRATIVE ARCHITECTURE",
     kickerArtifact: "From method to artifact",
     kickerApplied: "The method, applied",
-    h1a: "The Strawberry",
+    h1a: "The Momentum",
     h1b: "Method.",
     lead: "Five stages. One doctrine. The method behind every story we write, before any moment is staged.",
     whyH2a: "Most studios improvise.",
     whyH2b: "We do not.",
-    whyLead: "A framework is not a constraint — it is the discipline that frees creative depth. The Strawberry Method is what we refine with every commission, so that nothing a moment will say is left to chance.",
+    whyLead: "A framework is not a constraint — it is the discipline that frees creative depth. The Momentum Method is what we refine with every commission, so that nothing a moment will say is left to chance.",
     principles: [
       { title: "Speed without shortcuts", body: "A method is repeatable. We do not invent the process for each moment — we apply a refined one, freeing the time for what is irreducibly creative." },
       { title: "Precision over instinct", body: "Improvisation is for poets. A moment people remember demands a structure that holds — five stages, each one earning the next." },
@@ -85,7 +85,7 @@ const T = {
     ctaProduct: "The Narrative Architecture",
     ctaPrice: "€2,900",
     cta: "Order the story · €2,900 →",
-    ctaFoot: "Proprietary Framework · Strawberry Production",
+    ctaFoot: "Proprietary Framework · MOMENTUM",
   },
   fr: {
     badge: "Le Framework Propri\u00e9taire",
@@ -97,11 +97,11 @@ const T = {
     kickerArtifact: "De la m\u00e9thode \u00e0 l'artefact",
     kickerApplied: "La m\u00e9thode, appliqu\u00e9e",
     h1a: "La M\u00e9thode",
-    h1b: "Strawberry.",
+    h1b: "Momentum.",
     lead: "Cinq \u00e9tapes. Une doctrine. La m\u00e9thode derri\u00e8re chaque r\u00e9cit que nous \u00e9crivons, avant que le moment soit mis en sc\u00e8ne.",
     whyH2a: "La plupart des studios improvisent.",
     whyH2b: "Pas nous.",
-    whyLead: "Un cadre n'est pas une contrainte — c'est la discipline qui libère la profondeur créative. La Méthode Strawberry, c'est ce que nous affinons à chaque commande, pour que rien de ce qu'un moment dira ne soit laissé au hasard.",
+    whyLead: "Un cadre n'est pas une contrainte — c'est la discipline qui libère la profondeur créative. La Méthode Momentum, c'est ce que nous affinons à chaque commande, pour que rien de ce qu'un moment dira ne soit laissé au hasard.",
     principles: [
       { title: "La vitesse sans raccourcis", body: "Une m\u00e9thode est reproductible. On n'invente pas le processus pour chaque moment — on en applique un affin\u00e9, ce qui lib\u00e8re le temps pour ce qui est irr\u00e9ductiblement cr\u00e9atif." },
       { title: "La pr\u00e9cision avant l'instinct", body: "L'improvisation, c'est pour les po\u00e8tes. Un moment dont on se souvient exige une structure qui tient — cinq \u00e9tapes, chacune m\u00e9ritant la suivante." },
@@ -156,7 +156,7 @@ const T = {
     ctaProduct: "L'Architecture Narrative",
     ctaPrice: "2 900 €",
     cta: "Commander le récit · 2 900 € →",
-    ctaFoot: "Framework propri\u00e9taire · Strawberry Production",
+    ctaFoot: "Framework propri\u00e9taire · MOMENTUM",
   },
 }
 

@@ -60,7 +60,7 @@ export function NavBar() {
     >
       <div className="mx-auto flex h-[72px] max-w-[1280px] items-center justify-between">
         <Link href="/" className="font-serif text-[22px] font-bold tracking-[-0.02em] text-white no-underline">
-          <span className="text-brand">STRAWBERRY PROD.</span>
+          <span className="text-brand">MOMENTUM.</span>
         </Link>
 
         <button

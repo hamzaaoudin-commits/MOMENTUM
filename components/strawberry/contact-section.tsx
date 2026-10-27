@@ -5,7 +5,7 @@ import { useT } from "@/lib/i18n"
 import { CONTACT_ENDPOINT } from "@/lib/config"
 import { LIMITS, isValidEmail, sanitize, isBot, rateLimit, honeypotProps } from "@/lib/form-security"
 
-const CONTACT_VALUES = ["hamza@gostrawberryprod.com", "@strawberry_prods", "Paris, France"]
+const CONTACT_VALUES = ["contact@momentum.studio", "@strawberry_prods", "Paris, France"]
 const CONTACT_ICONS = ["✉", "◈", "◎"]
 const CONTACT_HREFS: (string | undefined)[] = [undefined, "https://instagram.com/strawberry_prods", undefined]
 
@@ -137,7 +137,7 @@ export function ContactSection() {
       if (res.ok) {
         setStatus("sent")
       } else {
-        let msg = "Something went wrong. Please email us directly at hamza@gostrawberryprod.com."
+        let msg = "Something went wrong. Please email us directly at contact@momentum.studio."
         try {
           const data = await res.json()
           if (data?.errors?.[0]?.message) msg = data.errors[0].message
@@ -147,7 +147,7 @@ export function ContactSection() {
       }
     } catch {
       setStatus("error")
-      setErrorMsg("Could not connect. Please email us directly at hamza@gostrawberryprod.com.")
+      setErrorMsg("Could not connect. Please email us directly at contact@momentum.studio.")
     }
   }
 

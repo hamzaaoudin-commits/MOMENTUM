@@ -61,7 +61,7 @@ function isValid(step: Question, a: Answers): boolean {
 
 const UI_COPY = {
   fr: {
-    kicker: "STRAWBERRY PRODUCTION · ONBOARDING",
+    kicker: "MOMENTUM · ONBOARDING",
     chapterOf: (n: number, t: number) => `Partie ${n} sur ${t}`,
     chapterCount: (n: number) => `${n} question${n > 1 ? "s" : ""}`,
     chapterMinutes: (m: number) => `environ ${m} min`,
@@ -98,7 +98,7 @@ const UI_COPY = {
     resumeLead: (n: number, t: number) => `Vos réponses sont là, vous étiez à la question ${n} sur ${t}.`,
     resumeCta: "Reprendre",
     resumeRestart: "Recommencer à zéro",
-    thresholdKicker: "Strawberry Production · Onboarding",
+    thresholdKicker: "MOMENTUM · Onboarding",
     thresholdTitle: "Votre moment commence ici.",
     thresholdLead: "Les questions qui suivent sont la matière première de votre récit, et de la mise en scène si vous la choisissez ensuite : plus vos réponses sont précises, plus votre moment sera juste. Prenez le temps qu'il faut — tout est enregistré au fil de l'eau.",
     thresholdCta: "Commencer",
@@ -205,7 +205,7 @@ const UI_COPY = {
     dash: "—",
   },
   en: {
-    kicker: "STRAWBERRY PRODUCTION · ONBOARDING",
+    kicker: "MOMENTUM · ONBOARDING",
     chapterOf: (n: number, t: number) => `Part ${n} of ${t}`,
     chapterCount: (n: number) => `${n} question${n > 1 ? "s" : ""}`,
     chapterMinutes: (m: number) => `about ${m} min`,
@@ -242,7 +242,7 @@ const UI_COPY = {
     resumeLead: (n: number, t: number) => `Your answers are here, you were on question ${n} of ${t}.`,
     resumeCta: "Resume",
     resumeRestart: "Start over",
-    thresholdKicker: "Strawberry Production · Onboarding",
+    thresholdKicker: "MOMENTUM · Onboarding",
     thresholdTitle: "Your moment starts here.",
     thresholdLead: "The questions that follow are the raw material of your story, and of the staging if you choose it afterwards: the more precise your answers, the more accurate your moment will be. Take the time you need — everything is saved as you go.",
     thresholdCta: "Begin",
@@ -2126,7 +2126,7 @@ function LanguageScreen({ onPick }: { onPick: (l: Lang) => void }) {
     <div className="relative isolate flex min-h-[82vh] flex-col items-center justify-center text-center">
       <BreatheGlow />
       <div className="q-rise font-mono text-[10.5px] uppercase tracking-[0.3em] text-chalk-40" style={at(100)}>
-        Strawberry Production · Onboarding
+        MOMENTUM · Onboarding
       </div>
       <h1
         className="mx-auto mt-9 max-w-[16ch] font-serif text-[clamp(2.2rem,6vw,4.4rem)] font-bold uppercase leading-[1] tracking-[-0.02em] text-white"

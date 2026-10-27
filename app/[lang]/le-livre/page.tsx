@@ -15,12 +15,12 @@ const T = {
     title: "La Doctrine la plus claire",
     sub: "L'architecture narrative à l'âge de la machine",
     author: "Hamza El Jaouahiry",
-    meta: ["158 pages", "Français et anglais", "Strawberry Production · Paris"],
+    meta: ["158 pages", "Français et anglais", "MOMENTUM · Paris"],
     epigraph:
       "Sur un marché où tout le monde a accès à la même machine, le meilleur produit ne gagne plus. C'est la doctrine la plus claire qui gagne.",
     whyH: "Pourquoi ce livre existe",
     whyP1:
-      "Un studio qui vend une position doit pouvoir défendre la sienne. Ce livre est la doctrine de Strawberry Production, écrite une fois pour toutes plutôt que réinventée à chaque commande — ce qui permet à un client de vérifier, avant de commander, sur quoi le travail repose.",
+      "Un studio qui vend une position doit pouvoir défendre la sienne. Ce livre est la doctrine de MOMENTUM, écrite une fois pour toutes plutôt que réinventée à chaque commande — ce qui permet à un client de vérifier, avant de commander, sur quoi le travail repose.",
     whyP2:
       "Il expose pourquoi la machine a rendu tout le monde identique, ce dont hérite l'école française de précision narrative, et la méthode en cinq étapes par laquelle une maison s'excave au lieu de s'inventer. Sa dernière partie applique cette méthode de bout en bout, sur trois maisons.",
     partsH: "Ce qu'il contient",
@@ -53,12 +53,12 @@ const T = {
     title: "The Clearest Doctrine",
     sub: "Narrative architecture in the age of the machine",
     author: "Hamza El Jaouahiry",
-    meta: ["158 pages", "French and English", "Strawberry Production · Paris"],
+    meta: ["158 pages", "French and English", "MOMENTUM · Paris"],
     epigraph:
       "In a market where everyone has access to the same machine, the best product no longer wins. The clearest doctrine does.",
     whyH: "Why this book exists",
     whyP1:
-      "A studio that sells a position has to be able to defend its own. This book is the doctrine of Strawberry Production, written once rather than reinvented commission by commission — which lets a client check what the work rests on before ordering it.",
+      "A studio that sells a position has to be able to defend its own. This book is the doctrine of MOMENTUM, written once rather than reinvented commission by commission — which lets a client check what the work rests on before ordering it.",
     whyP2:
       "It sets out why the machine made everyone identical, what the French school of narrative precision inherits, and the five-stage method by which a house is excavated rather than invented. Its final part applies that method end to end, on three houses.",
     partsH: "What it contains",
@@ -111,7 +111,7 @@ export default async function BookPage({
                 <span className="bracket-tl" aria-hidden />
                 <span className="bracket-br" aria-hidden />
                 <div className="text-center font-sans text-[8px] uppercase tracking-[0.3em] text-chalk-40">
-                  Strawberry Production · Paris
+                  MOMENTUM · Paris
                 </div>
                 <div className="text-center">
                   <div className="mb-4 text-brand" aria-hidden>
