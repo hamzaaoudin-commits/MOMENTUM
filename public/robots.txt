@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /atlas/
+Disallow: /fr/thank-you
+Disallow: /en/thank-you
+Disallow: /fr/questionnaire/
+Disallow: /en/questionnaire/
+
+Sitemap: https://momentum.studio/sitemap.xml
